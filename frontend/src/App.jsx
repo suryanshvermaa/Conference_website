@@ -23,6 +23,7 @@ import AddPhotoGallery from "./components/AddPhotoGallery"
 import { useState } from "react"
 import AllPapersUser from "./components/AllPapersUser"
 import AllUpdatesUser from "./components/AllUpdatesUser"
+import AllImages from "./components/AllImages"
 
 function App() {
   const [fetch,setfetch]=useState(false)
@@ -51,6 +52,7 @@ function App() {
           <Route path="/admin/all-updates" element={<AllUpdates />} />
           <Route path="/admin/photogalleryupload" element={<AddPhotoGallery />} />
         </Route>
+        <Route path="/all-images" element={<AllImages />} />
       </Routes>
       <Footer/>
     </>

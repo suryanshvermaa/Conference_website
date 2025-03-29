@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 
-export default function Navbar(fetch,setfetch) {
+export default function Navbar(fetch, setfetch) {
   const [isOpen, setIsOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -12,10 +12,10 @@ export default function Navbar(fetch,setfetch) {
     if (token) {
       setIsAuthenticated(true);
     }
-  }, [setfetch,fetch]);
+  }, [setfetch, fetch]);
 
   return (
-    <nav className="bg-blue-600 text-white shadow-lg">
+    <nav className="bg-blue-600 text-white shadow-lg fixed top-0 left-0 w-full z-50">
       <div className="container mx-auto flex items-center justify-between p-4">
         
         {/* Logo */}

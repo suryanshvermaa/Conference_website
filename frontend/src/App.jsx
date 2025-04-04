@@ -24,6 +24,14 @@ import { useState } from "react"
 import AllPapersUser from "./components/AllPapersUser"
 import AllUpdatesUser from "./components/AllUpdatesUser"
 import AllImages from "./components/AllImages"
+import Aboutnit from "./components/aboutcomp/Aboutnit"
+import OrganisingCom from "./components/aboutcomp/OrganisingCom"
+import Venue from "./components/aboutcomp/Venue"
+import Abounithistory from "./components/aboutcomp/abounithistory"
+import Guidelines from "./components/authorcomp/Guidelines"
+import Conferencetracks from "./components/authorcomp/Conferencetracks"
+import Papersub from "./components/authorcomp/Papersub"
+import Registrations from "./components/authorcomp/Registrations"
 
 function App() {
   const [fetch,setfetch]=useState(false)
@@ -33,8 +41,16 @@ function App() {
       < ToastContainer/>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/about" element={<Aboutnit />} />
+        <Route path="/about/about-nit-patna" element={<Aboutnit />} />
+        <Route path="/about/organising-committee" element={<OrganisingCom />} />
+        <Route path="/about/venue-and-travels" element={<Venue />} />
+        <Route path="/about/about-nit-patna(history)" element={<Abounithistory/>} />
         <Route path="/authors" element={<Authors />} />
+        <Route path="/authors/guidelines-to-authors" element={<Guidelines />} />
+        <Route path="/authors/conference-tracks" element={<Conferencetracks />} />
+        <Route path="/authors/paper-submissions" element={<Papersub/>} />
+        <Route path="/authors/registrations" element={<Registrations/>} />
         <Route path="/programs" element={<Programs />} />
         <Route path="/sponsors" element={<Sponsors />} />
         <Route path="/contact" element={<Contact />} />

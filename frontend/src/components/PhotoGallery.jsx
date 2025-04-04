@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ImCross } from 'react-icons/im'; // Import ImCross for the close button
+import { Link } from 'react-router-dom';
 
 const PhotoGallery = () => {
   const [images, setImages] = useState([]);
@@ -39,12 +40,12 @@ const PhotoGallery = () => {
           ))}
         </div>
         <div className="mt-6 text-center">
-          <a
-            href="/all-images"
+          <Link
+            to="/all-images"
             className="bg-blue-600 text-white px-6 py-2 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors"
           >
             View All Images
-          </a>
+          </Link>
         </div>
       </section>
 

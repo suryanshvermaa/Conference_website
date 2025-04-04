@@ -1,61 +1,116 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { HiMenuAlt3, HiX } from "react-icons/hi";
+import {
+  HiMenuAlt3,
+  HiX,
+  HiChevronDown,
+  HiChevronUp,
+} from "react-icons/hi";
 
 export default function Navbar(fetch, setfetch) {
   const [isOpen, setIsOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState("");
 
-  // Check for token in localStorage when component mounts
+  const toggleDropdown = (section) => {
+    setOpenDropdown((prev) => (prev === section ? "" : section));
+  };
+
   useEffect(() => {
-    const token = localStorage.getItem("token"); // Change "token" to your actual key
+    const token = localStorage.getItem("token");
     if (token) {
       setIsAuthenticated(true);
     }
   }, [setfetch, fetch]);
 
+  const menuSections = [
+    { label: "About", key: "about", options: ["About Nit Patna", "Organising Committee", "Venue and Travels", "About Nit Patna(History)"] },
+    { label: "Authors", key: "authors", options: ["Guidelines To Authors", "Conference Tracks", "Paper Submissions", "Registrations"] },
+    { label: "Programs", key: "programs", options: ["Keynotes", "Workshops"] },
+    { label: "Sponsors", key: "sponsors", options: ["Become a Sponsor", "Our Sponsors"] },
+    { label: "Contact", key: "contact", options: ["Contact Form", "FAQ"] },
+  ];
+
   return (
-    <nav className="bg-blue-600 text-white shadow-lg fixed top-0 left-0 w-full z-50">
+    <nav className="bg-gray-100 text-gray-900 shadow-md fixed top-0 left-0 w-full z-50 border-b border-gray-200">
       <div className="container mx-auto flex items-center justify-between p-4">
-        
-        {/* Logo */}
-        <Link to="/" className="text-xl font-bold">
-          ICNARI
-        </Link>
+        <Link to="/" className="text-xl font-bold">ICNARI</Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-6">
-          <Link to="/" className="hover:text-gray-200">Home</Link>
-          <Link to="/about" className="hover:text-gray-200">About</Link>
-          <Link to="/authors" className="hover:text-gray-200">Authors</Link>
-          <Link to="/programs" className="hover:text-gray-200">Programs</Link>
-          <Link to="/sponsors" className="hover:text-gray-200">Sponsors</Link>
-          <Link to="/contact" className="hover:text-gray-200">Contact</Link>
+        <div className="hidden md:flex space-x-6 items-center">
+          <Link to="/" className="hover:text-gray-500">Home</Link>
+
+          {menuSections.map(({ label, key, options }) => (
+            <div key={key} className="relative group capitalize">
+              {/* Parent Link (just label with hover effect) */}
+              <Link to={`/${key}`} className="hover:text-gray-500 cursor-pointer">{label}</Link>
+
+              {/* Dropdown Menu */}
+              <div className="absolute top-full left-0 hidden group-hover:flex flex-col bg-gray-100 py-2 rounded shadow-lg min-w-[160px] z-50">
+                {options.map((opt, i) => (
+                  <Link
+                    key={i}
+                    to={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}`}
+                    className="px-4 py-2 hover:bg-gray-200"
+                  >
+                    {opt}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
+
           {isAuthenticated && (
-            <Link to="/admin" className="hover:text-gray-200 font-semibold">Admin</Link>
+            <Link to="/admin" className="hover:text-gray-500 font-semibold">Admin</Link>
           )}
         </div>
 
         {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden focus:outline-none"
-          onClick={() => setIsOpen(!isOpen)}
-        >
+        <button className="md:hidden focus:outline-none" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <HiX size={28} /> : <HiMenuAlt3 size={28} />}
         </button>
       </div>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden flex flex-col bg-blue-700 p-4 space-y-2">
-          <Link to="/" className="hover:text-gray-200" onClick={() => setIsOpen(false)}>Home</Link>
-          <Link to="/about" className="hover:text-gray-200" onClick={() => setIsOpen(false)}>About</Link>
-          <Link to="/authors" className="hover:text-gray-200" onClick={() => setIsOpen(false)}>Authors</Link>
-          <Link to="/programs" className="hover:text-gray-200" onClick={() => setIsOpen(false)}>Programs</Link>
-          <Link to="/sponsors" className="hover:text-gray-200" onClick={() => setIsOpen(false)}>Sponsors</Link>
-          <Link to="/contact" className="hover:text-gray-200" onClick={() => setIsOpen(false)}>Contact</Link>
+        <div className="md:hidden flex flex-col bg-gray-100 p-4 space-y-2 z-40 shadow-lg">
+          <Link to="/" className="hover:text-gray-500" onClick={() => setIsOpen(false)}>Home</Link>
+
+          {menuSections.map(({ label, key, options }) => (
+            <div key={key}>
+              <div
+                className="flex items-center justify-between w-full hover:text-gray-500 cursor-pointer"
+                onClick={() => toggleDropdown(key)}
+              >
+                <span>{label}</span>
+                {openDropdown === key ? <HiChevronUp /> : <HiChevronDown />}
+              </div>
+
+              {openDropdown === key && (
+                <div className="ml-4 mt-1 flex flex-col space-y-1">
+                  {options.map((opt, i) => (
+                    <Link
+                      key={i}
+                      to={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}`}
+                      className="hover:text-gray-500"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {opt}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+
           {isAuthenticated && (
-            <Link to="/admin" className="hover:text-gray-200 font-semibold" onClick={() => setIsOpen(false)}>Admin</Link>
+            <Link
+              to="/admin"
+              className="hover:text-gray-500 font-semibold"
+              onClick={() => setIsOpen(false)}
+            >
+              Admin
+            </Link>
           )}
         </div>
       )}

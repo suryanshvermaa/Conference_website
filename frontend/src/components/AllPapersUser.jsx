@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 const AllPapersUser = () => {
     const [papers, setPapers] = useState([]);
-  const token = localStorage.getItem('token');
 
   useEffect(() => {
     // Fetch all papers when the component mounts

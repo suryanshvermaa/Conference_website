@@ -26,7 +26,7 @@ const PhotoGallery = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center mt-4">
-      <section className="mb-8 p-8 bg-white rounded-xl shadow-lg w-full max-w-4xl">
+      <section className="mb-8 p-8 bg-white rounded-xl shadow-lg w-full  max-w-full">
         <h2 className="text-4xl font-extrabold text-gray-800 mb-4 border-b-4 border-gray-600 pb-2 text-center">Photo Gallery</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {images.map((image, index) => (

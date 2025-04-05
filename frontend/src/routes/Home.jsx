@@ -7,14 +7,14 @@ import RunningText from "../components/RunningText";
 import SmallAbout from "../components/SmallAbout";
 
 export default function Home() {
-    return <h1 className="">
+    return <div style={{width:'100%'}}>
         <Header/>
         <Slider/>
         <RunningText/>
-        <PaperUpdates/>
+        <PaperUpdates/>       
         <SmallAbout/>
-        <PhotoGallery/>
+        <PhotoGallery/>              
         <EventTimeline/>
-    </h1>;
+    </div>;
   }
   

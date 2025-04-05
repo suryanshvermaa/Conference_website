@@ -57,10 +57,10 @@ const PaperUpdates = () => {
           <h2 className="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2">📄 Papers Received</h2>
           <ul className="space-y-3 max-h-[500px] overflow-y-auto">
             {visiblePapers.map((paper, index) => (
-              <li key={index} className="bg-yellow-100 p-4 rounded-md shadow-md flex justify-between items-center transition-transform duration-300">
+              <li key={index} className="bg-[#C9D8FF] p-4 rounded-md shadow-md flex justify-between items-center transition-transform duration-300">
                 <div>
                   <strong className="text-gray-900">{paper.heading}</strong>
-                  <p className="text-gray-600 text-sm">Authors: {paper.authors.join(", ")}</p>
+                  <p className="text-gray-600 text-sm font-bold">Authors: {paper.authors.join(", ")}</p>
                 </div>
                 {paper.link && (
                   <a href={paper.link} target="_blank" rel="noopener noreferrer">
@@ -84,10 +84,10 @@ const PaperUpdates = () => {
           <h2 className="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2">🔥 Recent Updates</h2>
           <ul className="space-y-3 max-h-[500px] overflow-y-auto">
             {visibleUpdates.map((update, index) => (
-              <li key={index} className="bg-yellow-100 p-4 rounded-md shadow-md flex justify-between items-center transition-transform duration-300">
+              <li key={index} className="bg-[#C9D8FF] gap-1 p-4 rounded-md shadow-md flex justify-between items-center transition-transform duration-300">
                 <div>
                   <strong className="text-gray-900">{update.title}</strong>
-                  <p className="text-gray-600 text-sm">{update.description}</p>
+                  <p className="text-gray-600 text-sm font-bold">{update.description}</p>
                 </div>
                 {update.link && (
                   <a href={update.link} target="_blank" rel="noopener noreferrer">

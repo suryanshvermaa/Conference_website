@@ -102,7 +102,7 @@ export default function Navbar(fetch, setfetch) {
               )}
             </div>
           ))}
-
+          <Link to="/contact" className="hover:text-gray-500">Contact</Link>
           {isAuthenticated && (
             <Link
               to="/admin"

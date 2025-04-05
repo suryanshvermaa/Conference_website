@@ -48,17 +48,15 @@ const ContactSection = () => {
          {/* Google Map */}
          <div className="mt-10 max-w-4xl mx-auto px-4">
         <iframe
-          title="NIT Patna Map"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2293.0456952447425!2d85.19085988827348!3d25.6221814814087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f2a92a6321d3eb%3A0xf0b7b30252bb67fd!2sNational%20Institute%20of%20Technology%2C%20Patna!5e0!3m2!1sen!2sin!4v1712308655392!5m2!1sen!2sin"
-          width="100%"
-          height="300"
-          style={{ border: 0 }}
-          allowFullScreen=""
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          className="rounded-lg shadow-md"
-          
-        ></iframe>
+        title="NIT Patna Map"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3597.521975435267!2d85.1719948!3d25.6207961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ed58dce6732867%3A0x4059f39a1ac82f06!2sNational%20Institute%20of%20Technology%2C%20Patna!5e0!3m2!1sen!2sin!4v1743854714737!5m2!1sen!2sin"
+        width="100%"
+        height="300"
+        style={{border:0}}
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
       </div>
 
 

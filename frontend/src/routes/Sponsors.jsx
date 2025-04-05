@@ -76,3 +76,88 @@ export function BenefitsOfBecomeSponser(){
     </div>
   );
 }
+
+const tourSpots = [
+  {
+    title: "Mahabodhi Temple, Bodh Gaya",
+    image: "Mahabodhi_Temple.png",
+    description: `The Mahabodhi Temple Complex at Bodh Gaya is one of the four holy sites...`
+  },
+  {
+    title: "Takhat Sri Harimandir Ji, Patna Sahib",
+    image: "Takhat_Sri_Harimandir_Ji.png",
+    description: `Takhat Sri Harimandir Ji, also known as Patna Sahib Gurudwara...`
+  },
+  {
+    title: "Nalanda Mahavihara",
+    image: "Nalanda_Mahavihara.png",
+    description: `Nalanda was a renowned Mahavihara, a large Buddhist monastery...`
+  },
+  {
+    title: "Vishwa Shanti Stupa",
+    image: "Vishwa_Shanti_Stupa.png",
+    description: `The Vishwa Shanti Stupa (World Peace Pagoda) is a white stupa...`
+  },
+  {
+    title: "Valmiki National Park",
+    image: "Valmiki_National_Park.png",
+    description: `Valmiki National Park is located in the West Champaran district...`
+  },
+  {
+    title: "Vikramshila University",
+    image: "Ruins_of_Vikramshila.png",
+    description: `Vikramshila was one of the two most important centers of Buddhist learning...`
+  },
+  {
+    title: "Vikramshila Gangetic Dolphin Sanctuary",
+    image: "Vikramshila_Gangetic_Dolphin_Sanctuary.png",
+    description: `The Vikramshila Gangetic Dolphin Sanctuary is located in the Bhagalpur district...`
+  },
+  {
+    title: "Pawapuri",
+    image: "Pawapuri.png",
+    description: `Pawapuri is a sacred Jain pilgrimage site in Nalanda district...`
+  },
+  {
+    title: "Lauriya Nandangarh",
+    image: "Lauriya_Nandangarh.png",
+    description: `Lauriya Nandangarh, in the West Champaran district, is famous for its Ashokan Pillar...`
+  },
+  {
+    title: "Tomb of Sher Shah Suri",
+    image: "Tomb_of_Sher_Shah_Suri.png",
+    description: `The Tomb of Sher Shah Suri is located in Sasaram, Bihar...`
+  },
+  {
+    title: "Navlakha Palace",
+    image: "Navlakha_Palace.png",
+    description: `Navlakha Palace, also known as Rajnagar Palace, is located near Madhubani...`
+  }
+];
+
+export function TourImages() {
+  return (
+    <div className="bg-gray-100 min-h-screen px-4 sm:px-6 lg:px-8 py-10">
+      <h1 className="text-4xl font-bold text-center mb-12 text-blue-800">Bihar Tourism Gallery</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {tourSpots.map((spot, index) => (
+          <div
+            key={index}
+            className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300"
+          >
+            <div className="relative group">
+              <img
+                src={`/tour/${spot.image}`}
+                alt={spot.title}
+                className="w-full h-64 object-cover transform group-hover:scale-105 transition duration-300"
+              />
+              <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                <h3 className="text-white text-lg font-semibold text-center px-4">{spot.title}</h3>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

@@ -3,18 +3,38 @@ import React from 'react'
 const Abounithistory = () => {
   return (
     <div>
-      <section className="mt-8 p-12 bg-gradient-to-r from-blue-50 to-gray-100 rounded-lg shadow-xl ">
-        <h2 className="text-3xl font-extrabold text-blue-700 mb-6 border-b-4 border-blue-500 pb-3">About NIT Patna</h2>
-        <p className="text-gray-800 text-lg leading-relaxed">
-          <strong className="text-blue-600">National Institute of Technology (NIT) Patna</strong> is the 18th National Institute of Technology created by the Ministry of H.R.D., Government of India, after rechristening the erstwhile Bihar College of Engineering Patna on January 28, 2004.
+      <div className="bg-white py-16 md:p-10 rounded-xl shadow-lg max-w-4xl mx-auto my-10">
+        <h2 className="w-full text-center border-b-4 border-blue-500 text-2xl md:text-3xl font-bold text-black mb-4">
+          About NIT Patna (Bihta Campus)
+        </h2>
+        <p className="text-black text-base md:text-lg leading-relaxed">
+          The <span className="font-bold">NIT Patna (Bihta Campus)</span>, situated about
+          <span className="font-bold"> 25 km</span> from the old campus in the heart of Patna, is a
+          <span className="font-bold"> modern expansion</span> of the institute aimed at enhancing its
+          <span className="font-bold"> educational</span> and
+          <span className="font-bold"> research capabilities</span>. While the old campus continues to offer a rich legacy of
+          <span className="font-bold"> academic excellence</span>, the Bihta campus provides a more
+          <span className="font-bold"> spacious and advanced environment</span> for both students and faculty.
         </p>
-        <p className="text-gray-800 text-lg mt-4 leading-relaxed">
-          NIT Patna marked its humble beginning in 1886 with the establishment of Pleaders Survey Training School, which was subsequently promoted to Bihar College of Engineering Patna in 1924. This made this institute the 6th oldest engineering institute of India. The graduate-level curriculum was later elevated to the postgraduate level in 1978.
+
+        <p className="text-black text-base md:text-lg leading-relaxed mt-4">
+          Spanning over <span className="font-bold">125 acres</span>, the new campus is equipped with
+          <span className="font-bold"> state-of-the-art infrastructure</span>, including
+          <span className="font-bold"> spacious classrooms</span>,
+          <span className="font-bold"> cutting-edge laboratories</span>, and
+          <span className="font-bold"> improved hostel facilities</span>. This strategic shift aims to accommodate the
+          <span className="font-bold"> growing academic community</span> and foster
+          <span className="font-bold"> innovation</span> in a serene, green setting.
         </p>
-        <p className="text-gray-800 text-lg mt-4 leading-relaxed">
-          The institute is situated on the south bank of the holy river Ganges behind Gandhi Ghat, one of the most important and reverential places of Patna. The Gandhi Ghat is associated with the immersion of ashes of the Father of the Nation, Mahatma Gandhi, in the river Ganges. The campus has a picturesque river view with historic buildings, presenting a spectacle of architectural delight and natural beauty.
+
+        <p className="text-black text-base md:text-lg leading-relaxed mt-4">
+          Together with the old campus, the Bihta campus strengthens
+          <span className="font-bold"> NIT Patna's commitment</span> to providing
+          <span className="font-bold"> high-quality education</span> and
+          <span className="font-bold"> research opportunities</span>.
         </p>
-      </section>
+      </div>
+
     </div>
   )
 }

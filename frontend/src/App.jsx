@@ -32,6 +32,8 @@ import Guidelines from "./components/authorcomp/Guidelines"
 import Conferencetracks from "./components/authorcomp/Conferencetracks"
 import Papersub from "./components/authorcomp/Papersub"
 import Registrations from "./components/authorcomp/Registrations"
+import Aboutconf from "./components/aboutcomp/Aboutconf"
+import Accomodations from "./components/aboutcomp/Accomodations"
 
 function App() {
   const [fetch,setfetch]=useState(false)
@@ -42,10 +44,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<Aboutnit />} />
+        <Route path="/about/about-the-conference" element={<Aboutconf/>} />
         <Route path="/about/about-nit-patna" element={<Aboutnit />} />
         <Route path="/about/organising-committee" element={<OrganisingCom />} />
         <Route path="/about/venue-and-travels" element={<Venue />} />
-        <Route path="/about/about-nit-patna(history)" element={<Abounithistory/>} />
+        <Route path="/about/accomodations" element={<Accomodations />} />
+        <Route path="/about/about-nit-patna(bihta-campus)" element={<Abounithistory/>} />
         <Route path="/authors" element={<Authors />} />
         <Route path="/authors/guidelines-to-authors" element={<Guidelines />} />
         <Route path="/authors/conference-tracks" element={<Conferencetracks />} />

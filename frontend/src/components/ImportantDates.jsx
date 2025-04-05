@@ -34,14 +34,14 @@ const EventTimeline = () => {
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
             Important Dates
           </h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid lg:grid-cols-1 gap-6">
             {dates.map((event, index) => (
               <div
                 key={index}
-                className="bg-yellow-100 shadow-md rounded-lg p-6 border-l-4 border-blue-500"
+                className="bg-[#C9D8FF] shadow-md rounded-lg p-6 border-l-4 border-blue-500"
               >
                 <h3 className="text-lg font-semibold text-gray-900">{event.title}</h3>
-                <p className="text-blue-600 font-medium text-md">{event.date}</p>
+                <p className="text-blue-600 font-bold text-md underline">{event.date}</p>
                 <p className="text-gray-700 text-sm mt-2">{event.description}</p>
               </div>
             ))}

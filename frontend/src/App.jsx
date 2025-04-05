@@ -3,8 +3,7 @@ import Navbar from "./components/Navbar"
 import About from "./routes/About"
 import Home from "./routes/Home"
 import Authors from "./routes/Authors"
-import Programs from "./routes/Program"
-import Sponsors from "./routes/Sponsors"
+import Programs, { Tours } from "./routes/Program"
 import Contact from "./routes/Contact"
 import Admin from "./routes/Admin"
 import Login from "./routes/Login"
@@ -34,6 +33,7 @@ import Papersub from "./components/authorcomp/Papersub"
 import Registrations from "./components/authorcomp/Registrations"
 import Aboutconf from "./components/aboutcomp/Aboutconf"
 import Accomodations from "./components/aboutcomp/Accomodations"
+import {BecomeSponsor, BenefitsOfBecomeSponser } from "./routes/Sponsors"
 
 function App() {
   const [fetch,setfetch]=useState(false)
@@ -55,8 +55,9 @@ function App() {
         <Route path="/authors/conference-tracks" element={<Conferencetracks />} />
         <Route path="/authors/paper-submissions" element={<Papersub/>} />
         <Route path="/authors/registrations" element={<Registrations/>} />
-        <Route path="/programs" element={<Programs />} />
-        <Route path="/sponsors" element={<Sponsors />} />
+        <Route path="/programs/tours" element={<Tours />} />
+        <Route path="/sponsors/become-a-sponsor" element={<BecomeSponsor />} />
+        <Route path="/sponsors/benefits-of-sponsorship" element={<BenefitsOfBecomeSponser />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/allpapers" element={<AllPapersUser />} />
         <Route path="/allupdates" element={<AllUpdatesUser />} />

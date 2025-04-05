@@ -38,7 +38,7 @@ const EventTimeline = () => {
             {dates.map((event, index) => (
               <div
                 key={index}
-                className="bg-[#C9D8FF] shadow-md rounded-lg p-6 border-l-4 border-blue-500"
+                className="bg-[#C9D8FF] shadow-md rounded-lg p-6 border-4 border-blue-500"
               >
                 <h3 className="text-lg font-semibold text-gray-900">{event.title}</h3>
                 <p className="text-blue-600 font-bold text-md underline">{event.date}</p>

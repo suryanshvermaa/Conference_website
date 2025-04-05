@@ -12,7 +12,7 @@ const About = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-16 md:py-24">
+    <div className="container mx-auto px-2 py-16 md:py-24">
       {/* Section Buttons */}
       <div className="flex flex-col space-y-4 mb-8">
         <button

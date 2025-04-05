@@ -34,6 +34,7 @@ import Registrations from "./components/authorcomp/Registrations"
 import Aboutconf from "./components/aboutcomp/Aboutconf"
 import Accomodations from "./components/aboutcomp/Accomodations"
 import {BecomeSponsor, BenefitsOfBecomeSponser } from "./routes/Sponsors"
+import AllMessages from "./components/GetAllContact"
 
 function App() {
   const [fetch,setfetch]=useState(false)
@@ -72,6 +73,7 @@ function App() {
           <Route path="/admin/all-speakers" element={<AllSpeakers />} />
           <Route path="/admin/all-updates" element={<AllUpdates />} />
           <Route path="/admin/photogalleryupload" element={<AddPhotoGallery />} />
+          <Route path="/admin/contact-messages" element={<AllMessages />} />
         </Route>
         <Route path="/all-images" element={<AllImages />} />
       </Routes>

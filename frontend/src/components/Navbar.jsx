@@ -28,7 +28,7 @@ export default function Navbar(fetch, setfetch) {
     { label: "Authors", key: "authors", options: ["Guidelines To Authors", "Conference Tracks", "Paper Submissions", "Registrations"] },
     { label: "Programs", key: "programs", options: ["Speakers", "Workshops","Tours","Cultural Event"] },
     { label: "Sponsors", key: "sponsors", options: ["Become a Sponsor", "Benefits of Sponsorship"] },
-    { label: "Contact", key: "contact", options: ["Contact Form", "FAQ"] },
+    // { label: "Contact", key: "contact", options: ["Contact Form"] },
   ];
 
   return (
@@ -59,7 +59,7 @@ export default function Navbar(fetch, setfetch) {
               </div>
             </div>
           ))}
-
+          <Link to="/contact" className="hover:text-gray-500">Contact</Link>
           {isAuthenticated && (
             <Link to="/admin" className="hover:text-gray-500 font-semibold">Admin</Link>
           )}

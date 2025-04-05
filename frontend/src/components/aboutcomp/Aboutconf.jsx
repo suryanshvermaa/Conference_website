@@ -3,7 +3,7 @@ import React from 'react'
 const Aboutconf = () => {
     return (
         <div>
-            <div className="bg-white p-6 md:p-10 rounded-xl shadow-lg max-w-4xl mx-auto my-10">
+            <div className="bg-white py-16 md:py-16 rounded-xl shadow-lg max-w-4xl mx-auto px-3">
                 <h2 className="w-full text-center border-b-2 border-blue-500 text-2xl md:text-3xl font-bold text-black mb-4">
                     About the Conference
                 </h2>

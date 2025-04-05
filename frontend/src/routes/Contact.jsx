@@ -1,4 +1,5 @@
 import { MapPin, Mail, Phone } from "lucide-react"; // or use any icon lib
+import ContactForm from "../components/ContactForm";
 
 const ContactSection = () => {
   return (
@@ -58,7 +59,7 @@ const ContactSection = () => {
         referrerpolicy="no-referrer-when-downgrade">
         </iframe>
       </div>
-
+      <ContactForm/>
 
     </section>
   );

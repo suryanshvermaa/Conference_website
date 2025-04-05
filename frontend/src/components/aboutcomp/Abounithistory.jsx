@@ -3,7 +3,7 @@ import React from 'react'
 const Abounithistory = () => {
   return (
     <div>
-      <div className="bg-white py-16 md:p-10 rounded-xl shadow-lg max-w-4xl mx-auto my-10">
+      <div className="mt-8 py-16 bg-white rounded-xl shadow-lg max-w-5xl px-2">
         <h2 className="w-full text-center border-b-4 border-blue-500 text-2xl md:text-3xl font-bold text-black mb-4">
           About NIT Patna (Bihta Campus)
         </h2>

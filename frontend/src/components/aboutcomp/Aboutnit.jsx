@@ -3,7 +3,7 @@ import React from 'react'
 const Aboutnit = () => {
   return (
     <div>
-      <section className="mt-8 p-10 bg-white rounded-xl shadow-lg max-w-5xl mx-12">
+      <section className="mt-8 py-16 bg-white rounded-xl shadow-lg max-w-5xl px-2">
         <h2 className="text-3xl font-extrabold text-black mb-6 border-b-4 border-blue-500 pb-3 text-center">About NIT PATNA</h2>
 
         <p className="text-black text-lg leading-relaxed">

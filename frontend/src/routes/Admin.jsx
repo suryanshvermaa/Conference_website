@@ -104,6 +104,15 @@ export default function Admin({ setfetch }) {
             Upload Image
           </button>
         </div>
+        <div
+          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
+          onClick={() => handleNavigation('/admin/contact-messages')}
+        >
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">Contact Requests</h2>
+          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
+            See Requests 
+          </button>
+        </div>
       </div>
     </div>
     </AdminLayout>

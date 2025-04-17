@@ -4,9 +4,9 @@ const createSpeaker = async (req, res) => {
     try {
         let imageUrl = req.body.imageUrl;
 
-        const { name, specialization } = req.body;
+        const { name, specialization ,description} = req.body;
 
-        const newSpeaker = new Speaker({ name, specialization:specialization?specialization.split(','):[], imageUrl });
+        const newSpeaker = new Speaker({ name, specialization:specialization?specialization.split(','):[], imageUrl ,description});
         await newSpeaker.save();
 
         res.status(201).json({ message: "Speaker added successfully", speaker: newSpeaker });

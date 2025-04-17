@@ -13,6 +13,11 @@ const speakerSchema = new mongoose.Schema({
     imageUrl: {
         type: String, // Cloudinary URL or any image link
         default: "https://example.com/default-speaker.jpg"
+    },
+    description: { 
+        type: String,
+        required: true,
+        trim: true
     }
 }, { timestamps: true });
 

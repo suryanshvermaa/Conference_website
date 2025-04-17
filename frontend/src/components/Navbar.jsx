@@ -24,7 +24,7 @@ export default function Navbar(fetch, setfetch) {
   }, [setfetch, fetch]);
 
   const menuSections = [
-    { label: "About", key: "about", options: ["About the Conference","About Nit Patna", "Organising Committee", "Venue and Travels","Accomodations","About Nit Patna(Bihta Campus)"] },
+    { label: "About", key: "about", options: ["About the Conference","About Nit Patna", "Organising Committee", "Venue and Travels","Accomodations","About Nit Patna(Bihta Campus)","Photo-Gallery"] },
     { label: "Authors", key: "authors", options: ["Guidelines To Authors", "Conference Tracks", "Paper Submissions", "Registrations"] },
     { label: "Programs", key: "programs", options: ["Speakers", "Workshops","Tours","Cultural Event"] },
     { label: "Sponsors", key: "sponsors", options: ["Become a Sponsor", "Benefits of Sponsorship"] },
@@ -33,11 +33,11 @@ export default function Navbar(fetch, setfetch) {
 
   return (
     <nav className="bg-gray-100 text-gray-900 shadow-md fixed top-0 left-0 w-full z-50 border-b border-gray-200">
-      <div className="container mx-auto flex items-center justify-between p-4">
-        <Link to="/" className="text-xl font-bold">ICNARI</Link>
+      <div className="container  flex items-center  p-4">
+        <Link to="/" className="text-3xl font-bold">ICNARI</Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-6 items-center">
+        <div className="hidden md:flex space-x-12 items-center mx-10 text-lg font-bold">
           <Link to="/" className="hover:text-gray-500">Home</Link>
 
           {menuSections.map(({ label, key, options }) => (

@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Slider from "../components/ImageSlider";
 import EventTimeline from "../components/ImportantDates";
 import PhotoGallery from "../components/PhotoGallery";
+import AllSpeakerprog from "../components/programscomp/ThreeSpeakers";
 import RunningText from "../components/RunningText";
 import SmallAbout from "../components/SmallAbout";
 
@@ -13,7 +14,8 @@ export default function Home() {
         <RunningText/>
         <PaperUpdates/>       
         <SmallAbout/>
-        <PhotoGallery/>              
+        {/* <PhotoGallery/>               */}
+        <AllSpeakerprog/>
         <EventTimeline/>
     </div>;
   }

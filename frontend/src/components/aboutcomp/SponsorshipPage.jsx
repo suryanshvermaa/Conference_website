@@ -150,9 +150,7 @@ const SponsorshipPage = () => {
         </section>
       </main>
 
-      <footer className="bg-blue-900 text-white text-center p-4 mt-8">
-        &copy; 2026 NIT Patna. All rights reserved.
-      </footer>
+      
     </div>
   );
 };

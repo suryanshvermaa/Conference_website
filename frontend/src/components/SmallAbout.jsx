@@ -22,10 +22,7 @@ const SmallAbout = () => {
       <Link to="/about" className="text-blue-600 hover:text-blue-700 font-semibold text-lg transition duration-300 ease-in-out transform hover:scale-105">
         Read more
       </Link>
-      <h2 className="m-auto text-center text-3xl font-semibold text-gray-900 mb-4 border-b-2 pb-2">Our <span className='text-gray-500'>Vision</span></h2>
-      <p className="text-gray-700 text-lg mb-4">
-      👉 To be the go-to platform for knowledge sharing and networking within the [conference's specific industry/topic] community", focusing on creating a valuable and engaging experience for attendees. 
-      </p>
+      
     </div>
   )
 }

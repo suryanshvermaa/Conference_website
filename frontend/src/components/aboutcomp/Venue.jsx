@@ -1,36 +1,38 @@
 import React from 'react'
-import { FaAirbnb, FaTrain, FaBus } from 'react-icons/fa'
+import { FaPlaneArrival, FaTrain, FaBus } from 'react-icons/fa'
 
 const Venue = () => {
   return (
-    <div>
-      <section className="mt-8 py-16 bg-white rounded-xl shadow-lg max-w-5xl px-2">
-        <h2 className="text-3xl font-extrabold text-black mb-6 border-b-4 border-blue-500 pb-3 w-full text-center">Venue & Travels</h2>
+    <div className="flex w-full justify-center items-center flex-col">
+      <section className="mt-8 py-16 bg-white rounded-xl shadow-lg w-full max-w-5xl px-4 md:px-8">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-black mb-6 border-b-4 border-blue-500 pb-3 text-center">
+          Venue & Travel
+        </h2>
 
-        <p className="text-black text-lg leading-relaxed">
-          <strong className="text-black">The ICNARI-2026</strong> will be held at <strong>NIT Patna, Bihar, India</strong>. The institute’s campus is beautifully situated on the south bank of the River Ganges, behind Gandhi Ghat, one of the most important and sacred places in Patna.
+        <p className="text-black text-base md:text-lg lg:text-xl leading-relaxed">
+          <strong>ICNARI-2026</strong> will be held at <strong>NIT Patna, Bihar, India</strong>. The institute is beautifully situated on the south bank of the River Ganges, behind Gandhi Ghat, one of the most sacred places in Patna.
         </p>
 
-        <p className="text-black text-lg mt-4 leading-relaxed">
-          Historically known as Patliputra, Patna has long been a hub of knowledge and culture, attracting scholars and visitors from across the globe. Some of Patna’s best-known attractions include the Mahabodhi Temple, the ruins of Ancient Nalanda University, the Vaishali Ashokan Pillar, and the Patna Sahib Gurudwara.
+        <p className="text-black text-base md:text-lg lg:text-xl mt-4 leading-relaxed">
+          Historically known as Patliputra, Patna has long been a hub of knowledge and culture, attracting scholars and travelers from around the world. Notable attractions include the Mahabodhi Temple, the ruins of Ancient Nalanda University, the Vaishali Ashokan Pillar, and Patna Sahib Gurudwara.
         </p>
 
-        <p className="text-black text-lg mt-4 leading-relaxed">
-          The main entrance of NIT Patna is located on Ashok Rajpath, and it is approximately 3 km from Patna's Gandhi Maidan. The campus is conveniently connected to key parts of the city:
+        <p className="text-black text-base md:text-lg lg:text-xl mt-4 leading-relaxed">
+          The main entrance of NIT Patna is on Ashok Rajpath, approximately 3 km from Gandhi Maidan. The campus is well-connected to key city points:
         </p>
 
-        <ul className="list-none pl-0 text-black text-lg mt-4">
+        <ul className="text-black text-base md:text-lg lg:text-xl mt-4 space-y-4">
           <li className="flex items-center space-x-3">
-            <FaAirbnb size={22} className="text-black" />
-            <span><strong>12 km</strong> from the Jai Prakash Narayan International Airport.</span>
+            <FaPlaneArrival className="text-blue-600" size={20} />
+            <span><strong>12 km</strong> from Jai Prakash Narayan International Airport</span>
           </li>
-          <li className="flex items-center space-x-3 mt-3">
-            <FaTrain size={22} className="text-black" />
-            <span><strong>8 km</strong> from the Patna Junction Railway Station.</span>
+          <li className="flex items-center space-x-3">
+            <FaTrain className="text-blue-600" size={20} />
+            <span><strong>8 km</strong> from Patna Junction Railway Station</span>
           </li>
-          <li className="flex items-center space-x-3 mt-3">
-            <FaBus size={22} className="text-black" />
-            <span>Well-served by buses, making it easily accessible from various parts of the city.</span>
+          <li className="flex items-center space-x-3">
+            <FaBus className="text-blue-600" size={20} />
+            <span>Easily accessible by city buses and local transport</span>
           </li>
         </ul>
       </section>

@@ -2,12 +2,12 @@ import React from 'react'
 
 const Aboutconf = () => {
     return (
-        <div>
+        <div className='flex w-full justify-center items-center flex-col mt-4'>
             <div className="bg-white py-16 md:py-16 rounded-xl shadow-lg max-w-4xl mx-auto px-3">
-                <h2 className="w-full text-center border-b-2 border-blue-500 text-2xl md:text-3xl font-bold text-black mb-4">
+                <h2 className="w-full text-center border-b-4 border-blue-500 text-2xl md:text-5xl font-bold text-black mb-8">
                     About the Conference
                 </h2>
-                <p className="text-black text-base md:text-lg leading-relaxed">
+                <p className="text-black text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed">
                     The <span className="font-bold">International Conference on Next-Generation Adaptive Research and Innovations (ICNARI-2026)</span>, organized by the
                     <span className="font-bold"> Department of Electrical Engineering</span> at the
                     <span className="font-bold"> National Institute of Technology, Patna, Bihar, India</span>, is scheduled to take place in
@@ -20,7 +20,7 @@ const Aboutconf = () => {
                     <span className="font-bold"> sustainable technologies</span>.
                 </p>
 
-                <p className="text-black text-base md:text-lg leading-relaxed mt-4">
+                <p className="text-black text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed mt-4">
                     <span className="font-bold">ICNARI-2026</span> will feature specialized tracks covering emerging technologies and research in
                     <span className="font-bold"> biosensing</span> and
                     <span className="font-bold"> neuromorphic computing</span>,
@@ -32,7 +32,6 @@ const Aboutconf = () => {
                     <span className="font-bold"> knowledge exchange</span> among the participants.
                 </p>
             </div>
-
         </div>
     )
 }

@@ -18,7 +18,7 @@ const AdminLayout = ({ children ,setfetch}) => {
   };
 
   return (
-    <div className="admin-layout flex flex-col">
+    <div className="admin-layout flex flex-col mt-14">
       <div className="header  text-black flex justify-between items-center p-4">
         <div className="flex items-center space-x-4">
           <img

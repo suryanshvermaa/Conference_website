@@ -8,6 +8,7 @@ const AddSpeaker = () => {
   const [specialization, setSpecialization] = useState('');
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
+  const [desription,setdescription]=useState('')
 
   const token = localStorage.getItem('token');  // Get the token from localStorage
 
@@ -70,6 +71,7 @@ const AddSpeaker = () => {
           setSpecialization('');
           setImage(null);
           setImageUrl('');
+          setdescription('')
         }
       }
     } catch (error) {
@@ -107,6 +109,18 @@ const AddSpeaker = () => {
               required
             />
           </div>
+          <div className="mb-4">
+            <label className="block text-gray-700">Description</label>
+            <textarea
+              rows="4"
+              type="text"
+              value={desription}
+              onChange={(e) => setdescription(e.target.value)}
+              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter speaker's specialization separated by commas"
+              required
+            />
+          </div>
 
           <div className="mb-4">
             <label className="block text-gray-700">Upload Image</label>
@@ -132,8 +146,6 @@ const AddSpeaker = () => {
           </button>
         </form>
       </div>
-
-      {/* ToastContainer with position set to bottom-center */}
       <ToastContainer position="bottom-center" />
     </div>
   );

@@ -12,25 +12,23 @@ const ConferenceTrack = () => {
     <div className="mx-auto px-4 py-8">
       <div className="flex flex-col gap-6 items-start">
         <section className="p-6 bg-white shadow-lg rounded-xl w-full">
-          <p className="text-gray-700">
+          <p className="text-gray-700 text-3xl">
             Different themes and topics covered in the conference.
           </p>
 
           {/* Biosensing Track */}
           <button
-            className="bg-gray-100 text-gray-800 px-6 py-3 rounded-lg w-full text-left font-semibold hover:bg-gray-200 mt-6"
+            className="bg-gray-100 text-gray-800 px-6 py-3 rounded-lg w-full text-left font-semibold hover:bg-gray-200 mt-4 text-3xl"
             onClick={() => toggleTrack("biosensing")}
           >
             Tracks for Biosensing and Neuromorphic Computing
           </button>
           {visibleTrack === "biosensing" && (
             <div className="p-6 bg-white shadow-lg rounded-2xl w-full mt-6">
-              <h3 className="text-2xl font-bold mb-6 text-blue-800">
-                Tracks for Biosensing and Neuromorphic Computing
-              </h3>
+              
 
               {/* Track 1 */}
-              <h4 className="text-xl font-semibold mt-6 text-gray-800">
+              <h4 className="text-2xl font-semibold mt-6 text-gray-800">
                 Track 1: Advanced Biosensing Technologies
               </h4>
               <div className="flex flex-col md:flex-row items-start w-full gap-8 mt-4">
@@ -39,7 +37,7 @@ const ConferenceTrack = () => {
                   alt="Advanced Biosensing Technologies"
                   className="w-full md:w-[30%] rounded-xl shadow-md"
                 />
-                <ul className="list-disc pl-6 text-gray-700 text-base leading-relaxed">
+                <ul className="list-disc pl-6 text-gray-700  leading-relaxed text-lg">
                   <li>Novel TFET-, FET-, and Nanowire-based Biosensors</li>
                   <li>Dielectric Modulation and Junctionless Biosensing Techniques</li>
                   <li>Sensitivity, Selectivity, and Noise Performance in Biosensors</li>
@@ -49,7 +47,7 @@ const ConferenceTrack = () => {
               </div>
 
               {/* Track 2 */}
-              <h4 className="text-xl font-semibold mt-8 text-gray-800">
+              <h4 className="text-2xl font-semibold mt-8 text-gray-800">
                 Track 2: Neuromorphic Computing, Bioelectronics and Hybrid Systems
               </h4>
               <div className="flex flex-col md:flex-row items-start w-full gap-8 mt-4">
@@ -58,7 +56,7 @@ const ConferenceTrack = () => {
                   alt="Neuromorphic Computing"
                   className="w-full md:w-[30%] rounded-xl shadow-md"
                 />
-                <ul className="list-disc pl-6 text-gray-700 text-base leading-relaxed">
+                <ul className="list-disc pl-6 text-gray-700 text-lg leading-relaxed">
                   <li>Brain-Inspired Computing and Spiking Neural Networks (SNNs)</li>
                   <li>Memristors and Ferroelectric Devices for Neuromorphic Systems</li>
                   <li>AI-driven Biosensing and Real-time Signal Processing</li>
@@ -72,7 +70,7 @@ const ConferenceTrack = () => {
               </div>
 
               {/* Track 3 */}
-              <h4 className="text-xl font-semibold mt-8 text-gray-800">
+              <h4 className="text-2xl font-semibold mt-8 text-gray-800">
                 Track 3: Materials, Fabrication and Emerging Technologies
               </h4>
               <div className="flex flex-col md:flex-row items-start w-full gap-8 mt-4">
@@ -81,7 +79,7 @@ const ConferenceTrack = () => {
                   alt="Materials and Fabrication"
                   className="w-full md:w-[30%] rounded-xl shadow-md"
                 />
-                <ul className="list-disc pl-6 text-gray-700 text-base leading-relaxed">
+                <ul className="list-disc pl-6 text-gray-700 text-lg leading-relaxed">
                   <li>2D Materials (MoS₂, Graphene) for High-performance Biosensors</li>
                   <li>Quantum and Spintronics-based Biosensors and Neuromorphic Devices</li>
                   <li>Nanoengineering for Improved Biomolecule Capture and Sensitivity</li>
@@ -94,7 +92,7 @@ const ConferenceTrack = () => {
 
           {/* EV + Sustainability */}
           <button
-            className="bg-gray-100 text-gray-800 px-6 py-3 rounded-lg w-full text-left font-semibold hover:bg-gray-200 mt-6"
+            className="bg-gray-100 text-gray-800 px-6 py-3 rounded-lg w-full text-left font-semibold hover:bg-gray-200 mt-4 text-3xl"
             onClick={() =>
               toggleTrack("TracksforElectricVehicles,SustainableEnergyandTransportation")
             }
@@ -104,16 +102,16 @@ const ConferenceTrack = () => {
           {visibleTrack === "TracksforElectricVehicles,SustainableEnergyandTransportation" && (
             <div className="p-6 bg-white shadow-lg rounded-2xl w-full mt-6">
               {/* Track 1 */}
-              <h4 className="text-xl font-semibold mt-6 text-gray-800">
+              <h4 className="text-2xl font-semibold mt-6 text-gray-800">
                 Track 1: Energy Storage, Management and Integration for Sustainable Transportation
               </h4>
               <div className="flex flex-col md:flex-row items-start w-full gap-8 mt-4">
                 <img
                   src="http://res.cloudinary.com/dt35ytobp/image/upload/v1743771444/nimr4k8hebifeapaecis.png"
                   alt="Energy Storage"
-                  className="w-full md:w-[30%] rounded-xl shadow-md"
+                  className="w-full md:w-[30%] h-[300px] rounded-xl shadow-md"
                 />
-                <ul className="list-disc pl-6 text-gray-700 text-base leading-relaxed">
+                <ul className="list-disc pl-6 text-gray-700 text-lg leading-relaxed">
                   <li>Energy Storage Technologies for EVs (Li-ion, Fuel cell, Solid-state, Hybrid Storage)</li>
                   <li>Battery Management Systems (BMS) and State Estimation (SOC, SOH, SOP)</li>
                   <li>Thermal Management of Batteries and Supercapacitors</li>
@@ -126,16 +124,16 @@ const ConferenceTrack = () => {
               </div>
 
               {/* Track 2 */}
-              <h4 className="text-xl font-semibold mt-8 text-gray-800">
+              <h4 className="text-2xl font-semibold mt-8 text-gray-800">
                 Track 2: Power Conversion, Control and Sustainable Electrification
               </h4>
               <div className="flex flex-col md:flex-row items-start w-full gap-8 mt-4">
                 <img
                   src="http://res.cloudinary.com/dt35ytobp/image/upload/v1743771538/gqeudgfhocgsvvpv4bil.png"
                   alt="Power Conversion"
-                  className="w-full md:w-[30%] rounded-xl shadow-md"
+                  className="w-full md:w-[30%] h-[300px] rounded-xl shadow-md"
                 />
-                <ul className="list-disc pl-6 text-gray-700 text-base leading-relaxed">
+                <ul className="list-disc pl-6 text-gray-700 text-lg leading-relaxed">
                   <li>Power Electronics for EVs: Converters, Inverters, and Motor Drives</li>
                   <li>Electric Propulsion Systems: Design, Control, and Optimization</li>
                   <li>Energy-Efficient Power Conversion for EVs and Hybrid Vehicles</li>
@@ -151,25 +149,25 @@ const ConferenceTrack = () => {
 
           {/* Renewable Energy */}
           <button
-            className="bg-gray-100 text-gray-800 px-6 py-3 rounded-lg w-full text-left font-semibold hover:bg-gray-200 mt-6"
+            className="bg-gray-100 text-gray-800 px-6 py-3 rounded-lg w-full text-left font-semibold hover:bg-gray-200 mt-4 text-3xl"
             onClick={() => toggleTrack("renewableEnergy")}
           >
             Tracks for Renewable Energy
           </button>
           {visibleTrack === "renewableEnergy" && (
             <div className="p-6 bg-white shadow-lg rounded-2xl w-full mt-6">
-              <h3 className="text-2xl font-semibold">Tracks for Renewable Energy</h3>
+              <h3 className="text-3xl font-semibold">Tracks for Renewable Energy</h3>
               {/* Track 1 */}
-              <h4 className="text-xl font-semibold mt-6 text-gray-800">
+              <h4 className="text-2xl font-semibold mt-6 text-gray-800">
                 Track 1: Advanced Solar/Wind Energy and Circular Economy
               </h4>
               <div className="flex flex-col md:flex-row items-start w-full gap-8 mt-4">
                 <img
                   src="http://res.cloudinary.com/dt35ytobp/image/upload/v1743772019/xgkcoiwgsytre06kgvub.png"
-                  alt="Solar/Wind Energy"
+                  alt="Renewable Energy"
                   className="w-full md:w-[30%] rounded-xl shadow-md"
                 />
-                <ul className="list-disc pl-6 text-gray-700 text-base leading-relaxed">
+                <ul className="list-disc pl-6 text-gray-700  leading-relaxed text-lg ">
                   <li>Next-generation Photovoltaic Materials (Perovskite, Tandem and Organic Solar Cells)</li>
                   <li>AI and IOT-driven Solar Energy Optimization</li>
                   <li>Solar-powered Hydrogen Production</li>
@@ -188,16 +186,16 @@ const ConferenceTrack = () => {
               </div>
 
               {/* Track 2 */}
-              <h4 className="text-xl font-semibold mt-8 text-gray-800">
+              <h4 className="text-2xl font-semibold mt-8 text-gray-800">
                 Track 2: Bioenergy, Hydropower and Geothermal and Hydrogen Economy
               </h4>
               <div className="flex flex-col md:flex-row items-start w-full gap-8 mt-4">
                 <img
                   src="http://res.cloudinary.com/dt35ytobp/image/upload/v1743772060/u6iasbwoymi01zueiiz0.png"
-                  alt="Bioenergy"
-                  className="w-full md:w-[30%] rounded-xl shadow-md"
+                  alt="Smart Grids"
+                  className="w-full md:w-[30%]  rounded-xl shadow-md"
                 />
-                <ul className="list-disc pl-6 text-gray-700 text-base leading-relaxed">
+                <ul className="list-disc pl-6 text-gray-700 text-lg leading-relaxed">
                   <li>Advanced Biofuels and Synthetic Fuels</li>
                   <li>Algae-based Bioenergy Solutions</li>
                   <li>Waste-to-Energy Technologies</li>
@@ -219,23 +217,24 @@ const ConferenceTrack = () => {
             </div>
           )}
           <button
-            className="bg-gray-100 text-gray-800 px-6 py-2 rounded-lg w-full text-left font-semibold hover:bg-gray-200 mt-4"
+            className="bg-gray-100 text-gray-800 px-6 py-3 rounded-lg w-full text-left font-semibold hover:bg-gray-200 mt-4 text-3xl"
             onClick={() => toggleTrack("photovoltaic")}
           >
             Tracks for Photovoltaic Cells
           </button>
           {visibleTrack === "photovoltaic" && (
-            <div className="p-4 bg-white shadow-md rounded-lg w-full mt-4">
-              <h3 className="text-xl font-semibold">Tracks for Photovoltaic Cells</h3>
+            <div className="p-6 bg-white shadow-md rounded-lg w-full mt-6">
+              <h3 className="text-2xl font-semibold text-blue-800">Tracks for Photovoltaic Cells</h3>
+
               {/* Track 1 */}
               <h4 className="text-xl font-semibold mt-6 text-gray-800">Track 1: Thin-film Photovoltaics and Modules</h4>
-              <div className="flex flex-col md:flex-row items-start w-full gap-6 mt-2">
+              <div className="flex flex-col md:flex-row items-start w-full gap-6 mt-4">
                 <img
                   src="http://res.cloudinary.com/dt35ytobp/image/upload/v1743772575/cyh5rv5cvyazbodfqzao.png"
                   alt="Advanced Biosensing Technologies"
-                  className="w-full md:w-[30%] rounded-xl shadow-md"
+                  className="w-full md:w-[30%] h-[300px] rounded-xl shadow-md"
                 />
-                <ul className="list-disc pl-6 text-gray-700 text-base leading-relaxed">
+                <ul className="list-disc pl-6 text-gray-700 text-2xl leading-relaxed">
                   <li>Organic and Inorganic Photovoltaics</li>
                   <li>Compound Thin-film Photovoltaics</li>
                   <li>III-V High-efficiency Devices</li>
@@ -244,13 +243,13 @@ const ConferenceTrack = () => {
 
               {/* Track 2 */}
               <h4 className="text-xl font-semibold mt-8 text-gray-800">Track 2: Perovskite, Tandems and Emerging Photovoltaics</h4>
-              <div className="flex flex-col md:flex-row items-start w-full gap-6 mt-2">
+              <div className="flex flex-col md:flex-row items-start w-full gap-6 mt-4">
                 <img
                   src="http://res.cloudinary.com/dt35ytobp/image/upload/v1743772613/yzibksobiwa09h8akxvp.png"
                   alt="Materials and Fabrication"
-                  className="w-full md:w-[30%] rounded-xl shadow-md"
+                  className="w-full md:w-[30%] h-[300px] rounded-xl shadow-md"
                 />
-                <ul className="list-disc pl-6 text-gray-700 text-base leading-relaxed">
+                <ul className="list-disc pl-6 text-gray-700 text-2xl leading-relaxed">
                   <li>Perovskite Photovoltaics</li>
                   <li>Emerging Materials and New Concepts</li>
                   <li>Perovskite Tandems</li>
@@ -260,13 +259,13 @@ const ConferenceTrack = () => {
 
               {/* Track 3 */}
               <h4 className="text-xl font-semibold mt-8 text-gray-800">Track 3: Wafer-based Silicon Photovoltaics and Integrated PV</h4>
-              <div className="flex flex-col md:flex-row items-start w-full gap-6 mt-2">
+              <div className="flex flex-col md:flex-row items-start w-full gap-6 mt-4">
                 <img
                   src="http://res.cloudinary.com/dt35ytobp/image/upload/v1743772649/ih5lcrqeboilvcjr7aoa.png"
                   alt="Neuromorphic Computing"
-                  className="w-full md:w-[30%] rounded-xl shadow-md"
+                  className="w-full md:w-[30%] h-[300px] rounded-xl shadow-md"
                 />
-                <ul className="list-disc pl-6 text-gray-700 text-base leading-relaxed">
+                <ul className="list-disc pl-6 text-gray-700 text-2xl leading-relaxed">
                   <li>Materials, Processes, Fundamentals</li>
                   <li>Cells and Modules</li>
                   <li>Integrated PV and Advanced Applications of Photovoltaics</li>
@@ -279,6 +278,7 @@ const ConferenceTrack = () => {
             </div>
           )}
 
+
         </section>
       </div>
     </div>
@@ -286,3 +286,4 @@ const ConferenceTrack = () => {
 };
 
 export default ConferenceTrack;
+

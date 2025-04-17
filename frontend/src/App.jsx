@@ -36,12 +36,15 @@ import Accomodations from "./components/aboutcomp/Accomodations"
 import {BecomeSponsor, BenefitsOfBecomeSponser } from "./routes/Sponsors"
 import AllMessages from "./components/GetAllContact"
 import SponsorshipPage from "./components/aboutcomp/SponsorshipPage"
+import AllSpeakerprog from "./components/programscomp/AllSpeakersprog"
+import WorkShop from "./components/programscomp/WorkShop"
 
 function App() {
   const [fetch,setfetch]=useState(false)
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Navbar fetch={fetch} setfetch={setfetch}/>
+      <main className="flex-grow">
       < ToastContainer/>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -58,7 +61,9 @@ function App() {
         <Route path="/authors/conference-tracks" element={<Conferencetracks />} />
         <Route path="/authors/paper-submissions" element={<Papersub/>} />
         <Route path="/authors/registrations" element={<Registrations/>} />
+        <Route path="/programs/speakers" element={<AllSpeakerprog/>} />
         <Route path="/programs/tours" element={<Tours />} />
+        <Route path="/programs/workshops" element={<WorkShop />} />
         <Route path="/sponsors/become-a-sponsor" element={<BecomeSponsor />} />
         <Route path="/sponsors/benefits-of-sponsorship" element={<BenefitsOfBecomeSponser />} />
         <Route path="/contact" element={<Contact />} />
@@ -77,10 +82,11 @@ function App() {
           <Route path="/admin/photogalleryupload" element={<AddPhotoGallery />} />
           <Route path="/admin/contact-messages" element={<AllMessages />} />
         </Route>
-        <Route path="/all-images" element={<AllImages />} />
+        <Route path="/about/photo-gallery" element={<AllImages />} />
       </Routes>
+      </main>
       <Footer/>
-    </>
+    </div>
   )
 }
 

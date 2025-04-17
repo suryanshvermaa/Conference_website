@@ -35,6 +35,7 @@ import Aboutconf from "./components/aboutcomp/Aboutconf"
 import Accomodations from "./components/aboutcomp/Accomodations"
 import {BecomeSponsor, BenefitsOfBecomeSponser } from "./routes/Sponsors"
 import AllMessages from "./components/GetAllContact"
+import SponsorshipPage from "./components/aboutcomp/SponsorshipPage"
 
 function App() {
   const [fetch,setfetch]=useState(false)
@@ -45,6 +46,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<Aboutnit />} />
+        <Route path="/sponsors" element={<SponsorshipPage/>}></Route>
         <Route path="/about/about-the-conference" element={<Aboutconf/>} />
         <Route path="/about/about-nit-patna" element={<Aboutnit />} />
         <Route path="/about/organising-committee" element={<OrganisingCom />} />

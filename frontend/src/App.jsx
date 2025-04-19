@@ -64,7 +64,7 @@ function App() {
         <Route path="/programs/speakers" element={<AllSpeakerprog/>} />
         <Route path="/programs/tours" element={<Tours />} />
         <Route path="/programs/workshops" element={<WorkShop />} />
-        <Route path="/sponsors/become-a-sponsor" element={<BecomeSponsor />} />
+        <Route path="/sponsors/become-a-sponsor" element={<SponsorshipPage />} />
         <Route path="/sponsors/benefits-of-sponsorship" element={<BenefitsOfBecomeSponser />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/allpapers" element={<AllPapersUser />} />

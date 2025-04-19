@@ -54,7 +54,7 @@ const PaperUpdates = () => {
 
         {/* 📄 Papers Received */}
         <div className="bg-white shadow-lg rounded-lg p-6 flex-1 border h-[60%] border-gray-200 overflow-hidden">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2">📄 Papers Received</h2>
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2">📄 Highlights</h2>
           <ul className="space-y-3 max-h-[500px] overflow-y-auto">
             {visiblePapers.map((paper, index) => (
               <li key={index} className="bg-[#C9D8FF] p-4 rounded-md shadow-md flex justify-between items-center transition-transform duration-300">

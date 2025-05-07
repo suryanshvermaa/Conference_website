@@ -7,6 +7,52 @@ const ConferenceTrack = () => {
   const toggleTrack = (track) => {
     setVisibleTrack(visibleTrack === track ? null : track);
   };
+  const topics = [
+    'Applications of Power Electronics in Renewable Energy',
+    'Applications of Power Electronics in Robotics & Automation',
+    'Converter topologies',
+    'Distributed generation',
+    'Application of Data Analytics in Energy Management',
+    'Blockchain Applications for Distributed Energy Generation (DER)',
+    'Energy Efficient Buildings',
+    'Energy Forecasting',
+    'Energy Policies & Standards',
+    'Energy Storage solutions for Utility-scale PV generation',
+    'IoT in Power System Applications',
+    'Modelling of Energy Systems',
+    'Resilient Power Generation Systems',
+    'Urban Microgrids and smart grids',
+    'Wide Bandgap devices',
+    'AR/VR, Entertainment and Gaming',
+    'Computer Architecture & Embedded Systems',
+    'Consumer Systems for Healthcare and Wellbeing',
+    'Geoscience and Remote Sensing Technology',
+    'Industrial Electronics',
+    'Next-Gen Communications, Networks & IoT',
+    'Smart Cities, Vehicular Technology & Intelligent Transportation',
+    'VLSI for Applied and Future Computing',
+    'Multicore system-on-chip-based embedded systems and applications',
+    'Biomedical Imaging and Image Processing',
+    'Software Analytics & Visualization',
+    'Computer Architectures Using Emerging Technology & Quantum Computing',
+    'AI, Data Science and Scalable Machine Learning',
+    'Internet of Things and Cyber-Physical Systems',
+    'Cloud Systems Security, Privacy and Trust in Distributed Systems',
+    'Robotics, control systems and AI',
+    'Cryptography and security solutions',
+    'Cyber-physical system forensics',
+    'Network, cloud, distributed and cyber systems security',
+    'Smart Generation, Transmission & Distribution',
+    'Power System Restructuring, Economics & Electricity Markets',
+    'FACTS Controllers and HVDC Systems',
+    'Power System Protection and Security',
+    'Microgrids, Power Quality, Load Forecasting',
+    'Control System, Modelling and Applications',
+    'Instrumentation',
+    'Signal and Image Processing',
+    'Biomechanics'
+  ];
+  
 
   return (
     <div className="mx-auto px-4 py-8">
@@ -277,8 +323,27 @@ const ConferenceTrack = () => {
               </div>
             </div>
           )}
-
-
+          <button
+            className="bg-gray-100 text-gray-800 px-6 py-3 rounded-lg w-full text-left font-semibold hover:bg-gray-200 mt-4 text-3xl"
+            onClick={() => toggleTrack("additionaltracks")}
+          >
+            In addition to the above special tracks, papers are also invited in the following areas:
+          </button>
+          {visibleTrack === "additionaltracks" && (
+            <div className="p-6 bg-white shadow-md rounded-lg w-full mt-6">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6">Topics List</h1>
+      <ul className="list-disc pl-5 space-y-2">
+        {topics.map((topic, index) => (
+          <li
+            key={index}
+            className="text-base sm:text-lg md:text-xl text-gray-700"
+          >
+            {topic}
+          </li>
+        ))}
+      </ul>
+            </div>
+          )}
         </section>
       </div>
     </div>

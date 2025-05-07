@@ -38,13 +38,15 @@ import AllMessages from "./components/GetAllContact"
 import SponsorshipPage from "./components/aboutcomp/SponsorshipPage"
 import AllSpeakerprog from "./components/programscomp/AllSpeakersprog"
 import WorkShop from "./components/programscomp/WorkShop"
+import BestStuden from "./components/authorcomp/BestStuden"
+import FinancialSupp from "./components/authorcomp/FinancialSupp"
 
 function App() {
   const [fetch,setfetch]=useState(false)
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar fetch={fetch} setfetch={setfetch}/>
-      <main className="flex-grow">
+      <main className="flex-grow mt-6">
       < ToastContainer/>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -61,6 +63,8 @@ function App() {
         <Route path="/authors/conference-tracks" element={<Conferencetracks />} />
         <Route path="/authors/paper-submissions" element={<Papersub/>} />
         <Route path="/authors/registrations" element={<Registrations/>} />
+        <Route path="/authors/best-student-paper-award" element={<BestStuden/>} />
+        <Route path="/authors/financial-support" element={<FinancialSupp/>} />
         <Route path="/programs/speakers" element={<AllSpeakerprog/>} />
         <Route path="/programs/tours" element={<Tours />} />
         <Route path="/programs/workshops" element={<WorkShop />} />

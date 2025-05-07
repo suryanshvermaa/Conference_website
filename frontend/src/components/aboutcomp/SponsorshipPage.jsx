@@ -1,7 +1,6 @@
 import React from "react";
 
 const SponsorshipPage = () => {
-      
   return (
     <div className="bg-gray-50 text-gray-800 font-sans mt-12">
       <header className="bg-blue-900 text-white p-6 text-center">
@@ -15,7 +14,7 @@ const SponsorshipPage = () => {
             Submit Interest Form
           </button>
           <p className="mt-4 text-2xl">
-            Department of Electrical Engineering, National Institute of Technology (NIT), Patna is happy to announce the{" "}
+            Department of Electrical Engineering, National Institute of Technology (NIT), Patna is happy to announce the {" "}
             <strong>
               International Conference on Next-Generation Adaptive Research and Innovations (ICNARI-2026)
             </strong>
@@ -33,9 +32,22 @@ const SponsorshipPage = () => {
         </section>
 
         <section className="grid grid-cols-2 md:grid-cols-4 gap-10 text-center mb-8">
-          <div className="bg-gray-200 p-4 rounded shadow text-blue-700 font-bold text-2xl">Platinum Sponsor</div>
-          <div className="bg-gray-200 p-4 rounded shadow text-orange-500 font-bold text-2xl">Bronze Sponsor</div>
-          <div className="bg-gray-200 p-4 rounded shadow text-red-600 font-bold text-2xl">Other Sponsors</div>
+          <div className="bg-gray-200 p-4 rounded shadow text-blue-700 font-bold text-lg">
+            Platinum Sponsor
+            <img src="/platinum.png" alt="Platinum Sponsor" className="mx-auto mt-2 h-20" />
+          </div>
+          <div className="bg-gray-200 p-4 rounded shadow text-yellow-500 font-bold text-2xl">
+            Gold Sponsor
+            <img src="/gold.png" alt="Gold Sponsor" className="mx-auto mt-2 h-20" />
+          </div>
+          <div className="bg-gray-200 p-4 rounded shadow text-gray-500 font-bold text-2xl">
+            Silver Sponsor
+            <img src="/silver.png" alt="Silver Sponsor" className="mx-auto mt-2 h-20" />
+          </div>
+          <div className="bg-gray-200 p-4 rounded shadow text-orange-500 font-bold text-2xl">
+            Bronze Sponsor
+            <img src="/bronze.png" alt="Bronze Sponsor" className="mx-auto mt-2 h-20" />
+          </div>
         </section>
 
         <p className="mb-4 font-semibold">
@@ -52,40 +64,15 @@ const SponsorshipPage = () => {
               </tr>
             </thead>
             <tbody>
-              {[
-                {
-                  name: "PLATINUM",
-                  facilities:
-                    "Exhibition Stand, Platform for Technical Presentation, Registration Fees Waived for Three Participants, Promotional Banner, Logo in Brochure and Banner, Full-Page A4 Ad in Abstract Book",
-                  price: "₹ XXXX or above",
-                },
-                {
-                  name: "GOLD ",
-                  facilities:
-                    "Exhibition Stand, Platform for Technical Presentation, Registration Fees Waived for Two Participants, Logo in Brochure and Banner, Full-Page A4 Ad in Abstract Book",
-                  price: "₹ XXXX or above",
-                },
-                {
-                  name: "SILVER",
-                  facilities:
-                    "Exhibition Stand, Complimentary Registration for Two, Logo in Brochure and Banner",
-                  price: "₹ XXXX or above",
-                },
-                {
-                  name: "BRONZE",
-                  facilities:
-                    "Complimentary Registration for Two, Logo on Banner",
-                  price: "₹ XXXX or above",
-                },
-                {
-                  name: "Academic/Industrial",
-                  facilities:
-                    "Exhibition stall with two tables and electrical connections",
-                  price: "₹ XXXX",
-                },
+              {[ 
+                { name: "PLATINUM", facilities: "Exhibition Stand, Platform for Technical Presentation, Registration Fees Waived for Three Participants, Promotional Banner, Logo in Brochure and Banner, Full-Page A4 Ad in Abstract Book", price: "₹ XXXX or above" },
+                { name: "GOLD", facilities: "Exhibition Stand, Platform for Technical Presentation, Registration Fees Waived for Two Participants, Logo in Brochure and Banner, Full-Page A4 Ad in Abstract Book", price: "₹ XXXX or above" },
+                { name: "SILVER", facilities: "Exhibition Stand, Complimentary Registration for Two, Logo in Brochure and Banner", price: "₹ XXXX or above" },
+                { name: "BRONZE", facilities: "Complimentary Registration for Two, Logo on Banner", price: "₹ XXXX or above" },
+                { name: "Academic/Industrial", facilities: "Exhibition stall with two tables and electrical connections", price: "₹ XXXX" },
               ].map((item, i) => (
-                <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-5"}>
-                  <td className="border px-4 py-2 font-bold ">{item.name}</td>
+                <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                  <td className="border px-4 py-2 font-bold">{item.name}</td>
                   <td className="border px-4 py-2">{item.facilities}</td>
                   <td className="border px-4 py-2">{item.price}</td>
                 </tr>
@@ -95,11 +82,9 @@ const SponsorshipPage = () => {
         </section>
 
         <section className="mb-10">
-          <h3 className="text-xl font-semibold mb-4">
-            Additional Sponsorship Opportunities
-          </h3>
+          <h3 className="text-xl font-semibold mb-4">Additional Sponsorship Opportunities</h3>
           <ul className="list-disc list-inside space-y-2">
-            {[
+            {[ 
               "Delegate Kit",
               "Conference Lunch – XXXX INR/Day",
               "High Tea – XXXX INR/Day",
@@ -115,42 +100,28 @@ const SponsorshipPage = () => {
             ))}
           </ul>
           <p className="mt-4 italic">
-            If the above options do not fit your marketing needs, the support
-            opportunities can be customized for your requirements.
+            If the above options do not fit your marketing needs, the support opportunities can be customized for your requirements.
           </p>
         </section>
 
         <section className="mb-10">
           <h3 className="text-xl font-semibold mb-2">Important Dates</h3>
           <p>
-            Last date for receipt of advertisement materials:{" "}
-            <strong>XXXX</strong>
+            Last date for receipt of advertisement materials: <strong>XXXX</strong>
           </p>
         </section>
 
         <section>
           <h3 className="text-xl font-semibold mb-2">Bank Account Details</h3>
           <ul className="list-disc list-inside">
-            <li>
-              <strong>Account Name:</strong> xxxx
-            </li>
-            <li>
-              <strong>Account No:</strong> xxxx
-            </li>
-            <li>
-              <strong>Bank Name:</strong> xxxx
-            </li>
-            <li>
-              <strong>IFSC Code:</strong> xxxx
-            </li>
-            <li>
-              <strong>Branch Address:</strong> xxxx
-            </li>
+            <li><strong>Account Name:</strong> xxxx</li>
+            <li><strong>Account No:</strong> xxxx</li>
+            <li><strong>Bank Name:</strong> xxxx</li>
+            <li><strong>IFSC Code:</strong> xxxx</li>
+            <li><strong>Branch Address:</strong> xxxx</li>
           </ul>
         </section>
       </main>
-
-      
     </div>
   );
 };

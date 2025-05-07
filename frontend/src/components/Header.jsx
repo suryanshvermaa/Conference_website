@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = () => {
   return (
-    <header className="relative bg-gradient-to-r bg-[#5F6FFF] text-white py-20 px-6">
+    <header className="relative bg-gradient-to-r bg-[#5F6FFF] text-white py-20 px-6 mt-6">
       {/* Overlay with gradient */}
       <div className="absolute inset-0 bg-black opacity-40 z-0 "></div>
 
@@ -10,7 +10,7 @@ const Header = () => {
         <div className="flex justify-center items-center space-x-6 mb-4">
           {/* Logo */}
           <img
-            src="https://via.placeholder.com/200x200?text=Logo"
+            src="/vite.svg"
             alt="Conference Logo"
             className="rounded-full w-20 h-20 object-cover border-4 border-white"
           />

@@ -23,7 +23,7 @@ const Header = () => {
         {/* Event Date */}
         <div className="text-lg sm:text-xl font-semibold mb-6">
           <p className="bg-[#FFFFFF] inline-block py-2 px-4 rounded-md text-gray-900 m-1.5 font-bold">
-            Event Date: 7th & 8th of March, 2026
+            Event Date: 6th, 7th & 8th of March, 2026
           </p>
         </div>
 

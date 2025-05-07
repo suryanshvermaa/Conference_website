@@ -52,6 +52,7 @@ const AddSpeaker = () => {
           name,
           specialization: specialization, // Split by commas
           imageUrl: imageResponse.data.result,
+          description:desription
         };
 
         // Now add the speaker data

@@ -24,8 +24,8 @@ export default function Navbar(fetch, setfetch) {
   }, [setfetch, fetch]);
 
   const menuSections = [
-    { label: "About", key: "about", options: ["About the Conference","About Nit Patna", "Organising Committee", "Venue and Travels","Accomodations","About Nit Patna(Bihta Campus)","Photo-Gallery"] },
-    { label: "Authors", key: "authors", options: ["Guidelines To Authors", "Conference Tracks", "Paper Submissions", "Registrations","Best Student Paper Award" ,"Financial support"] },
+    { label: "About", key: "about", options: ["About the Conference","About Nit Patna", "Organising Committee", "Venue and Travels","Accomodations","About Nit Patna (Bihta Campus)","PhotoGallery"] },
+    { label: "Authors", key: "authors", options: ["Guidelines to Authors", "Conference Tracks", "Paper Submissions", "Registrations","Best Student Paper Award" ,"Financial support"] },
     { label: "Programs", key: "programs", options: ["Speakers", "Workshops","Tours","Cultural Event"] },
     { label: "Sponsors", key: "sponsors", options: ["Become a Sponsor", "Benefits of Sponsorship"] },
     // { label: "Contact", key: "contact", options: ["Contact Form"] },
@@ -41,7 +41,7 @@ export default function Navbar(fetch, setfetch) {
           <Link to="/" className="hover:text-gray-500">Home</Link>
 
           {menuSections.map(({ label, key, options }) => (
-            <div key={key} className="relative group capitalize">
+            <div key={key} className="relative group cursor-pointer">
               {/* Parent Link (just label with hover effect) */}
               <Link to={``} className="hover:text-gray-500 cursor-pointer">{label}</Link>
 

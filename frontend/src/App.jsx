@@ -57,7 +57,7 @@ function App() {
         <Route path="/about/organising-committee" element={<OrganisingCom />} />
         <Route path="/about/venue-and-travels" element={<Venue />} />
         <Route path="/about/accomodations" element={<Accomodations />} />
-        <Route path="/about/about-nit-patna(bihta-campus)" element={<Abounithistory/>} />
+        <Route path="/about/about-nit-patna-(bihta-campus)" element={<Abounithistory/>} />
         <Route path="/authors" element={<Authors />} />
         <Route path="/authors/guidelines-to-authors" element={<Guidelines />} />
         <Route path="/authors/conference-tracks" element={<Conferencetracks />} />

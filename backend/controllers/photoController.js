@@ -30,4 +30,30 @@ const getAllPhotos = async (req, res) => {
     }
 };
 
-module.exports = { uploadPhoto, getAllPhotos };
+
+
+const deletePhoto = async (req, res) => {
+    try {
+        const photoId = req.params.id;
+
+        // Find the photo by ID
+        const photo = await Photo.findById(photoId);
+        if (!photo) {
+            return res.status(404).json({ message: "Photo not found" });
+        }
+
+        // OPTIONAL: If you want to delete from cloud storage
+        if (photo.imageUrl && photo.imageUrl.includes('cloudinary')) {
+            const publicId = photo.imageUrl.split('/').pop().split('.')[0]; // Extract publicId
+            await cloud.uploader.destroy(publicId);
+        }
+
+        // Delete from MongoDB
+        await Photo.findByIdAndDelete(photoId);
+
+        res.status(200).json({ message: "Photo deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+module.exports = { uploadPhoto, getAllPhotos ,deletePhoto};

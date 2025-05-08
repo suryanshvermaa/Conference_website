@@ -5,7 +5,7 @@ const auth = require("../middlewares/middleware")
 const router = express.Router();
 
 router.post('/upload',auth ,upload.single('image'), uploadPhoto);
-router.post('/delete',auth, deletePhoto);
+router.post('/delete/:id',auth, deletePhoto);
 router.get('/all', getAllPhotos);
 
 module.exports = router;

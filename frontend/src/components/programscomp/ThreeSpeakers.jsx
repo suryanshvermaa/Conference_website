@@ -29,17 +29,17 @@ const AllSpeakerprog = () => {
 
 
     return (
-        <div className="min-h-screen p-8 border-2 border-gray-200 bg-white-100 rounded-md shadow-2xl md:mx-6 mt-14">
+        <div className="min-h-screen p-8 border-2 border-gray-200 bg-white-100 rounded-md shadow-2xl mx-2 md:mx-6 mt-14">
             <h2 className="text-3xl font-semibold text-center mb-8 border-b-4 border-b-blue-500">Speakers</h2>
             <div className="grid  gap-8">
                 {speakers.map((speaker) => (
                     <div key={speaker._id} className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden mb-6">
                         {/* Speaker Photo and Info */}
-                        <div className="w-[30%] flex flex-col  p-4 bg-gray-100">
+                        <div className="w-full md:w-[30%] flex flex-col  p-4 bg-gray-100">
                             <img
                                 src={speaker.imageUrl}
                                 alt={speaker.name}
-                                className="w-full h-[250px] object-cover rounded-lg mb-4"
+                                className="w-full h-[250px] object-fill rounded-lg mb-4"
                             />
                             <div className="text-center">
                                 <h3 className="text-xl font-semibold uppercase">{speaker.name}</h3>
@@ -49,7 +49,7 @@ const AllSpeakerprog = () => {
                         </div>
 
                         {/* Talk Details */}
-                        <div className="w-[70%] p-6">
+                        <div className="w-full md:w-[70%] p-6">
                             <h2 className="text-xl font-bold text-red-600 mb-2">
                                 {/* {speaker.sessionTitle} */}
                             </h2>

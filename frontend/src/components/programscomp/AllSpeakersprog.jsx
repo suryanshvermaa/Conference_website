@@ -34,11 +34,11 @@ const AllSpeakerprog = () => {
                 {speakers.map((speaker) => (
                     <div key={speaker._id} className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden mb-6">
                         {/* Speaker Photo and Info */}
-                        <div className="w-[30%] flex flex-col  p-4 bg-gray-100">
+                        <div className="w-full md:w-[30%] flex flex-col  p-4 bg-gray-100">
                             <img
                                 src={speaker.imageUrl}
                                 alt={speaker.name}
-                                className="w-full h-[250px] object-cover rounded-lg mb-4"
+                                className="w-full h-[250px] object-fill rounded-lg mb-4"
                             />
                             <div className="text-center">
                                 <h3 className="text-xl font-semibold uppercase">{speaker.name}</h3>
@@ -48,7 +48,7 @@ const AllSpeakerprog = () => {
                         </div>
 
                         {/* Talk Details */}
-                        <div className="w-[70%] p-6">
+                        <div className="w-full md:w-[70%] p-6">
                             <h2 className="text-xl font-bold text-red-600 mb-2">
                                 {/* {speaker.sessionTitle} */}
                             </h2>

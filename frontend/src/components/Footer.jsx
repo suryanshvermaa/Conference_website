@@ -8,7 +8,7 @@ export default function Footer() {
         
         {/* Left Section: Logo */}
         <div className="flex flex-col items-center md:items-start">
-          <img src="/nasl-logo.png" alt="ICNARI" className="w-28 h-auto mb-4" />
+          <img src="/vite.svg" alt="ICNARI" className="w-28 h-auto mb-4" />
           <p className="text-gray-400 text-center md:text-left">
             International Conference on <br /> Next-Generation Adaptive Research and Innovations
           </p>

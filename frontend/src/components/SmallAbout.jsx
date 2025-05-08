@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const SmallAbout = () => {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg mx-auto w-[80%] h-[80%]">
+    <div className="bg-white p-6 rounded-lg shadow-lg   md:p-12 border-2 border-gray-200 mx-2">
       <h2 className="m-auto text-center text-3xl font-semibold text-gray-900 mb-4 border-b-2 pb-2">About Conference</h2>
       <p className='text-lg'>The International Conference on Next-Generation Adaptive Research and Innovations (ICNARI-2026), organized by the Department of Electrical Engineering at the National Institute of Technology, Patna, Bihar, India, is scheduled to take place in hybrid mode on 7th March 2026 and 8th March 2026. The conference aims to bring together leading visionaries, researchers, academicians, and industry experts to explore the latest advancements and innovations while showcasing cutting-edge developments in various fields of electrical engineering and sustainable technologies.
       <Link to="/about/about-the-conference" className="text-blue-600 hover:text-blue-700 font-semibold text-lg transition duration-300 ease-in-out transform hover:scale-105">

@@ -19,7 +19,7 @@ const EventTimeline = () => {
         },
         {
           title: "Conference Start Date",
-          date: "March 7, 2026",
+          date: "March 6, 2026",
           description: "The official start of the International Conference.",
         },
         {

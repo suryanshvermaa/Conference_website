@@ -40,6 +40,7 @@ import AllSpeakerprog from "./components/programscomp/AllSpeakersprog"
 import WorkShop from "./components/programscomp/WorkShop"
 import BestStuden from "./components/authorcomp/BestStuden"
 import FinancialSupp from "./components/authorcomp/FinancialSupp"
+import Culturalevents from "./components/programscomp/Culturalevents"
 
 function App() {
   const [fetch,setfetch]=useState(false)
@@ -68,6 +69,7 @@ function App() {
         <Route path="/programs/speakers" element={<AllSpeakerprog/>} />
         <Route path="/programs/tours" element={<Tours />} />
         <Route path="/programs/workshops" element={<WorkShop />} />
+        <Route path="/programs/cultural-event" element={<Culturalevents />} />
         <Route path="/sponsors/become-a-sponsor" element={<SponsorshipPage />} />
         <Route path="/sponsors/benefits-of-sponsorship" element={<BenefitsOfBecomeSponser />} />
         <Route path="/contact" element={<Contact />} />
@@ -86,7 +88,7 @@ function App() {
           <Route path="/admin/photogalleryupload" element={<AddPhotoGallery />} />
           <Route path="/admin/contact-messages" element={<AllMessages />} />
         </Route>
-        <Route path="/about/photo-gallery" element={<AllImages />} />
+        <Route path="/about/photogallery" element={<AllImages />} />
       </Routes>
       </main>
       <Footer/>

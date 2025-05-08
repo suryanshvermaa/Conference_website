@@ -10,7 +10,7 @@ const PhotoGallery = () => {
   useEffect(() => {
     fetch("https://conference-website-dnqi.onrender.com/photogallery/all")
       .then(response => response.json())
-      .then(data => setImages(data.slice(0, 6))) // Show only 6 images
+      .then(data => setImages(data)) // Show only 6 images
       .catch(error => console.error("Error fetching images:", error));
   }, []);
 

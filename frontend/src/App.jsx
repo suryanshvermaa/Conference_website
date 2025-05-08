@@ -41,6 +41,7 @@ import WorkShop from "./components/programscomp/WorkShop"
 import BestStuden from "./components/authorcomp/BestStuden"
 import FinancialSupp from "./components/authorcomp/FinancialSupp"
 import Culturalevents from "./components/programscomp/Culturalevents"
+import Allphotosgallery from "./components/Allphotosgallery"
 
 function App() {
   const [fetch,setfetch]=useState(false)
@@ -87,6 +88,7 @@ function App() {
           <Route path="/admin/all-updates" element={<AllUpdates />} />
           <Route path="/admin/photogalleryupload" element={<AddPhotoGallery />} />
           <Route path="/admin/contact-messages" element={<AllMessages />} />
+          <Route path="/admin/deletephoto" element={<Allphotosgallery />} />
         </Route>
         <Route path="/about/photogallery" element={<AllImages />} />
       </Routes>

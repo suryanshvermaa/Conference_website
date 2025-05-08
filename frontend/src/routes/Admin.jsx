@@ -113,6 +113,15 @@ export default function Admin({ setfetch }) {
             See Requests 
           </button>
         </div>
+        <div
+          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
+          onClick={() => handleNavigation('/admin/deletephoto')}
+        >
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">PhotoGallery</h2>
+          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
+            delete photo
+          </button>
+        </div>
       </div>
     </div>
     </AdminLayout>

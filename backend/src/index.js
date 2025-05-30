@@ -1,5 +1,5 @@
 const express=require("express")
-
+const organisingCommitteeRouter=require("../routes/organisingcommitteeRoutes")
 const app=express()
 const db=require("../database/dbconn")
 const cors=require("cors")
@@ -21,6 +21,7 @@ app.use("/speaker",speakerRoute)
 app.use("/papers",noticeRoute)
 app.use("/recentupdate",recentupdateRoute)
 app.use("/contact",router)
+app.use("/organisingcommitee",organisingCommitteeRouter)
 db().then(
     app.listen(PORT,()=>{
         console.log(clc.bgGreen.whiteBright(" server connection  successfull 😍😍"))

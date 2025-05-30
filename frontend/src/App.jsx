@@ -41,6 +41,7 @@ import BestStuden from "./components/authorcomp/BestStuden"
 import FinancialSupp from "./components/authorcomp/FinancialSupp"
 import Culturalevents from "./components/programscomp/Culturalevents"
 import Allphotosgallery from "./components/Allphotosgallery"
+import AddOrganisingCommitteeMember from "./components/OrganisingCommittee/AddOrganisingCommitteeMember"
 
 function App() {
   const [fetch,setfetch]=useState(false)
@@ -88,6 +89,7 @@ function App() {
           <Route path="/admin/photogalleryupload" element={<AddPhotoGallery />} />
           <Route path="/admin/contact-messages" element={<AllMessages />} />
           <Route path="/admin/deletephoto" element={<Allphotosgallery />} />
+          <Route path="/admin/add-organising-member" element={<AddOrganisingCommitteeMember />} />
         </Route>
         <Route path="/about/photogallery" element={<AllImages />} />
       </Routes>

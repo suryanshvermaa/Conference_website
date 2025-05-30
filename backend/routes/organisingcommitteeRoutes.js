@@ -5,7 +5,7 @@ const organisingCommitteeRouter=Router();
 
 organisingCommitteeRouter
 .post('/createMember',auth,createMember)
-.get('/getAllMembers',auth,getAllMembers)
+.get('/getAllMembers',getAllMembers)
 .delete('/deleteMember/:id',auth,deleteMember)
 
 module.exports=organisingCommitteeRouter;

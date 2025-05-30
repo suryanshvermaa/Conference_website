@@ -7,7 +7,7 @@ const AllMessages = () => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const res = await fetch('https://conference-website-dnqi.onrender.com/contact'); // Update this if your endpoint differs
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/contact`); // Update this if your endpoint differs
         const data = await res.json();
         setMessages(data);
         setLoading(false);

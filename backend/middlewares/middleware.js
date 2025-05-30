@@ -4,7 +4,13 @@ const jwt=require("jsonwebtoken");
 const cli=require("cli-color");
 const secret=process.env.secret;
 
-
+/**
+ * 
+ * @description Middleware to authenticate user requests using JWT.
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res 
+ * @param {import("express").NextFunction} next 
+ */
 const auth=async (req,res,next)=>{
     try{
         const token=req.headers.token;

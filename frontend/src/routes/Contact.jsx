@@ -30,7 +30,7 @@ const ContactSection = () => {
           </div>
           <div>
             <h3 className="font-semibold text-lg">Email:</h3>
-            <p className="text-sm mt-1">xxxx@nitp.ac.in</p>
+            <p className="text-sm mt-1">nasl@nitp.ac.in</p>
           </div>
         </div>
 
@@ -41,7 +41,7 @@ const ContactSection = () => {
           </div>
           <div>
             <h3 className="font-semibold text-lg">Call:</h3>
-            <p className="text-sm mt-1">+91 XXXXXXXXXX</p>
+            <p className="text-sm mt-1">+91-7840809129, +91-9635102410, +91-9304640178</p>
           </div>
         </div>
       </div>

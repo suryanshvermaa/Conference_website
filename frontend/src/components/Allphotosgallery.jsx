@@ -4,14 +4,14 @@ import React, { useEffect, useState } from 'react'
 const Allphotosgallery = () => {
     const [Images, setImages] = useState([]);
     useEffect(() => {
-        fetch("https://conference-website-dnqi.onrender.com/photogallery/all")
+        fetch(`${import.meta.env.VITE_API_URL}/photogallery/all`)
             .then(response => response.json())
             .then(data => setImages(data)) // Show only 6 images
             .catch(error => console.error("Error fetching images:", error));
     }, []);
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`https://conference-website-dnqi.onrender.com/photogallery/delete/${id}`, { headers: { token: localStorage.getItem('token') } });
+            await axios.delete(`${import.meta.env.VITE_API_URL}/photogallery/delete/${id}`, { headers: { token: localStorage.getItem('token') } });
             setImages(Images.filter(photo => photo._id !== id));
         } catch (error) {
             console.error('Error deleting photo:', error);

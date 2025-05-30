@@ -21,7 +21,7 @@ exports.createMember=async(req,res)=>{
               description
        });
        await newMember.save();
-       res.json({success:true,msg:`successfully created organising member`});
+       res.status(201).json({success:true,msg:`successfully created organising member`});
    } catch (err) {
     res.status(500).json({ error: err.message });
    }

@@ -7,7 +7,7 @@ const AllImages = () => {
     const [selectedImage, setSelectedImage] = useState(null);
 
     useEffect(() => {
-        fetch("https://conference-website-dnqi.onrender.com/photogallery/all")
+        fetch(`${import.meta.env.VITE_API_URL}/photogallery/all`)
             .then(response => response.json())
             .then(data => setImages(data)) // Show only 6 images
             .catch(error => console.error("Error fetching images:", error));

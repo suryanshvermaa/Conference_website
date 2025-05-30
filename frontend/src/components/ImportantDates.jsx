@@ -4,18 +4,28 @@ const EventTimeline = () => {
     const dates = [
         {
           title: "Paper Submission Deadline",
-          date: "January 15, 2026",
+          date: "November 28, 2025",
           description: "Final date to submit research papers for review.",
         },
         {
           title: "Notification of Acceptance",
-          date: "February 10, 2026",
+          date: "December 29, 2025",
           description: "Authors will receive acceptance or rejection notifications.",
         },
         {
+          title: "Early Bird Registration",
+          date: "January 25, 2026",
+          description: "Deadline for early bird registration for the conference.",
+        },
+        {
           title: "Camera-Ready Submission",
-          date: "February 25, 2026",
+          date: "February 16, 2026",
           description: "Final versions of accepted papers must be submitted.",
+        },
+        {
+          title: "Last Date of Registration",
+          date: "February 23, 2026",
+          description: "Final date for all participants to register for the conference.",
         },
         {
           title: "Conference Start Date",

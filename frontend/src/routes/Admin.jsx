@@ -63,6 +63,17 @@ export default function Admin({ setfetch }) {
           </button>
         </div>
 
+         {/* All Organising Committee Members */}
+         <div
+          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
+          onClick={() => handleNavigation('/admin/all-organising-members')}
+        >
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">All Committee Members</h2>
+          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
+          All Organising Members
+          </button>
+        </div>
+
         {/* Add New Updates */}
         <div
           className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"

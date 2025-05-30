@@ -53,7 +53,7 @@ const AddOrganisingCommitteeMember = () => {
 
       if (imageResponse.data.result) {
         const response = await axios.post(
-          `${import.meta.env.VITE_API_URL}/organising-committee/create`,
+          `${import.meta.env.VITE_API_URL}/organisingcommitee/createMember`,
           {...organisingMemberData,imageUrl:imageResponse.data.result},
           {
             headers: {
@@ -63,14 +63,14 @@ const AddOrganisingCommitteeMember = () => {
         );
         console.log(response);
         if (response.status === 201) {
-          toast.success(response.data.message);
+          toast.success(response.data.msg);
           setImage(null);
           setOrganisingMemberData({name:"",desription:"",imageUrl:"",specialization:"",college:"",committee:""})
         }
       }
     } catch (error) {
       console.error('Error:', error);
-      toast.error('Failed to add the speaker. Please try again.');
+      toast.error('Failed to add the new committee member. Please try again.');
     }
   };
 

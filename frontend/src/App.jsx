@@ -27,7 +27,6 @@ import OrganisingCom from "./components/aboutcomp/OrganisingCom"
 import Venue from "./components/aboutcomp/Venue"
 import Abounithistory from "./components/aboutcomp/Abounithistory"
 import Guidelines from "./components/authorcomp/Guidelines"
-import Conferencetracks from "./components/authorcomp/Conferencetracks"
 import Papersub from "./components/authorcomp/Papersub"
 import Registrations from "./components/authorcomp/Registrations"
 import Aboutconf from "./components/aboutcomp/Aboutconf"
@@ -43,6 +42,9 @@ import Culturalevents from "./components/programscomp/Culturalevents"
 import Allphotosgallery from "./components/Allphotosgallery"
 import AddOrganisingCommitteeMember from "./components/OrganisingCommittee/AddOrganisingCommitteeMember"
 import AllOrganisingCommitteeMembers from "./components/OrganisingCommittee/AllOrganisingCommitteeMembers"
+import CallforPapers from "./components/authorcomp/CallforPapers"
+import Track from "./components/authorcomp/Track"
+import UpdateMember from "./components/OrganisingCommittee/UpdateMember"
 
 function App() {
   const [fetch,setfetch]=useState(false)
@@ -53,25 +55,35 @@ function App() {
       < ToastContainer/>
       <Routes>
         <Route path="/" element={<Home />} />
+        {/* About routes */}
         <Route path="/about" element={<Aboutnit />} />
-        <Route path="/sponsors" element={<SponsorshipPage/>}></Route>
         <Route path="/about/about-the-conference" element={<Aboutconf/>} />
         <Route path="/about/about-nit-patna" element={<Aboutnit />} />
         <Route path="/about/organising-committee" element={<OrganisingCom />} />
         <Route path="/about/venue-and-travels" element={<Venue />} />
         <Route path="/about/accomodations" element={<Accomodations />} />
         <Route path="/about/about-nit-patna-(bihta-campus)" element={<Abounithistory/>} />
+        <Route path="/about/photogallery" element={<AllImages />} />
+
+
+        {/* Authors routes */}
         <Route path="/authors" element={<Authors />} />
+        <Route path="/authors/call-for-papers" element={<CallforPapers />} />
+        <Route path="/authors/call-for-papers/:track" element={<Track />} />
         <Route path="/authors/guidelines-to-authors" element={<Guidelines />} />
-        <Route path="/authors/conference-tracks" element={<Conferencetracks />} />
         <Route path="/authors/paper-submissions" element={<Papersub/>} />
         <Route path="/authors/registrations" element={<Registrations/>} />
         <Route path="/authors/best-student-paper-award" element={<BestStuden/>} />
         <Route path="/authors/financial-support" element={<FinancialSupp/>} />
+
+        {/* Program routes */}
         <Route path="/programs/speakers" element={<AllSpeakerprog/>} />
         <Route path="/programs/tours" element={<Tours />} />
         <Route path="/programs/workshops" element={<WorkShop />} />
         <Route path="/programs/cultural-event" element={<Culturalevents />} />
+
+        {/* Sponser routes */}
+        <Route path="/sponsors" element={<SponsorshipPage/>}></Route>
         <Route path="/sponsors/become-a-sponsor" element={<SponsorshipPage />} />
         <Route path="/sponsors/benefits-of-sponsorship" element={<BenefitsOfBecomeSponser />} />
         <Route path="/contact" element={<Contact />} />
@@ -79,6 +91,7 @@ function App() {
         <Route path="/allupdates" element={<AllUpdatesUser />} />
         <Route path="/login" element={<Login setfetch={setfetch}/>} />
         <Route element={<ProtectedRoute />}>
+        {/* Admin routes */}
           <Route path="/admin" element={<Admin setfetch={setfetch}/>} />
           <Route path="/admin/add-speakers" element={<AddSpeakers />} />
           <Route path="/admin/add-papers" element={<AddPapers />} />
@@ -92,8 +105,8 @@ function App() {
           <Route path="/admin/deletephoto" element={<Allphotosgallery />} />
           <Route path="/admin/add-organising-member" element={<AddOrganisingCommitteeMember />} />
           <Route path="/admin/all-organising-members" element={<AllOrganisingCommitteeMembers />} />
+          <Route path="/admin/all-organising-members/:id" element={<UpdateMember />} />
         </Route>
-        <Route path="/about/photogallery" element={<AllImages />} />
       </Routes>
       </main>
       <Footer/>

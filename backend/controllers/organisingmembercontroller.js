@@ -95,3 +95,25 @@ exports.updateMember=async(req,res)=>{
         res.status(500).json({ error: err.message });
    }
 }
+
+/**
+ * 
+ * @description get a member from the organising committee
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res  
+ */
+exports.getMember=async(req,res)=>{
+    try {   
+        const {id}=req.params;
+        if(!id){
+            return res.status(400).json({success:false,msg:"id is required"});
+        }
+        const member=await OrganisingCommitteeMember.findById(id);
+        if(!member){
+            return res.status(400).json({success:false,msg:"member not found"});
+        }
+        res.json({success:true,member});
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}

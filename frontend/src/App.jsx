@@ -44,6 +44,7 @@ import AddOrganisingCommitteeMember from "./components/OrganisingCommittee/AddOr
 import AllOrganisingCommitteeMembers from "./components/OrganisingCommittee/AllOrganisingCommitteeMembers"
 import CallforPapers from "./components/authorcomp/CallforPapers"
 import Track from "./components/authorcomp/Track"
+import UpdateMember from "./components/OrganisingCommittee/UpdateMember"
 
 function App() {
   const [fetch,setfetch]=useState(false)
@@ -104,6 +105,7 @@ function App() {
           <Route path="/admin/deletephoto" element={<Allphotosgallery />} />
           <Route path="/admin/add-organising-member" element={<AddOrganisingCommitteeMember />} />
           <Route path="/admin/all-organising-members" element={<AllOrganisingCommitteeMembers />} />
+          <Route path="/admin/all-organising-members/:id" element={<UpdateMember />} />
         </Route>
       </Routes>
       </main>

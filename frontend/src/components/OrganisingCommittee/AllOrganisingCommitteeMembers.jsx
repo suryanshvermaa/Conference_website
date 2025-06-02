@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import {useNavigate} from "react-router-dom";
 const AllOrganisingCommitteeMembers = () => {
   const [organisingMembers, setOrganisingMembers] = useState([]);
   const token = localStorage.getItem('token');
+  const navigate=useNavigate();
 
   useEffect(() => {
     const fetchMembers = async () => {
@@ -78,6 +79,12 @@ const AllOrganisingCommitteeMembers = () => {
                   className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600"
                 >
                   Delete
+                </button>
+                <button
+                  onClick={() => navigate(`/admin/all-organising-members/${member._id}`)}
+                  className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600"
+                >
+                  Update
                 </button>
               </div>
             </div>

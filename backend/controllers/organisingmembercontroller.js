@@ -14,7 +14,7 @@ exports.createMember=async(req,res)=>{
        }
        const newMember=new OrganisingCommitteeMember({
               name,
-              specialization:[...String(specialization).split(',')],
+              specialization:[...String(specialization).split(',').map(item => item.trim())],
               college,
               committee,
               imageUrl,

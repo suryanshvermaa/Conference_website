@@ -26,11 +26,11 @@ export default function Footer() {
           <p className="text-gray-400">Event Coordinator</p>
           <div className="flex items-center justify-center md:justify-start mt-2">
             <FaPhone className="text-green-400 mr-2" />
-            <span className="text-gray-300">+123 456 7890</span>
+            <span className="text-gray-300">+91 7840809129</span>
           </div>
           <div className="flex items-center justify-center md:justify-start mt-1">
             <FaEnvelope className="text-red-400 mr-2" />
-            <span className="text-gray-300">johndoe@nasl.org</span>
+            <span className="text-gray-300">nasl@nitp.ac.in</span>
           </div>
         </div>
 

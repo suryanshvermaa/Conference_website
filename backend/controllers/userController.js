@@ -8,6 +8,14 @@ const secret=process.env.secret
 const jwt=require("jsonwebtoken")
 const validator=require("validator")
 
+/**
+ * 
+ * @description Upload an image to cloud storage
+ * @route POST /user/image
+ * @access Private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res  
+ */
 exports.uploadImage=async(req,res)=>{
     try{
         const result=await cloud.uploader.upload(req.file.path)
@@ -18,6 +26,14 @@ exports.uploadImage=async(req,res)=>{
     
 }
 
+/**
+ * 
+ * @description Sign up a new user
+ * @route POST /user/signup | This route is not used in the app, it is only for admin to create new users
+ * @access Private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res  
+ */
 exports.signUp=async(req,res)=>{
     const {name,email,password,pic}=req.body
     if(!name || !email ||!password||!pic){
@@ -43,6 +59,14 @@ exports.signUp=async(req,res)=>{
     }
 }
 
+/**
+ * 
+ * @description Create a new admin member
+ * @route POST /user/newuser
+ * @access Private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res  
+ */
 exports.createNewAdmin=async(req,res)=>{
     const {name,email,password,pic}=req.body
     
@@ -63,6 +87,14 @@ exports.createNewAdmin=async(req,res)=>{
     }
 }
 
+/**
+ * 
+ * @description Login a user
+ * @route POST /user/login
+ * @access Private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res  
+ */
 exports.login=async(req,res)=>{
     const {email,password}=req.body
     
@@ -91,7 +123,14 @@ exports.login=async(req,res)=>{
 
 }
 
-
+/**
+ * 
+ * @description Get all users except the logged-in user
+ * @route GET /user/Allusers
+ * @access Private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res  
+ */
 exports.getAllUsers=async(req,res)=>{
     try{
         console.log(req.user)

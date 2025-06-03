@@ -114,11 +114,24 @@ const SponsorshipPage = () => {
         <section>
           <h3 className="text-xl font-semibold mb-2">Bank Account Details</h3>
           <ul className="list-disc list-inside">
-            <li><strong>Account Name:</strong> xxxx</li>
-            <li><strong>Account No:</strong> xxxx</li>
-            <li><strong>Bank Name:</strong> xxxx</li>
-            <li><strong>IFSC Code:</strong> xxxx</li>
-            <li><strong>Branch Address:</strong> xxxx</li>
+          <div>
+              <strong className="font-semibold">Bank Name:</strong> Indian Bank
+            </div>
+            <div>
+              <strong className="font-semibold">Branch:</strong> NIT Patna Campus
+            </div>
+            <div>
+              <strong className="font-semibold">Account Name:</strong> NIT Patna CF Account
+            </div>
+            <div>
+              <strong className="font-semibold">Account Number:</strong> 50433562364
+            </div>
+            <div>
+              <strong className="font-semibold">IFSC Code:</strong> IDIB000B810
+            </div>
+            <div>
+              <strong className="font-semibold">MICR Code:</strong> 800019027
+            </div>
           </ul>
         </section>
       </main>

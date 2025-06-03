@@ -76,6 +76,9 @@ const Registrations = () => {
               <strong className="font-semibold">Account Name:</strong> NIT Patna CF Account
             </div>
             <div>
+              <strong className="font-semibold">Account Number:</strong> 50433562364
+            </div>
+            <div>
               <strong className="font-semibold">IFSC Code:</strong> IDIB000B810
             </div>
             <div>

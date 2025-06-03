@@ -2,6 +2,14 @@ const Photo = require('../models/Photo');
 const { cloud } = require("../multer/multer")
 const fs = require('fs');
 
+/**
+ * 
+ * @description upload a photo to the gallery
+ * @route POST /photogallery/upload
+ * @access Private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res  
+ */
 const uploadPhoto = async (req, res) => {
     try {
         imageUrl=req.body.imageUrl
@@ -21,6 +29,14 @@ const uploadPhoto = async (req, res) => {
     }
 };
 
+/**
+ * 
+ * @description get all photos from the gallery
+ * @route GET /photogallery/all
+ * @access Private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res  
+ */
 const getAllPhotos = async (req, res) => {
     try {
         const photos = await Photo.find().sort({ createdAt: -1 }); // Get all photos, newest first
@@ -31,7 +47,14 @@ const getAllPhotos = async (req, res) => {
 };
 
 
-
+/**
+ * 
+ * @description delete a photo from the gallery
+ * @route DELETE /photogallery/delete/:id
+ * @access Private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res  
+ */
 const deletePhoto = async (req, res) => {
     try {
         const photoId = req.params.id;

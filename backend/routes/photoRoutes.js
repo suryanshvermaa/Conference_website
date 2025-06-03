@@ -2,10 +2,11 @@ const express = require('express');
 const {upload}=require("../multer/multer")
 const { uploadPhoto, getAllPhotos, deletePhoto } = require('../controllers/photoController');
 const auth = require("../middlewares/middleware")
-const router = express.Router();
+const photoGalleryRouter = express.Router();
 
-router.post('/upload',auth ,upload.single('image'), uploadPhoto);
-router.delete('/delete/:id',auth, deletePhoto);
-router.get('/all', getAllPhotos);
+photoGalleryRouter
+.post('/upload',auth ,upload.single('image'), uploadPhoto)
+.delete('/delete/:id',auth, deletePhoto)
+.get('/all', getAllPhotos)
 
-module.exports = router;
+module.exports = photoGalleryRouter;

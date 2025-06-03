@@ -2,9 +2,10 @@ const express = require('express');
 const { createSpeaker, deleteSpeaker ,getAllSpeakers} = require('../controllers/speakerController');
 const auth = require('../middlewares/middleware');
 
-const router = express.Router();
+const speakerRouter = express.Router();
 
-router.post('/create', auth, createSpeaker);
-router.delete('/delete/:id',auth, deleteSpeaker);
-router.get('/all', getAllSpeakers);
-module.exports = router;
+speakerRouter
+.post('/create', auth, createSpeaker)
+.delete('/delete/:id',auth, deleteSpeaker)
+.get('/all', getAllSpeakers)
+module.exports = speakerRouter;

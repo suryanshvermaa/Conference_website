@@ -1,5 +1,14 @@
 const Speaker = require('../models/Speaker');
 const fs = require('fs');
+
+/**
+ * 
+ * @description Create a new Speaker
+ * @route POST /speaker/create
+ * @access Private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res  
+ */
 const createSpeaker = async (req, res) => {
     try {
         let imageUrl = req.body.imageUrl;
@@ -15,7 +24,14 @@ const createSpeaker = async (req, res) => {
     }
 };
 
-// Delete a Speaker by ID
+/**
+ * 
+ * @description Delete a Speaker by ID
+ * @route DELETE /speaker/delete/:id
+ * @access Private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res  
+ */
 const deleteSpeaker = async (req, res) => {
     try {
         const { id } = req.params;
@@ -30,6 +46,15 @@ const deleteSpeaker = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+/**
+ * 
+ * @description Get all Speakers
+ * @route GET /speaker/all
+ * @access Private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res  
+ */
 const getAllSpeakers = async (req, res) => {
     try {
         const speakers = await Speaker.find().sort({ createdAt: -1 }); // Fetch speakers, newest first

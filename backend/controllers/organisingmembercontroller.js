@@ -3,6 +3,8 @@ const OrganisingCommitteeMember=require("../models/OrganisingCommitteeMember");
 /**
  * 
  * @description create a new member in the organising committee
+ * @route POST /organisingcommitee/createMember
+ * @access Private
  * @param {import("express").Request} req 
  * @param {import("express").Response} res  
  */
@@ -30,6 +32,8 @@ exports.createMember=async(req,res)=>{
 /**
  * 
  * @description get all members of the organising committee
+ * @route GET /organisingcommitee/getAllMembers
+ * @access private
  * @param {import("express").Request} req 
  * @param {import("express").Response} res  
  */
@@ -45,6 +49,8 @@ exports.getAllMembers=async(req,res)=>{
 /**
  * 
  * @description delete a member from the organising committee
+ * @route DELETE /organisingcommitee/deleteMember/:id
+ * @access private
  * @param {import("express").Request} req 
  * @param {import("express").Response} res  
  */
@@ -66,6 +72,8 @@ exports.deleteMember=async(req,res)=>{
 /**
  * 
  * @description update a member in the organising committee
+ * @route PUT /organisingcommitee/updateMember/:id
+ * @access private
  * @param {import("express").Request} req 
  * @param {import("express").Response} res 
  */
@@ -99,6 +107,8 @@ exports.updateMember=async(req,res)=>{
 /**
  * 
  * @description get a member from the organising committee
+ * @route GET /organisingcommitee/getMember/:id
+ * @access private
  * @param {import("express").Request} req 
  * @param {import("express").Response} res  
  */

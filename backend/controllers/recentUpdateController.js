@@ -1,6 +1,13 @@
 const RecentUpdate = require('../models/RecentUpdates');
 
-// Add a new Recent Update
+/**
+ * 
+ * @description Add a new Recent Update
+ * @route POST /recentupdate/add
+ * @access Private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res  
+ */
 const addRecentUpdate = async (req, res) => {
     try {
         const { title, description, link, eventDate} = req.body;
@@ -15,7 +22,14 @@ const addRecentUpdate = async (req, res) => {
     }
 };
 
-// Get all Recent Updates
+/**
+ * 
+ * @description Get all Recent Updates
+ * @route GET /recentupdate/all
+ * @access Private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res  
+ */
 const getAllRecentUpdates = async (req, res) => {
     try {
         const recentUpdates = await RecentUpdate.find().sort({ createdAt: -1 }); // Fetch all, sorted by latest
@@ -25,7 +39,14 @@ const getAllRecentUpdates = async (req, res) => {
     }
 };
 
-// Delete a Recent Update by ID
+/**
+ * 
+ * @description Delete a Recent Update by ID
+ * @route DELETE /recentupdate/delete/:id
+ * @access Private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res  
+ */
 const deleteRecentUpdate = async (req, res) => {
     try {
         const { id } = req.params;

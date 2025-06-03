@@ -1,6 +1,12 @@
 const Notice = require('../models/Notices');
 
-// Add a new Notice
+/**
+ * @description Handles the addition of a new notice.
+ * @route POST /papers/add
+ * @access private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ */
 const addNotice = async (req, res) => {
     try {
         const { heading, content, link, authors } = req.body;
@@ -14,6 +20,15 @@ const addNotice = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+/**
+ * 
+ * @description Fetches all notices, sorted by creation date in descending order.
+ * @route GET /papers/all
+ * @access private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ */
 const getAllNotices = async (req, res) => {
     try {
         const notices = await Notice.find().sort({ createdAt: -1 }); // Fetch notices, newest first
@@ -22,7 +37,15 @@ const getAllNotices = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
-// Delete a Notice by ID
+
+/**
+ * 
+ * @description Deletes a notice by its ID.
+ * @route DELETE /papers/delete/:id
+ * @access private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ */
 const deleteNotice = async (req, res) => {
     try {
         const { id } = req.params;

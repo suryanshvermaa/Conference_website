@@ -1,5 +1,13 @@
 const Contact=require("../models/Contact")
 
+/**
+ * 
+ * @description Handles the creation of a new contact message.
+ * @route POST /contact
+ * @access Public
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ */
 exports.createContact= async (req, res) => {
     try {
       const { name, email, subject, phone, message } = req.body;
@@ -24,7 +32,13 @@ exports.createContact= async (req, res) => {
     }
 };
 
-
+/**
+ * @description Fetches all contact messages.
+ * @route GET /contact
+ * @access private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ */
 exports.getContact=async (req, res) => {
     try {
       const contacts = await Contact.find().sort({ createdAt: -1 }); // newest first

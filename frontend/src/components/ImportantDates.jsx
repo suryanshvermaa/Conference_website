@@ -2,6 +2,11 @@ import React from 'react';
 
 const EventTimeline = () => {
     const dates = [
+      {
+        title: "Paper Submission Start Date",
+        date: "June 16, 2025",
+        description: "Start date to submit research papers for review.",
+      },
         {
           title: "Paper Submission Deadline",
           date: "November 28, 2025",

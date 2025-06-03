@@ -63,4 +63,58 @@ const getAllSpeakers = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
-module.exports = { createSpeaker, deleteSpeaker,getAllSpeakers };
+
+/**
+ * 
+ * @description get a Speaker by ID
+ * @route POST /speaker/get/:id
+ * @access Private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res  
+ */
+const getSpeakerById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const speaker = await Speaker.findById(id);
+
+        if (!speaker) {
+            return res.status(404).json({ error: "Speaker not found" });
+        }
+
+        res.status(200).json(speaker);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+/**
+ * 
+ * @description Update a Speaker
+ * @route POST /speaker/update/:id
+ * @access Private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res  
+ */
+const updateSpeaker = async (req, res) => {
+    try {
+
+        const { name, specialization ,description,imageUrl} = req.body;
+        if (!name || !specialization || !description||!imageUrl) {
+            return res.status(400).json({ error: "All fields are required" });
+        }
+        const { id } = req.params;
+        const speaker = await Speaker.findById(id);
+        if (!speaker) {
+            return res.status(404).json({ error: "Speaker not found" });
+        }
+        speaker.name = name;
+        speaker.specialization =specialization.split(',').map((spec) => spec.trim());
+        speaker.description = description;
+        speaker.imageUrl = imageUrl;
+        await speaker.save();
+        res.status(201).json({ message: "Speaker updated successfully", speaker: speaker });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+module.exports = { createSpeaker, deleteSpeaker,getAllSpeakers,updateSpeaker, getSpeakerById };

@@ -25,48 +25,35 @@ exports.uploadImage=async(req,res)=>{
     }
     
 }
+/**
+ * 
+ * @param {string} imageUrl 
+ * @returns imagedata|null
+ */
+const getImageByImageUrl=async(imageUrl)=>{
+    const publicId=imageUrl.split("/").slice(7).join("/").split(".")[0];
+    return publicId;
+}
 
 /**
  * 
  * @description delete an image from cloud storage
- * @route DELETE /user/image/:public_id
+ * @route DELETE /user/image/:imageurl
  * @access Private
  * @param {import("express").Request} req 
  * @param {import("express").Response} res  
  */
 exports.deleteImage=async(req,res)=>{
     try{
-        const {public_id}=req.body
-        if(!public_id){
-            return res.json({success:false,msg:"public id is required"})
+        const {imageurl}=req.body;
+        if(!imageurl){
+            return res.json({success:false,msg:"image url is required"})
         }
-        const result=await cloud.uploader.destroy(public_id)
+        const public_id=await getImageByImageUrl(imageurl);
+        const result=await cloud.uploader.destroy(public_id);
         return res.json({success:true,msg:"deleted successfully",result})
     }catch(err){
         return res.json({success:false,msg:"error while deleting image",err})
-    }
-}
-/**
- * 
- * @description getImageByImageUrl - fetch an image from cloud storage by its URL
- * @route POST /user/image
- * @access Private
- * @param {import("express").Request} req 
- * @param {import("express").Response} res  
- */
-exports.getImageByImageUrl=async(req,res)=>{
-    try{
-        const {imageUrl}=req.query
-        if(!imageUrl){
-            return res.json({success:false,msg:"image url is required"})
-        }
-        const result=await cloud.search.expression(`resource_type:image AND url:${imageUrl}`).execute()
-        if(result.resources.length === 0){
-            return res.json({success:false,msg:"no image found with this url"})
-        }
-        return res.json({success:true,msg:"image found",result:result.resources[0]})//returns { public_id, url, secure_url, format, width, height }
-    }catch(err){
-        return res.json({success:false,msg:"error while fetching image",err})
     }
 }
 

@@ -7,7 +7,7 @@ const Guidelines = () => {
       <section className="bg-white shadow-xl rounded-lg w-full p-8">
         <h2 className="text-3xl font-semibold mb-4 text-gray-900 border-b-2 border-blue-600 pb-3">Guidelines to Authors</h2> {/* Blue underline here */}
         <p className="text-lg text-gray-700 mb-6">
-          <span className='bg-yellow-300'>All papers must be submitted electronically thorough Microsoft CMT.</span>
+           All papers must be submitted electronically thorough Microsoft CMT.
            We invite researchers, academicians, and industry professionals to submit papers presenting original, innovative, and high-quality research in line with the conference tracks. Submissions should reflect substantial contributions, including novel methodologies, experimental findings, case studies, or groundbreaking theoretical advancements.
         </p>
 
@@ -30,6 +30,9 @@ const Guidelines = () => {
           <li><strong>MS Word template:</strong> <Link target='blank' to="https://drive.google.com/drive/folders/17kJUd9-buu3O-etJV6EGUJjWq_48f7Tl?usp=sharing" className="text-blue-600 underline hover:text-blue-800">Doc Template</Link></li>
           <li><strong>LaTex Formatting Macros:</strong> <Link target='blank' to="https://www.overleaf.com/latex/templates/springer-conference-proceedings-template-updated-2022-01-12/wcvbtmwtykqj" className="text-blue-600 underline hover:text-blue-800">Tex Template</Link></li>
         </ul>
+
+        <h3 className="text-2xl font-semibold text-gray-800 mt-6 underline">CMT Acknowledgement</h3> {/* No underline here */}
+        <p className='list-disc pl-6 text-gray-700 space-y-2 text-xl'>The <span className='text-blue-600'>Microsoft CMT service</span> was used for the managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.</p>
       </section>
     </div>
   );

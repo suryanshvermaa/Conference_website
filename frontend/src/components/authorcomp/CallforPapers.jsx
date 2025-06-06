@@ -66,7 +66,7 @@ const CallforPapers = () => {
         <ConferenceTrack/>
     </div>
     <div className='w-full mt-6 md:px-20 sm:px-12 px-6'>
-        <p className='text-xl text-gray-800 bg-yellow-300 font-semibold inline px-3'>In addition to the above special tracks, papers are also invited in the following areas, but not limited to these only.</p>
+        <p className='text-xl text-gray-800 font-semibold inline px-3'>In addition to the above special tracks, papers are also invited in the following areas, but not limited to these only.</p>
     </div>
     <div className='w-full mt-6 md:px-20 sm:px-12 px-6'>
         <h1 className="text-4xl font-bold text-center mb-8">General Tracks</h1>

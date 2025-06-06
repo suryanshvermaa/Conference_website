@@ -79,7 +79,7 @@ exports.deleteMember=async(req,res)=>{
  */
 exports.updateMember=async(req,res)=>{
    try {
-       const {id}=req.body;
+       const {id}=req.params;
         if(!id){
               return res.status(400).json({success:false,msg:"id is required"});
         }
@@ -98,7 +98,7 @@ exports.updateMember=async(req,res)=>{
         member.imageUrl=imageUrl;
         member.description=description;
         await member.save();
-        res.json({success:true,msg:`successfully updated organising member`});
+        res.status(201).json({success:true,msg:`successfully updated organising member`});
    } catch (err) {
         res.status(500).json({ error: err.message });
    }

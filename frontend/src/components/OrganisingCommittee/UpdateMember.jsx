@@ -8,6 +8,18 @@ const UpdateMember = () => {
   const [image, setImage] = useState(null);
   const {id}=useParams();
   const navigate=useNavigate();
+  const roles = [
+    'Patron & General Chair',
+    'Honorary Chairs (Chairman)',
+    'Organizing Chair',
+    'Program Chair',
+    'Program Secretary',
+    'Program Co-Chair',
+    'Program Coordinators',
+    'Advisory Committee',
+    'Program Steering Committee',
+    'Publication Chairs',
+  ];
   const [organisingMemberData,setOrganisingMemberData]=useState({
     name:"",
     specialization:"",
@@ -140,14 +152,19 @@ const UpdateMember = () => {
 
           <div className="mb-4">
             <label className="block text-gray-700">Committee</label>
-            <input
-              type="text"
+            <select
               value={organisingMemberData.committee}
               onChange={(e) => setOrganisingMemberData({...organisingMemberData,committee:e.target.value})}
               className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter Committee: for eg: Program Co-Chair/Program Coordinators/*"
               required
-            />
+            >
+              <option value="" disabled>Select Committee</option>
+              {roles.map((role, index) => (
+                <option key={index} value={role}>
+                  {role}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="mb-4">

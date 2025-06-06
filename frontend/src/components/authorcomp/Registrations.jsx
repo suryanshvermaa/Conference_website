@@ -19,7 +19,7 @@ const Registrations = () => {
           <li><strong className="font-semibold">✔ Attendee Registration (Non-Author):</strong> Includes access to keynote sessions, panel discussions, and technical sessions. Papers will not be included in conference proceedings. A participation certificate will be provided upon successful registration.</li>
         </ul>
         <div className="container mx-auto px-4 py-8 w-full overflow-x-auto mt-6">
-          <h2 className="text-3xl font-bold mb-6 text-black">REGISTRATION FEE DETAILS (including tax)</h2>
+          <h2 className="text-3xl font-bold mb-6 text-black">REGISTRATION FEE DETAILS (including GST)</h2>
           <table className="table-auto w-full border-collapse text-black">
             <thead className="bg-gray-100 text-lg">
               <tr>

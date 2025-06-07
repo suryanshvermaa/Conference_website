@@ -48,6 +48,7 @@ export default function Navbar(fetch, setfetch) {
               {/* Dropdown Menu */}
               <div className="absolute top-full left-0 hidden group-hover:flex flex-col bg-gray-100 py-2 rounded shadow-lg min-w-[250px] z-50">
                 {options.map((opt, i) => (
+                  opt=="CMT Acknowledgement"?<a key={i} href={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}.html`}className="px-4 py-2 hover:bg-gray-200">{opt}</a>:
                   <Link
                     key={i}
                     to={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}`}
@@ -89,6 +90,7 @@ export default function Navbar(fetch, setfetch) {
               {openDropdown === key && (
                 <div className="ml-4 mt-1 flex flex-col space-y-1">
                   {options.map((opt, i) => (
+                    opt=="CMT Acknowledgement"?<a key={i} href={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}.html`}className="hover:text-gray-500" onClick={() => setIsOpen(false)}>{opt}</a>:
                     <Link
                       key={i}
                       to={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}`}

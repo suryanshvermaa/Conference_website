@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Conference Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* --- RESET + BASE --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background: #f9fafb;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* --- NAVBAR --- */
+    nav {
+      background-color: #f3f4f6;
+      color: #111827;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      gap: 50px;
+    }
+    .nav-left img {
+      height: 60px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    .nav-links a:hover {
+      color: #6b7280;
+    }
+
+    /* --- SECTION --- */
+    section {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    section h1 {
+      text-align: center;
+      font-size: 2rem;
+      font-style: italic;
+      padding: 1rem;
+    }
+    section p {
+      font-size: 1.125rem;
+      font-style: italic;
+      color: #374151;
+      margin-bottom: 1rem;
+      font-weight: 300;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      background-color: #1a202c;
+      color: white;
+      padding: 2.5rem 1rem;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      gap: 2rem;
+    }
+    @media (min-width: 768px) {
+      .footer-container {
+        grid-template-columns: repeat(3, 1fr);
+        padding: 0 1.25rem;
+      }
+    }
+    .footer-logo img {
+      width: 7rem;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+    .footer-logo p {
+      color: #a0aec0;
+      text-align: center;
+    }
+    @media (min-width: 768px) {
+      .footer-logo p {
+        text-align: left;
+      }
+    }
+    .social-icons {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+    @media (min-width: 768px) {
+      .social-icons {
+        justify-content: flex-start;
+      }
+    }
+    .social-icons a {
+      font-size: 1.5rem;
+      transition: color 0.2s;
+    }
+    .social-icons a.facebook:hover { color: #3b82f6; }
+    .social-icons a.twitter:hover { color: #60a5fa; }
+    .social-icons a.instagram:hover { color: #ec4899; }
+
+    .contact-info, .quick-links {
+      text-align: center;
+    }
+    @media (min-width: 768px) {
+      .contact-info, .quick-links {
+        text-align: left;
+      }
+    }
+    .contact-info h3, .quick-links h3 {
+      font-size: 1.125rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .contact-info p {
+      color: #d1d5db;
+    }
+    .info-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      color: #d1d5db;
+    }
+    @media (min-width: 768px) {
+      .info-row {
+        justify-content: flex-start;
+      }
+    }
+    .info-row i {
+      min-width: 1.2rem;
+    }
+    .quick-links .links {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+    @media (min-width: 768px) {
+      .quick-links .links {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .quick-links a {
+      color: #d1d5db;
+      transition: color 0.2s;
+    }
+    .quick-links a:hover {
+      color: #f9fafb;
+    }
+    .quick-links a.login {
+      color: #facc15;
+      font-weight: 600;
+    }
+    .quick-links a.login:hover {
+      color: #fde047;
+    }
+    .footer-bottom {
+      text-align: center;
+      color: #718096;
+      font-size: 0.875rem;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #4a5568;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-left">
+      <a href="/"><img src="/vite.svg" alt="Logo" /></a>
+    </div>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/authors">Authors</a>
+      <a href="/programs">Programs</a>
+      <a href="/sponsors">Sponsors</a>
+      <a href="/contact">Contact</a>
+    </div>
+    <div class="mobile-menu">
+      <button id="menu-toggle" aria-label="Toggle Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <style>
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #f3f4f6;
+        width: 100%;
+        padding: 1rem 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .mobile-menu {
+        display: block;
+        margin-left: auto;
+      }
+
+      #menu-toggle {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+    }
+  </style>
+
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+
+  <!-- CMT ACKNOWLEDGEMENT -->
+  <section>
+    <h1>CMT Acknowledgement</h1>
+    <p>
+      "The Microsoft CMT service was used for managing the peer-reviewing process for this conference.
+      This service was provided for free by Microsoft and they bore all expenses, including costs for
+      Azure cloud services as well as for software development and support."
+    </p>
+    <p>
+      "This conference uses Microsoft’s Conference Management Toolkit (CMT) for paper submissions."
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <!-- Left -->
+      <div class="footer-logo">
+        <img src="/vite.svg" alt="ICNARI">
+        <p>
+          International Conference on <br />
+          Next-Generation Adaptive Research and Innovations
+        </p>
+        <div class="social-icons">
+          <a href="#" class="facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <!-- Middle -->
+      <div class="contact-info">
+        <h3>Organizing Member</h3>
+        <p>John Doe</p>
+        <p style="color:#a0aec0;">Event Coordinator</p>
+        <div class="info-row">
+          <i class="fas fa-phone" style="color:#34d399;"></i>
+          <span>+91 7840809129</span>
+        </div>
+        <div class="info-row">
+          <i class="fas fa-envelope" style="color:#f87171;"></i>
+          <span>nasl@nitp.ac.in</span>
+        </div>
+      </div>
+
+      <!-- Right -->
+      <div class="quick-links">
+        <h3>Quick Links</h3>
+        <div class="links">
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/authors">Authors</a>
+          <a href="/programs">Programs</a>
+          <a href="/sponsors">Sponsors</a>
+          <a href="/contact">Contact</a>
+          <a href="/admin">Admin</a>
+          <a href="/login" class="login">Login</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2025 ICNARI. All Rights Reserved.
+    </div>
+  </footer>
+
+</body>
+</html>

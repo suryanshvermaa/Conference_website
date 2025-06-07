@@ -18,7 +18,7 @@ const Culturalevents = () => {
                         {/* Speaker Photo and Info */}
                         <div className="w-full md:w-[30%] flex flex-col  p-4 bg-gray-100">
                             <img
-                                src={speaker.imageUrl}
+                                src="/temp.jpeg"
                                 alt={speaker.name}
                                 className="w-full h-[250px] object-fill rounded-lg mb-4"
                             />

@@ -46,6 +46,7 @@ import CallforPapers from "./components/authorcomp/CallforPapers"
 import Track from "./components/authorcomp/Track"
 import UpdateMember from "./components/OrganisingCommittee/UpdateMember"
 import UpdateSpeaker from "./components/UpdateSpeaker"
+import CMTAcknowledgement from "./components/authorcomp/CMTAcknowledgement"
 
 function App() {
   const [fetch,setfetch]=useState(false)
@@ -76,6 +77,7 @@ function App() {
         <Route path="/authors/registrations" element={<Registrations/>} />
         <Route path="/authors/best-student-paper-award" element={<BestStuden/>} />
         <Route path="/authors/financial-support" element={<FinancialSupp/>} />
+        <Route path="/authors/cmt-acknowledgement" element={<CMTAcknowledgement/>} />
 
         {/* Program routes */}
         <Route path="/programs/speakers" element={<AllSpeakerprog/>} />

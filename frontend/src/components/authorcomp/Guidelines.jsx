@@ -7,7 +7,7 @@ const Guidelines = () => {
       <section className="bg-white shadow-xl rounded-lg w-full p-8">
         <h2 className="text-3xl font-semibold mb-4 text-gray-900 border-b-2 border-blue-600 pb-3">Guidelines to Authors</h2> {/* Blue underline here */}
         <p className="text-lg text-gray-700 mb-6">
-           All papers must be submitted electronically thorough Microsoft CMT.
+           All papers must be submitted electronically through <span className='hover:cursor-pointer underline font-semibold text-blue-600' onClick={()=>window.open("https://cmt3.research.microsoft.com/ICNARI2026","_blank")}>Microsoft CMT</span>.
            We invite researchers, academicians, and industry professionals to submit papers presenting original, innovative, and high-quality research in line with the conference tracks. Submissions should reflect substantial contributions, including novel methodologies, experimental findings, case studies, or groundbreaking theoretical advancements.
         </p>
 

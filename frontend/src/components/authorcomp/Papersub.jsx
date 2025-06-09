@@ -16,7 +16,7 @@ const Papersub = () => {
           <li><strong className="font-semibold">Camera-Ready Submission:</strong> February 16, 2026</li>
           <li>
             <strong className="font-semibold">Submission link:</strong> 
-            <Link to="#" className="text-blue-600 underline hover:text-blue-800">Click here</Link>
+            <span className='hover:cursor-pointer underline font-semibold text-blue-600' onClick={()=>window.open("https://cmt3.research.microsoft.com/ICNARI2026","_blank")}> Microsoft CMT</span>
           </li>
         </ul>
       </section>

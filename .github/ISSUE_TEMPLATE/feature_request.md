@@ -1,3 +1,10 @@
+---
+name: 💡 Feature Request
+about: Suggest an idea or enhancement
+title: "[Feature] "
+labels: enhancement
+assignees: ''
+---
 ## Feature Description
 
 Describe the feature you would like to see added.

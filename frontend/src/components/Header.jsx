@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = () => {
   return (
-    <header className="relative bg-gradient-to-r bg-blue-100 text-white py-20 px-6 mt-6">
+    <header className="relative bg-gradient-to-r bg-gray-600 text-white py-20 px-6 mt-6">
       {/* Overlay with gradient */}
       <div className="absolute inset-0 bg-black opacity-40 z-0 "></div>
 

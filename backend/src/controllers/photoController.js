@@ -13,7 +13,6 @@ const fs = require('fs');
 const uploadPhoto = async (req, res) => {
     try {
         imageUrl=req.body.imageUrl
-
         // Save image URL to MongoDB
         const newPhoto = new Photo({
             imageUrl: imageUrl,

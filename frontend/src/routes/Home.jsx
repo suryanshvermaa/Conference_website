@@ -15,7 +15,6 @@ export default function Home() {
         <PaperUpdates/>       
         <SmallAbout/>
         {/* <PhotoGallery/>               */}
-        <AllSpeakerprog/>
         <EventTimeline/>
     </div>;
   }

@@ -12,7 +12,7 @@ const Aboutconf = () => {
                     <span className="font-bold"> Department of Electrical Engineering</span> at the
                     <span className="font-bold"> National Institute of Technology, Patna, Bihar, India</span>, is scheduled to take place in
                     <span className="font-bold"> hybrid mode</span> on
-                    <span className="font-bold"> 7th March 2026</span> and
+                    <span className="font-bold"> 6th March 2026</span> to
                     <span className="font-bold"> 8th March 2026</span>. The conference aims to bring together leading
                     <span className="font-bold"> visionaries, researchers, academicians</span>, and
                     <span className="font-bold"> industry experts</span> to explore the latest advancements and innovations while showcasing cutting-edge developments in various fields of

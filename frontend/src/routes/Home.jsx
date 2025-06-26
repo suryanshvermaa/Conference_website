@@ -1,3 +1,5 @@
+import Aboutconf from "../components/aboutcomp/Aboutconf";
+import Aboutnit from "../components/aboutcomp/Aboutnit";
 import PaperUpdates from "../components/Board";
 import Header from "../components/Header";
 import Slider from "../components/ImageSlider";
@@ -13,7 +15,8 @@ export default function Home() {
         <Slider/>
         <RunningText/>
         <PaperUpdates/>       
-        <SmallAbout/>
+        <Aboutconf/>
+        <Aboutnit/>
         {/* <PhotoGallery/>               */}
         <EventTimeline/>
     </div>;

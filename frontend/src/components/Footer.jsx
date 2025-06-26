@@ -4,7 +4,7 @@ import { FaPhone, FaEnvelope, FaFacebook, FaTwitter, FaInstagram } from "react-i
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white py-10">
-      <div className="container mx-auto px-5 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="container mx-auto px-5 grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
         
         {/* Left Section: Logo */}
         <div className="flex flex-col items-center md:items-start">
@@ -21,9 +21,6 @@ export default function Footer() {
 
         {/* Middle Section: Contact Info */}
         <div className="flex flex-col text-center md:text-left">
-          <h3 className="text-lg font-semibold text-white">Organizing Member</h3>
-          <p className="text-gray-300">John Doe</p>
-          <p className="text-gray-400">Event Coordinator</p>
           <div className="flex items-center justify-center md:justify-start mt-2">
             <FaPhone className="text-green-400 mr-2" />
             <span className="text-gray-300">+91 7840809129</span>

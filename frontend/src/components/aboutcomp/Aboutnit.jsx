@@ -3,7 +3,7 @@ import React from 'react'
 const Aboutnit = () => {
   return (
     <div className='flex w-full justify-center items-center flex-col mt-4'>
-      <section className="py-16 bg-white rounded-xl shadow-lg max-w-5xl px-4 lg:px-8">
+      <section className="py-16 bg-white rounded-xl shadow-lg max-w-8xl px-4 lg:px-8">
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-black mb-6 border-b-4 border-blue-500 pb-3 text-center">
           About NIT PATNA
         </h2>

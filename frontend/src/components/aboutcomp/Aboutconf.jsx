@@ -3,8 +3,8 @@ import React from 'react'
 const Aboutconf = () => {
     return (
         <div className='flex w-full justify-center items-center flex-col mt-4'>
-            <div className="bg-white py-16 md:py-16 rounded-xl shadow-lg max-w-4xl mx-auto px-3">
-                <h2 className="w-full text-center border-b-4 border-blue-500 text-2xl md:text-5xl font-bold text-black mb-8">
+            <div className="bg-white py-16 md:py-16 rounded-xl shadow-lg max-w-8xl mx-auto px-3">
+                <h2 className="w-full text-center border-b-4 border-blue-500 text-2xl md:text-4xl font-bold text-black mb-8">
                     About the Conference
                 </h2>
                 <p className="text-black text-base md:text-lg lg:text-xl xl:text-2xl leading-relaxed">

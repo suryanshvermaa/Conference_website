@@ -86,7 +86,7 @@ const UpdateTechnicalMember = () => {
           setImage(null);
           setOrganisingMemberData({name:"",desription:"",imageUrl:"",specialization:"",college:"",committee:""})
           setTimeout(()=>{
-            navigate("/admin/all-organising-members");
+            navigate("/admin/all-technical-members");
           },1000)
         }
       }

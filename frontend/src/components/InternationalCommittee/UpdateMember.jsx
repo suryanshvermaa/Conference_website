@@ -86,7 +86,7 @@ const UpdateInternationalMember = () => {
           setImage(null);
           setOrganisingMemberData({name:"",desription:"",imageUrl:"",specialization:"",college:"",committee:""})
           setTimeout(()=>{
-            navigate("/admin/all-organising-members");
+            navigate("/admin/all-international-members");
           },1000)
         }
       }

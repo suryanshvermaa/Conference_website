@@ -3,7 +3,7 @@ const TechnicalProgrammeCommitteeMember=require("../models/TechnicalProgrammeCom
 /**
  * 
  * @description create a new member in the technical-committee committee
- * @route POST /technical-committee/createMember
+ * @route POST /technicalcommittee/createMember
  * @access Private
  * @param {import("express").Request} req 
  * @param {import("express").Response} res 
@@ -32,7 +32,7 @@ exports.createMember=async(req,res)=>{
 /**
  * 
  * @description get all members of the technical committee
- * @route GET /technical-committee/getAllMembers
+ * @route GET /technicalcommittee/getAllMembers
  * @access private
  * @param {import("express").Request} req 
  * @param {import("express").Response} res  
@@ -49,7 +49,7 @@ exports.getAllMembers=async(req,res)=>{
 /**
  * 
  * @description delete a member from the technical committee
- * @route DELETE /technical-committee/deleteMember/:id
+ * @route DELETE /technicalcommittee/deleteMember/:id
  * @access private
  * @param {import("express").Request} req 
  * @param {import("express").Response} res  
@@ -72,7 +72,7 @@ exports.deleteMember=async(req,res)=>{
 /**
  * 
  * @description update a member in the technical committee
- * @route PUT /technical-committee/updateMember/:id
+ * @route PUT /technicalcommittee/updateMember/:id
  * @access private
  * @param {import("express").Request} req 
  * @param {import("express").Response} res 
@@ -107,7 +107,7 @@ exports.updateMember=async(req,res)=>{
 /**
  * 
  * @description get a member from the technical committee
- * @route GET /technical-committee/getMember/:id
+ * @route GET /technicalcommittee/getMember/:id
  * @access private
  * @param {import("express").Request} req 
  * @param {import("express").Response} res  

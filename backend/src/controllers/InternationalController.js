@@ -3,7 +3,7 @@ const InternationalAdvisoryCommitteeMember=require("../models/InternationalAdvis
 /**
  * 
  * @description create a new member in the international-committee committee
- * @route POST /international-committee/createMember
+ * @route POST /internationalcommittee/createMember
  * @access Private
  * @param {import("express").Request} req 
  * @param {import("express").Response} res 
@@ -32,7 +32,7 @@ exports.createMember=async(req,res)=>{
 /**
  * 
  * @description get all members of the international committee
- * @route GET /international-committee/getAllMembers
+ * @route GET /internationalcommittee/getAllMembers
  * @access private
  * @param {import("express").Request} req 
  * @param {import("express").Response} res  
@@ -49,7 +49,7 @@ exports.getAllMembers=async(req,res)=>{
 /**
  * 
  * @description delete a member from the international committee
- * @route DELETE /international-committee/deleteMember/:id
+ * @route DELETE /internationalcommittee/deleteMember/:id
  * @access private
  * @param {import("express").Request} req 
  * @param {import("express").Response} res  
@@ -72,7 +72,7 @@ exports.deleteMember=async(req,res)=>{
 /**
  * 
  * @description update a member in the international committee
- * @route PUT /international-committee/updateMember/:id
+ * @route PUT /internationalcommittee/updateMember/:id
  * @access private
  * @param {import("express").Request} req 
  * @param {import("express").Response} res 
@@ -107,7 +107,7 @@ exports.updateMember=async(req,res)=>{
 /**
  * 
  * @description get a member from the international committee
- * @route GET /international-committee/getMember/:id
+ * @route GET /internationalcommittee/getMember/:id
  * @access private
  * @param {import("express").Request} req 
  * @param {import("express").Response} res  

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const TechnicalCommitteeMember = () => {
+const AddTechnicalCommitteeMember = () => {
   const [image, setImage] = useState(null);
   const [organisingMemberData,setOrganisingMemberData]=useState({
     name:"",
@@ -169,4 +169,4 @@ const TechnicalCommitteeMember = () => {
   );
 };
 
-export default TechnicalCommitteeMember;
+export default AddTechnicalCommitteeMember;

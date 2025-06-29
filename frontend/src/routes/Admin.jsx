@@ -74,6 +74,51 @@ export default function Admin({ setfetch }) {
           </button>
         </div>
 
+    {/* Add New Technical Programme Committee Member */}
+ <div
+          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
+          onClick={() => handleNavigation('/admin/add-technical-member')}
+        >
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">Add Technical Members</h2>
+          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
+          Add Members
+          </button>
+        </div>
+
+         {/* All  Technical Programme Committee Members */}
+         <div
+          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
+          onClick={() => handleNavigation('/admin/all-technical-members')}
+        >
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">All Technical Members</h2>
+          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
+          All Technical Members
+          </button>
+        </div>
+
+ {/* Add New International advisory Committee Member */}
+ <div
+          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
+          onClick={() => handleNavigation('/admin/add-international-member')}
+        >
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">Add International Members</h2>
+          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
+          Add Members
+          </button>
+        </div>
+
+         {/* All International Advisory Committee Members */}
+         <div
+          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
+          onClick={() => handleNavigation('/admin/all-international-members')}
+        >
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">All International Members</h2>
+          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
+          All International Members
+          </button>
+        </div>
+
+
         {/* Add New Updates */}
         <div
           className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"

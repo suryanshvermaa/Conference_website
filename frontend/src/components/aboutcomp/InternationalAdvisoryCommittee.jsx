@@ -26,7 +26,6 @@ export const InternationalAdvisoryCommitteeLoader = () => {
   );
 };
 
-/* --- Main Card Improvements --- */
 const InternationalAdvisoryCommittee = () => {
   const [loading, setLoading] = useState(false);
   const [committeeMembers, setCommitteeMembers] = useState(null);

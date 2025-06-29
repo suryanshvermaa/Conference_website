@@ -49,6 +49,12 @@ import UpdateSpeaker from "./components/UpdateSpeaker"
 import CMTAcknowledgement from "./components/authorcomp/CMTAcknowledgement"
 import TechnicalProgrammeCommittee from "./components/aboutcomp/TechnicalProgrammeCommittee"
 import InternationalAdvisoryCommittee from "./components/aboutcomp/InternationalAdvisoryCommittee"
+import InternationalMember from "./components/InternationalCommittee/AddMember"
+import AllInternationalAdvisoryCommitteeMembers from "./components/InternationalCommittee/AllMembers"
+import UpdateInternationalMember from "./components/InternationalCommittee/UpdateMember"
+import AddTechnicalCommitteeMember from "./components/TechnicalCommittee/AddMember"
+import UpdateTechnicalMember from "./components/TechnicalCommittee/UpdateMember"
+import AllTechnicalCommitteeMembers from "./components/TechnicalCommittee/AllMembers"
 
 function App() {
   const [fetch,setfetch]=useState(false)
@@ -113,6 +119,14 @@ function App() {
           <Route path="/admin/add-organising-member" element={<AddOrganisingCommitteeMember />} />
           <Route path="/admin/all-organising-members" element={<AllOrganisingCommitteeMembers />} />
           <Route path="/admin/all-organising-members/:id" element={<UpdateMember />} />
+
+          <Route path="/admin/add-international-member" element={<InternationalMember />} />
+          <Route path="/admin/all-international-members" element={<AllInternationalAdvisoryCommitteeMembers />} />
+          <Route path="/admin/all-international-members/:id" element={<UpdateInternationalMember />} />
+
+          <Route path="/admin/add-technical-member" element={<AddTechnicalCommitteeMember />} />
+          <Route path="/admin/all-technical-members" element={<AllTechnicalCommitteeMembers />} />
+          <Route path="/admin/all-technical-members/:id" element={<UpdateTechnicalMember />} />
         </Route>
       </Routes>
       </main>

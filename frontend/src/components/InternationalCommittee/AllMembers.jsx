@@ -12,7 +12,7 @@ const AllInternationalAdvisoryCommitteeMembers = () => {
     const fetchMembers = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/organisingcommitee/getAllMembers`,
+          `${import.meta.env.VITE_API_URL}/internationalcommitee/getAllMembers`,
           {
             headers:{
                 token:token
@@ -37,7 +37,7 @@ const AllInternationalAdvisoryCommitteeMembers = () => {
 
     try {
       const response = await axios.delete(
-        `${import.meta.env.VITE_API_URL}/organisingcommitee/deleteMember/${id}`,
+        `${import.meta.env.VITE_API_URL}/internationalcommitee/deleteMember/${id}`,
         {
           headers: { token: token },
         }

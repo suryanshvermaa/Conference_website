@@ -53,7 +53,7 @@ const InternationalMember = () => {
 
       if (imageResponse.data.result) {
         const response = await axios.post(
-          `${import.meta.env.VITE_API_URL}/organisingcommitee/createMember`,
+          `${import.meta.env.VITE_API_URL}/internationalcommitee/createMember`,
           {...organisingMemberData,imageUrl:imageResponse.data.result},
           {
             headers: {

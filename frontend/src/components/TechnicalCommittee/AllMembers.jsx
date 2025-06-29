@@ -12,7 +12,7 @@ const AllTechnicalCommitteeMembers = () => {
     const fetchMembers = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/organisingcommitee/getAllMembers`,
+          `${import.meta.env.VITE_API_URL}/technicalcommitee/getAllMembers`,
           {
             headers:{
                 token:token
@@ -37,7 +37,7 @@ const AllTechnicalCommitteeMembers = () => {
 
     try {
       const response = await axios.delete(
-        `${import.meta.env.VITE_API_URL}/organisingcommitee/deleteMember/${id}`,
+        `${import.meta.env.VITE_API_URL}/technicalcommitee/deleteMember/${id}`,
         {
           headers: { token: token },
         }

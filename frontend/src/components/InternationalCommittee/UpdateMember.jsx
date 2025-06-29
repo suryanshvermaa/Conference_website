@@ -18,7 +18,7 @@ const UpdateInternationalMember = () => {
   })
   useEffect(()=>{
     async function getData(){
-        const res=await axios.get(`${import.meta.env.VITE_API_URL}/organisingcommitee/getMember/${id}`,{
+        const res=await axios.get(`${import.meta.env.VITE_API_URL}/internationalcommitee/getMember/${id}`,{
             headers:{token:localStorage.getItem("token")}
         });
         const member=res.data.member;
@@ -72,7 +72,7 @@ const UpdateInternationalMember = () => {
 
       if (imageResponse.data.result) {
         const response = await axios.put(
-          `${import.meta.env.VITE_API_URL}/organisingcommitee/updateMember/${id}`,
+          `${import.meta.env.VITE_API_URL}/internationalcommitee/updateMember/${id}`,
           {...organisingMemberData,imageUrl:imageResponse.data.result},
           {
             headers: {
@@ -86,7 +86,7 @@ const UpdateInternationalMember = () => {
           setImage(null);
           setOrganisingMemberData({name:"",desription:"",imageUrl:"",specialization:"",college:"",committee:""})
           setTimeout(()=>{
-            navigate("/admin/all-organising-members");
+            navigate("/admin/all-international-members");
           },1000)
         }
       }

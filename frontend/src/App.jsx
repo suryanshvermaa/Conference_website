@@ -82,7 +82,7 @@ function App() {
         <Route path="/authors/call-for-papers" element={<CallforPapers />} />
         <Route path="/authors/call-for-papers/:track" element={<Track />} />
         <Route path="/authors/guidelines-to-authors" element={<Guidelines />} />
-        <Route path="/authors/paper-submissions" element={<Papersub/>} />
+        <Route path="/authors/paper-submissions" elemetechnicalnt={<Papersub/>} />
         <Route path="/authors/registrations" element={<Registrations/>} />
         <Route path="/authors/best-student-paper-award" element={<BestStuden/>} />
         <Route path="/authors/financial-support" element={<FinancialSupp/>} />
@@ -119,11 +119,9 @@ function App() {
           <Route path="/admin/add-organising-member" element={<AddOrganisingCommitteeMember />} />
           <Route path="/admin/all-organising-members" element={<AllOrganisingCommitteeMembers />} />
           <Route path="/admin/all-organising-members/:id" element={<UpdateMember />} />
-
           <Route path="/admin/add-international-member" element={<InternationalMember />} />
           <Route path="/admin/all-international-members" element={<AllInternationalAdvisoryCommitteeMembers />} />
           <Route path="/admin/all-international-members/:id" element={<UpdateInternationalMember />} />
-
           <Route path="/admin/add-technical-member" element={<AddTechnicalCommitteeMember />} />
           <Route path="/admin/all-technical-members" element={<AllTechnicalCommitteeMembers />} />
           <Route path="/admin/all-technical-members/:id" element={<UpdateTechnicalMember />} />

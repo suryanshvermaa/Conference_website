@@ -81,7 +81,7 @@ const AllTechnicalCommitteeMembers = () => {
                   Delete
                 </button>
                 <button
-                  onClick={() => navigate(`/admin/all-organising-members/${member._id}`)}
+                  onClick={() => navigate(`/admin/all-technical-members/${member._id}`)}
                   className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600"
                 >
                   Update

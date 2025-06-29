@@ -99,7 +99,7 @@ const UpdateTechnicalMember = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-8 mt-10">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
-        <h2 className="text-3xl font-semibold text-center mb-6">Update Organising Committee Member </h2>
+        <h2 className="text-3xl font-semibold text-center mb-6">Update Technical Programme Committee Member </h2>
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">

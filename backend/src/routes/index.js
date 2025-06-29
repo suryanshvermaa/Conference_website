@@ -6,6 +6,8 @@ const noticeRouter = require('./noticeRoutes');
 const recendUpdatesRouter = require('./recentUpdateRoutes');
 const contactRouter = require('./contactroute');
 const organisingCommitteeRouter = require('./organisingcommitteeRoutes');
+const internationalCommitteeRouter = require('./internationalRoutes');
+const technicalCommitteeRouter = require('./technicalRoutes.js');
 
 const router=Router();
 
@@ -17,4 +19,6 @@ router
 .use("/recentupdate",recendUpdatesRouter)
 .use("/contact",contactRouter)
 .use("/organisingcommitee",organisingCommitteeRouter)
+.use("/internationalcommitee",internationalCommitteeRouter)
+.use("/technicalcommitteecommitee",technicalCommitteeRouter)
 module.exports=router;

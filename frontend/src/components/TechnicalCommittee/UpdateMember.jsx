@@ -18,7 +18,7 @@ const UpdateTechnicalMember = () => {
   })
   useEffect(()=>{
     async function getData(){
-        const res=await axios.get(`${import.meta.env.VITE_API_URL}/organisingcommitee/getMember/${id}`,{
+        const res=await axios.get(`${import.meta.env.VITE_API_URL}/technicalcommitee/getMember/${id}`,{
             headers:{token:localStorage.getItem("token")}
         });
         const member=res.data.member;
@@ -72,7 +72,7 @@ const UpdateTechnicalMember = () => {
 
       if (imageResponse.data.result) {
         const response = await axios.put(
-          `${import.meta.env.VITE_API_URL}/organisingcommitee/updateMember/${id}`,
+          `${import.meta.env.VITE_API_URL}/technicalcommitee/updateMember/${id}`,
           {...organisingMemberData,imageUrl:imageResponse.data.result},
           {
             headers: {

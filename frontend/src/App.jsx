@@ -48,6 +48,7 @@ import UpdateMember from "./components/OrganisingCommittee/UpdateMember"
 import UpdateSpeaker from "./components/UpdateSpeaker"
 import CMTAcknowledgement from "./components/authorcomp/CMTAcknowledgement"
 import TechnicalProgrammeCommittee from "./components/aboutcomp/TechnicalProgrammeCommittee"
+import InternationalAdvisoryCommittee from "./components/aboutcomp/InternationalAdvisoryCommittee"
 
 function App() {
   const [fetch,setfetch]=useState(false)
@@ -68,7 +69,7 @@ function App() {
         <Route path="/about/about-nit-patna-(bihta-campus)" element={<Abounithistory/>} />
         <Route path="/about/photogallery" element={<AllImages />} />
         <Route path="/about/technical-programme-committee" element={<TechnicalProgrammeCommittee />} />
-
+        <Route path="/about/international-advisory-committee" element={<InternationalAdvisoryCommittee />} />
 
         {/* Authors routes */}
         <Route path="/authors" element={<Authors />} />

@@ -20,5 +20,5 @@ router
 .use("/contact",contactRouter)
 .use("/organisingcommitee",organisingCommitteeRouter)
 .use("/internationalcommitee",internationalCommitteeRouter)
-.use("/technicalcommitteecommitee",technicalCommitteeRouter)
+.use("/technicalcommitee",technicalCommitteeRouter)
 module.exports=router;

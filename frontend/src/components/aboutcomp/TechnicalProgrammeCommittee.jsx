@@ -36,7 +36,7 @@ const TechnicalProgrammeCommittee = () => {
       setLoading(true);
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/organisingcommitee/getAllMembers`
+          `${import.meta.env.VITE_API_URL}/technicalcommitee/getAllMembers`
         );
         setCommitteeMembers(res.data.members);
         setLoading(false);

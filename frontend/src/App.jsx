@@ -84,7 +84,7 @@ function App() {
         <Route path="/authors/paper-publication" element={<Publication />} />
         <Route path="/authors/call-for-papers/:track" element={<Track />} />
         <Route path="/authors/guidelines-to-authors" element={<Guidelines />} />
-        <Route path="/authors/paper-submissions" elemetechnicalnt={<Papersub/>} />
+        <Route path="/authors/paper-submissions" element={<Papersub/>} />
         <Route path="/authors/registrations" element={<Registrations/>} />
         <Route path="/authors/best-student-paper-award" element={<BestStuden/>} />
         <Route path="/authors/financial-support" element={<FinancialSupp/>} />

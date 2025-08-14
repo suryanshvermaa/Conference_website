@@ -56,6 +56,7 @@ import AddTechnicalCommitteeMember from "./components/TechnicalCommittee/AddMemb
 import UpdateTechnicalMember from "./components/TechnicalCommittee/UpdateMember"
 import AllTechnicalCommitteeMembers from "./components/TechnicalCommittee/AllMembers"
 import ConferenceProceedings from "./components/authorcomp/ConferenceProceedings"
+import Publication from "./components/authorcomp/Publication"
 
 function App() {
   const [fetch,setfetch]=useState(false)
@@ -82,6 +83,7 @@ function App() {
         <Route path="/authors" element={<Authors />} />
         <Route path="/authors/call-for-papers" element={<CallforPapers />} />
         <Route path="/authors/conference-proceedings" element={<ConferenceProceedings />} />
+        <Route path="/authors/publication" element={<Publication />} />
         <Route path="/authors/call-for-papers/:track" element={<Track />} />
         <Route path="/authors/guidelines-to-authors" element={<Guidelines />} />
         <Route path="/authors/paper-submissions" elemetechnicalnt={<Papersub/>} />

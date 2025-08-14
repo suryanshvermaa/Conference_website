@@ -59,6 +59,9 @@ const CallforPapers = () => {
     <div className='w-full mt-6 md:px-20 sm:px-12 px-6'>
         <p className='text-lg text-blue-800 font-semibold'>Prospective authors are invited to submit original unpublished work that is not currently under consideration for publication elsewhere via the various track mentioned below.</p>
     </div>
+    <div className='w-full mt-6 md:px-20 sm:px-12 px-6'>
+        <p className='text-lg text-blue-800 font-semibold'>It is planned to publish the peer reviewed and selected papers of conference as proceedings with Springer in their prestigious “Lecture Notes in Electrical Engineering” series <a href="https://link.springer.com/series/7818" className='underline'>https://link.springer.com/series/7818</a>. For detailed instructions for author and editors of conference proceedings, kindly visit the following link: <a href="https://www.springer.com/us/authors-editors/conference-proceedings" className='underline'>https://www.springer.com/us/authors-editors/conference-proceedings</a>. Select papers from the conference will be published by Springer as a proceedings book volume. Springer will conduct quality checks on the accepted papers and only papers that pass these checks will be published. Springer Nature does not charge any money for publication of Non-Open Access content. Abstracts/extended abstracts and short papers (less than 4 pages) are not considered for publication.</p>
+    </div>
     <div className='w-full h-30 flex justify-center items-center text-gray-600 underline'>
         <h1 className='font-mediums md:text-5xl sm:text-5xl text-3xl cursor-pointer' onClick={()=>window.open("https://drive.google.com/file/d/1Cr7ZAoTga7h14BRDZamnu93SHHRUsYKz/view?usp=drivesdk","_blank")}>Link for CFP Brochure</h1>
     </div>

@@ -19,6 +19,11 @@ const UpdateMember = () => {
     'Advisory Committee',
     'Program Steering Committee',
     'Publication Chairs',
+    'Publicity and Media Chair(s)',
+    'Workshop and Tutorial Chair(s)',
+    'Hospitality Chair(s)',
+    'Women in Engineering Chairs',
+    'Venue and Stage Chairs',
   ];
   const [organisingMemberData,setOrganisingMemberData]=useState({
     name:"",

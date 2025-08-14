@@ -43,6 +43,11 @@ const OrganisingCom = () => {
     'Advisory Committee',
     'Program Steering Committee',
     'Publication Chairs',
+    'Publicity and Media Chair(s)',
+    'Workshop and Tutorial Chair(s)',
+    'Hospitality Chair(s)',
+    'Women in Engineering Chairs',
+    'Venue and Stage Chairs',
   ];
 
   const [committeeMembers, setCommitteeMembers] = useState({
@@ -56,6 +61,11 @@ const OrganisingCom = () => {
     [roles[7]]: [],
     [roles[8]]: [],
     [roles[9]]: [],
+    [roles[10]]: [],
+    [roles[11]]: [],
+    [roles[12]]: [],
+    [roles[13]]: [],
+    [roles[14]]: [],
   });
 
   useEffect(() => {

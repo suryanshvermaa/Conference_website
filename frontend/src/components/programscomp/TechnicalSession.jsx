@@ -13,19 +13,21 @@ const TechnicalSession = () => {
             speakers: [
                 {
                     name: "Dr. Rajeev Kumar Singh",
-                    image:''
+                    image:'/technicalSession/RajeevKumar.png',
                     title: "Professor",
                     department: "Department of Electrical Engineering",
                     institution: "Indian Institute of Technology (BHU), Varanasi, Uttar Pradesh, India"
                 },
                 {
                     name: "Dr. Ranjan Kumar Behera",
+                    image:'/technicalSession/RanjanKumar.png',
                     title: "Associate Professor",
                     department: "Department of Electrical Engineering",
                     institution: "Indian Institute of Technology, Patna, Bihar, India"
                 },
                 {
                     name: "Dr. Avanish Tripathi",
+                    image:'/technicalSession/AvnishTripathi.png',
                     title: "Assistant Professor",
                     department: "Department of Energy Science and Engineering",
                     institution: "Indian Institute of Technology, Delhi, India"
@@ -34,6 +36,7 @@ const TechnicalSession = () => {
             coordinators: [
                 {
                     name: "Chinmay Bera",
+                    image:'/technicalSession/ChinayBera.png',
                     title: "Research Scholar, Nextgen Adaptive Systems Group",
                     department: "Department of Electrical Engineering",
                     institution: "National Institute of Technology Patna, Bihar, India",
@@ -42,12 +45,14 @@ const TechnicalSession = () => {
                 {
                     name: "Mr. Md Inayat Ali",
                     title: "Assistant Professor",
+                    image:'/technicalSession/InayatAli.png',
                     department: "Department of Electrical and Electronics Engineering",
                     institution: "Maulana Azad College of Engineering and Technology, Patna, Bihar, India",
                     email: "mda.ph21.ee@nitp.ac.in"
                 },
                 {
                     name: "Chandra Shekhar Singh Chandal",
+                    image:'/technicalSession/CSS.png',
                     title: "Assistant Professor",
                     department: "Department of Electrical & Electronics Engineering",
                     institution: "Motihari College of Engineering Motihari, Bihar India",
@@ -61,18 +66,21 @@ const TechnicalSession = () => {
             speakers: [
                 {
                     name: "Dr Sanjoy Kumar Parida",
+                    image:'/technicalSession/sanjoyKumar.png',
                     title: "Associate Professor",
                     department: "Department of Electrical Engineering",
                     institution: "Indian Institute of Technology, Patna, Bihar, India"
                 },
                 {
                     name: "Dr. Saurabh Dutta",
+                    image:'/technicalSession/SaurabhDatta.png',
                     title: "Research Associate",
                     department: "High Voltage Lab",
                     institution: "University of Manchester , UK"
                 },
                 {
                     name: "Dr PESN Raju",
+                    image:'/technicalSession/PESNRaju.png',
                     title: "Assistant Professor",
                     department: "Department of Energy Science and Engineering",
                     institution: "Indian Institute of Technology Guwahati, Assam, India"
@@ -81,6 +89,7 @@ const TechnicalSession = () => {
             coordinators: [
                 {
                     name: "Rohan Kumar Gupta",
+                    image:'/technicalSession/RohanKumarGupta.png',
                     title: "Research Scholar, Nextgen Adaptive Systems Group",
                     department: "Department of Electrical Engineering",
                     institution: "National Institute of Technology Patna, Bihar, India",
@@ -88,6 +97,7 @@ const TechnicalSession = () => {
                 },
                 {
                     name: "Rahul Kumar",
+                    image:'/technicalSession/RahulKumar.png',
                     title: "", // Title not specified in the source document
                     department: "Department of Electrical Engineering",
                     institution: "National Institute of Technology Patna, Bihar, India",
@@ -95,6 +105,7 @@ const TechnicalSession = () => {
                 },
                 {
                     name: "Balmukund Kumar",
+                    image:'/technicalSession/BalMukund.png',
                     title: "Assistant Professor",
                     department: "Department of Electrical Engineering",
                     institution: "Government Engineering College, Munger, Bihar, India",
@@ -108,18 +119,21 @@ const TechnicalSession = () => {
             speakers: [
                 {
                     name: "Dr. Vivek Garg",
+                    image:'/technicalSession/vevekGarg.png',
                     title: "Assistant Professor",
                     institution: "ECE Dept., SVNIT Surat",
                     bio: "Dr. Vivek Garg’s professional journey spans teaching, research, and academic leadership, with expertise in optoelectronic devices, quantum technologies, nanoscale device modeling, energy storage systems, and optical communication. He gained rich research experience as a Junior and Senior Research Fellow at IIT Indore and teaching experience as an Assistant Professor at DIAT Pune before joining SVNIT Surat. At SVNIT, he has taken on significant administrative and institutional roles, including Coordinator for national capacity-building programs (INUP i2i, LAM–IISc, and EICT Academy), Member of the DCC Sub-Committee on Quantum Technology Division, DoT, Govt. of India, and Digital Content Chair of IEEE Nanotechnology Council, Gujarat Chapter. His contributions extend to fostering research forums, student mentorship, and infrastructure development, reflecting his commitment to advancing both academic excellence and institutional growth."
                 },
                 {
                     name: "Dr. Brajendra Singh Sengar",
+                    image:'/technicalSession/brajendra.png',
                     title: "Assistant Professor",
                     institution: "ECE Dept., NIT Srinagar",
                     bio: "Dr. Brajendra Singh Sengar’s research interests include semiconductor device simulation and fabrication, thin-film solar cells, and the application of machine learning in semiconductor-based devices. He earned his Ph.D. in Electrical Engineering from IIT Indore (2014–2019), where he was a CSIR Junior and Senior Research Fellow, and also received the prestigious BASE Inter Fellowship to work at the University of Nevada, Las Vegas, USA. He gained industry experience as a Network Engineer at the National Informatics Centre (2012–2014) before pursuing doctoral research. He later served as an Assistant Professor at the Centre for Advanced Studies, Lucknow (2019–2021) before moving to his current academic role."
                 },
                 {
                     name: "Dr. Gaurav Sidddharth",
+                    image:'/technicalSession/gauravSiddharth.png',
                     title: "Assistant Professor",
                     institution: "ECE Dept., NIT Calicut",
                     bio: "Dr. Gaurav Siddharth received his Ph.D. in Electrical Engineering from IIT Indore. His research focuses on simulating, modeling, characterizing, and fabricating photoelectronic materials and devices, with particular emphasis on solar cells and photodetectors. He has served as Assistant Professor at IIIT Ranchi and SVNIT Surat before joining NIT Calicut, where he continues to contribute to research and teaching in advanced optoelectronic device technologies."
@@ -128,6 +142,7 @@ const TechnicalSession = () => {
             coordinators: [
                 {
                     name: "Dr. Pritam Kumar",
+                    image:'/technicalSession/pritamKumar.png',
                     title: "Assistant Professor",
                     department: "EE Dept.",
                     institution: "Government Engineering College, Madhubani (DSTTE, Bihar)",
@@ -135,6 +150,7 @@ const TechnicalSession = () => {
                 },
                 {
                     name: "Dr. Parshuram Singh",
+                    image:'/technicalSession/parsuramSingh.png',
                     title: "Assistant Professor",
                     department: "EEE Dept.",
                     institution: "Vignan's Foundation for Science, Technology and Research (Deemed to be University), Vadlamudi, (Andhra Pradesh)",
@@ -153,12 +169,10 @@ const TechnicalSession = () => {
         setImgError(prev => ({ ...prev, [key]: true }));
     }
 
-    const renderPerson = (person, index, type) => {
+    const renderPerson = (person, index, type,image) => {
         // generate a simple filename from the name (lowercase, replace spaces with underscores)
         const filename = person.name.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
-        const imgPath = imgError[`${type}-${index}`]
-            ? '/technicalSession/fallback.png'
-            : `/technicalSession/${filename}.jpg`;
+        const imgPath = person.image
 
         return (
             <div key={`${type}-${index}`} className="flex flex-col items-center text-center p-4">

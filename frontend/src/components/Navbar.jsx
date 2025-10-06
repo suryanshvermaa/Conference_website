@@ -11,6 +11,7 @@ export default function Navbar(fetch, setfetch) {
   const [isOpen, setIsOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [openDropdown, setOpenDropdown] = useState("");
+  const [hoveredNested, setHoveredNested] = useState("");
 
   const toggleDropdown = (section) => {
     setOpenDropdown((prev) => (prev === section ? "" : section));
@@ -24,9 +25,9 @@ export default function Navbar(fetch, setfetch) {
   }, [setfetch, fetch]);
 
   const menuSections = [
-    { label: "About", key: "about", options: ["About the Conference","About NIT Patna", "Organising Committee","International Advisory Committee","Technical Programme Committee", "Venue and Travels","Accomodations","About NIT Patna (Bihta Campus)","PhotoGallery"] },
-    { label: "Authors", key: "authors", options: ["Call for Papers","Guidelines to Authors",,"Paper Submissions", "Registrations","Best Student Paper Award" ,"Financial support","CMT Acknowledgement","Paper Publication"] },
-    { label: "Programs", key: "programs", options: ["Speakers", "Workshops","Tours","Cultural Event"] },
+    { label: "About", key: "about", options: ["About the Conference", "About NIT Patna", "Organising Committee", "International Advisory Committee", "Technical Programme Committee", "Venue and Travels", "Accomodations", "About NIT Patna (Bihta Campus)", "PhotoGallery"] },
+    { label: "Authors", key: "authors", options: ["Call for Papers", "Guidelines to Authors", "Paper Submissions", "Registrations", "Best Student Paper Award", "Financial support", "CMT Acknowledgement", "Paper Publication"] },
+    { label: "Programs", key: "programs", options: ["Speakers", "Technical Session", "Tours", "Cultural Event"] },
     { label: "Sponsors", key: "sponsors", options: ["Become a Sponsor", "Benefits of Sponsorship"] },
     // { label: "Contact", key: "contact", options: ["Contact Form"] },
   ];
@@ -47,16 +48,53 @@ export default function Navbar(fetch, setfetch) {
 
               {/* Dropdown Menu */}
               <div className="absolute top-full left-0 hidden group-hover:flex flex-col bg-gray-100 py-2 rounded shadow-lg min-w-[250px] z-50">
-                {options.map((opt, i) => (
-                  opt=="CMT Acknowledgement"?<a key={i} href={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}.html`}className="px-4 py-2 hover:bg-gray-200">{opt}</a>:
-                  <Link
-                    key={i}
-                    to={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="px-4 py-2 hover:bg-gray-200"
-                  >
-                    {opt}
-                  </Link>
-                ))}
+                {options.map((opt, i) => {
+                  // For the Technical Session option we render a separate relative group
+                  // so its nested submenu becomes visible only when hovering THAT item.
+                  if (opt === 'Technical Session') {
+                    return (
+                      <div
+                        key={i}
+                        className="relative"
+                        onMouseEnter={() => setHoveredNested('technical-session')}
+                        onMouseLeave={() => setHoveredNested('')}
+                      >
+                        <div className="px-4 py-2 hover:bg-gray-200 w-full h-full flex items-center cursor-pointer">
+                          {opt}
+                        </div>
+                        {/* Nested submenu appears only when hoveredNested matches */}
+                        <div className={`absolute left-full top-0 ${hoveredNested === 'technical-session' ? 'flex' : 'hidden'} flex-col bg-gray-100 py-2 rounded shadow-lg min-w-[250px] z-50`}>
+                          {['EVs and Emerging Technologies', 'Photovoltaic Cell','Renewable Energy'].map((ses, j) => (
+                            <Link
+                              key={j}
+                              to={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}/${ses.toLowerCase().replace(/\s+/g, "-")}`}
+                              className="px-4 py-2 hover:bg-gray-200"
+                            >
+                              {ses}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  }
+
+                  // Normal options
+                  if (opt === 'CMT Acknowledgement') {
+                    return (
+                      <a key={i} href={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}.html`} className="px-4 py-2 hover:bg-gray-200">{opt}</a>
+                    );
+                  }
+
+                  return (
+                    <Link
+                      key={i}
+                      to={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}`}
+                      className="px-4 py-2 hover:bg-gray-200"
+                    >
+                      {opt}
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           ))}
@@ -90,15 +128,15 @@ export default function Navbar(fetch, setfetch) {
               {openDropdown === key && (
                 <div className="ml-4 mt-1 flex flex-col space-y-1">
                   {options.map((opt, i) => (
-                    opt=="CMT Acknowledgement"?<a key={i} href={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}.html`}className="hover:text-gray-500" onClick={() => setIsOpen(false)}>{opt}</a>:
-                    <Link
-                      key={i}
-                      to={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}`}
-                      className="hover:text-gray-500"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {opt}
-                    </Link>
+                    opt == "CMT Acknowledgement" ? <a key={i} href={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}.html`} className="hover:text-gray-500" onClick={() => setIsOpen(false)}>{opt}</a> :
+                      <Link
+                        key={i}
+                        to={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}`}
+                        className="hover:text-gray-500"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {opt}
+                      </Link>
                   ))}
                 </div>
               )}

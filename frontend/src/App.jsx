@@ -93,7 +93,7 @@ function App() {
         {/* Program routes */}
         <Route path="/programs/speakers" element={<AllSpeakerprog/>} />
         <Route path="/programs/tours" element={<Tours />} />
-        <Route path="/programs/technical-session" element={<TechnicalSession />} />
+        <Route path="/programs/technical-session/:ts" element={<TechnicalSession />} />
         <Route path="/programs/cultural-event" element={<Culturalevents />} />
 
         {/* Sponser routes */}

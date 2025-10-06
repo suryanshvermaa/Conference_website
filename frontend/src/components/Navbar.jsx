@@ -64,7 +64,7 @@ export default function Navbar(fetch, setfetch) {
                         </div>
                         {/* Nested submenu appears only when hoveredNested matches */}
                         <div className={`absolute left-full top-0 ${hoveredNested === 'technical-session' ? 'flex' : 'hidden'} flex-col bg-gray-100 py-2 rounded shadow-lg min-w-[250px] z-50`}>
-                          {['one session', '2nd session'].map((ses, j) => (
+                          {['EVs and Emerging Technologies', 'Photovoltaic Cell','Renewable Energy'].map((ses, j) => (
                             <Link
                               key={j}
                               to={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}/${ses.toLowerCase().replace(/\s+/g, "-")}`}

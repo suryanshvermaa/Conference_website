@@ -56,9 +56,9 @@ const Registrations = () => {
               </tr>
               <tr>
                 <td className="px-6 py-3 border border-gray-300">Accompanying Person</td>
-                <td className="px-6 py-3 border border-gray-300">xxxx</td>
-                <td className="px-6 py-3 border border-gray-300">xxxx</td>
-                <td className="px-6 py-3 border border-gray-300">xxxx</td>
+                <td className="px-6 py-3 border border-gray-300">50% of registration amount</td>
+                <td className="px-6 py-3 border border-gray-300">50% of registration amount</td>
+                <td className="px-6 py-3 border border-gray-300">50% of registration amount</td>
               </tr>
             </tbody>
           </table>

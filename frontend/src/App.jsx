@@ -35,7 +35,7 @@ import {BenefitsOfBecomeSponser } from "./routes/Sponsors"
 import AllMessages from "./components/GetAllContact"
 import SponsorshipPage from "./components/aboutcomp/SponsorshipPage"
 import AllSpeakerprog from "./components/programscomp/AllSpeakersprog"
-import WorkShop from "./components/programscomp/WorkShop"
+import TechnicalSession from "./components/programscomp/TechnicalSession"
 import BestStuden from "./components/authorcomp/BestStuden"
 import FinancialSupp from "./components/authorcomp/FinancialSupp"
 import Culturalevents from "./components/programscomp/Culturalevents"
@@ -93,7 +93,7 @@ function App() {
         {/* Program routes */}
         <Route path="/programs/speakers" element={<AllSpeakerprog/>} />
         <Route path="/programs/tours" element={<Tours />} />
-        <Route path="/programs/workshops" element={<WorkShop />} />
+        <Route path="/programs/technical-session" element={<TechnicalSession />} />
         <Route path="/programs/cultural-event" element={<Culturalevents />} />
 
         {/* Sponser routes */}

@@ -117,4 +117,31 @@ const updateSpeaker = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
-module.exports = { createSpeaker, deleteSpeaker,getAllSpeakers,updateSpeaker, getSpeakerById };
+
+/**
+ * 
+ * @description Set priority for a Speaker
+ * @route PATCH /speaker/setPriority/:id
+ * @access Private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res
+ */
+const setPriority = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { priority } = req.body;
+        if (priority === undefined || priority < 1) {
+            return res.status(400).json({ error: "Priority must be a positive integer" });
+        } 
+        const speaker = await Speaker.findById(id);
+        if (!speaker) {
+            return res.status(404).json({ error: "Speaker not found" });
+        }
+        speaker.priority = priority;
+        await speaker.save();
+        res.status(200).json({ message: "Priority set successfully", speaker });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+module.exports = { createSpeaker, deleteSpeaker,getAllSpeakers,updateSpeaker, getSpeakerById, setPriority };

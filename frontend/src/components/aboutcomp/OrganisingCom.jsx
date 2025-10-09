@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import {useCookies} from 'react-cookie';
 
 export const OrganisingComSkeleton = () => {
   const cards=[];
@@ -32,6 +32,7 @@ export const OrganisingComSkeleton = () => {
 
 const OrganisingCom = () => {
   const [loading,setLoading]=useState(false);
+  const [cookies, setCookie] = useCookies(['organisingCommitteeCache']);
   const roles = [
     'Patron & General Chair',
     'Honorary Chairs (Chairman)',
@@ -72,6 +73,11 @@ const OrganisingCom = () => {
     async function fetchAllCommitteeMembers() {
       setLoading(true);
       try {
+        if (cookies.organisingCommitteeCache) {
+          setCommitteeMembers(cookies.organisingCommitteeCache);
+          setLoading(false);
+          return;
+        }
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/organisingcommitee/getAllMembers`);
         const updatedCommitteeMembers = { ...committeeMembers };
         
@@ -91,7 +97,7 @@ const OrganisingCom = () => {
             return priorityA - priorityB;
           });
         });
-        
+        setCookie('organisingCommitteeCache', updatedCommitteeMembers, { path: '/', maxAge: 86400 }); // Cache for 24 hours
         setCommitteeMembers(updatedCommitteeMembers);
         setLoading(false);
       } catch (error) {

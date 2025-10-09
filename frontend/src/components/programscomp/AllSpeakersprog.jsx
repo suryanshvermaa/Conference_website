@@ -28,6 +28,7 @@ export default function AllSpeakerprog() {
       }
 
       const data = await response.json()
+      data.sort((a, b) => (a.priority || 0) - (b.priority || 0))
       setSpeakers(data)
       setFilteredSpeakers(data)
     } catch (error) {

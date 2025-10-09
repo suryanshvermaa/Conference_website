@@ -51,6 +51,37 @@ const AllOrganisingCommitteeMembers = () => {
     }
   };
 
+  // Handle set priority
+  const handleSetPriority = async (id) => {
+    if (!token) {
+      toast.error('Please log in first.');
+      return;
+    }
+
+    try {
+      const response = await axios.patch(
+        `${import.meta.env.VITE_API_URL}/organisingcommitee/setPriority/${id}`,
+        {},
+        {
+          headers: { token: token },
+        }
+      );
+      toast.success(response.data.message || 'Priority updated successfully');
+      
+      // Optionally refresh the members list to reflect any changes
+      const updatedResponse = await axios.get(
+        `${import.meta.env.VITE_API_URL}/organisingcommitee/getAllMembers`,
+        {
+          headers: { token: token }
+        }
+      );
+      setOrganisingMembers(updatedResponse.data.members);
+    } catch (error) {
+      console.error('Error setting priority:', error);
+      toast.error('Failed to set priority. Please try again.');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-8">
         <h2 className="text-3xl font-semibold text-center mb-8">All Organising Committee Members</h2>
@@ -73,18 +104,26 @@ const AllOrganisingCommitteeMembers = () => {
               <p className="text-gray-700 mb-4">
                     <b>{member.college}</b>
                 </p>
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col gap-2">
+                <div className="flex justify-between items-center">
+                  <button
+                    onClick={() => handleDelete(member._id)}
+                    className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600"
+                  >
+                    Delete
+                  </button>
+                  <button
+                    onClick={() => navigate(`/admin/all-organising-members/${member._id}`)}
+                    className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600"
+                  >
+                    Update
+                  </button>
+                </div>
                 <button
-                  onClick={() => handleDelete(member._id)}
-                  className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600"
+                  onClick={() => handleSetPriority(member._id)}
+                  className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 w-full"
                 >
-                  Delete
-                </button>
-                <button
-                  onClick={() => navigate(`/admin/all-organising-members/${member._id}`)}
-                  className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600"
-                >
-                  Update
+                  Set Priority
                 </button>
               </div>
             </div>

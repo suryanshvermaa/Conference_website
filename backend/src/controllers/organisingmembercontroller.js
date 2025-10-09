@@ -127,3 +127,33 @@ exports.getMember=async(req,res)=>{
         res.status(500).json({ error: err.message });
     }
 }
+
+/**
+ * 
+ * @description set priority of a member in the organising committee
+ * @route PATCH /organisingcommitee/setPriority/:id
+ * @access private
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res  
+ */
+exports.setPriority=async(req,res)=>{
+    try {
+        const {id}=req.params;
+        const {priority}=req.body;
+        if(!id){
+            return res.status(400).json({success:false,msg:"id is required"});
+        }
+        if(priority===undefined){
+            return res.status(400).json({success:false,msg:"priority is required"});
+        }
+        const member=await OrganisingCommitteeMember.findById(id);
+        if(!member){
+            return res.status(400).json({success:false,msg:"member not found"});
+        }
+        member.priority=priority;
+        await member.save();
+        res.json({success:true,msg:"priority updated successfully"});
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}

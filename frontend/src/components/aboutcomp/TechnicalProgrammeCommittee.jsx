@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import {useCookies} from "react-cookie";
 
 export const TechnicalProgrammeCommitteeLoader = () => {
   const cards = [1, 2, 3, 4];
@@ -30,14 +31,23 @@ export const TechnicalProgrammeCommitteeLoader = () => {
 const TechnicalProgrammeCommittee = () => {
   const [loading, setLoading] = useState(false);
   const [committeeMembers, setCommitteeMembers] = useState(null);
-
+  const [cookies, setCookie] = useCookies(['tpcMembersCache']);
   useEffect(() => {
     async function fetchAllCommitteeMembers() {
       setLoading(true);
       try {
+        if(cookies.tpcMembersCache){
+          setCommitteeMembers(cookies.tpcMembersCache);
+          setLoading(false);
+          return;
+        }
         const res = await axios.get(
           `${import.meta.env.VITE_API_URL}/technicalcommitee/getAllMembers`
         );
+        setCookie("tpcMembersCache", res.data.members, {
+          path: "/",
+          maxAge: 86400,
+        }); // Cache for 1 day
         setCommitteeMembers(res.data.members);
         setLoading(false);
       } catch (error) {

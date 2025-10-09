@@ -37,8 +37,8 @@ const OrganisingCom = () => {
     'Honorary Chairs (Chairman)',
     'Organizing Chair',
     'Program Chair',
-    'Program Secretary',
     'Program Co-Chair',
+    'Program Secretary',
     'Program Coordinators',
     'Advisory Committee',
     'Program Steering Committee',
@@ -100,7 +100,7 @@ const OrganisingCom = () => {
               committeeMembers[role].length > 0 && (
                 <div key={index} className="space-y-6">
                   <h3 className="text-2xl font-semibold text-gray-800 pl-4">
-                    {role}
+                    {role=="Honorary Chairs (Chairman)"?"Chairs (Chairman)":role}
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {committeeMembers[role].map((member, idx) => (

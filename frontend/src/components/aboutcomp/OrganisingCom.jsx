@@ -73,12 +73,26 @@ const OrganisingCom = () => {
       setLoading(true);
       try {
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/organisingcommitee/getAllMembers`);
+        const updatedCommitteeMembers = { ...committeeMembers };
+        
         for (let member of res.data.members) {
-          setCommitteeMembers((prev) => ({
-            ...prev,
-            [member.committee]: [...(prev[member.committee] || []), member],
-          }));
+          if (!updatedCommitteeMembers[member.committee]) {
+            updatedCommitteeMembers[member.committee] = [];
+          }
+          updatedCommitteeMembers[member.committee].push(member);
         }
+        
+        // Sort members by priority within each committee
+        Object.keys(updatedCommitteeMembers).forEach(committee => {
+          updatedCommitteeMembers[committee].sort((a, b) => {
+            // Sort by priority (ascending order), members without priority go to the end
+            const priorityA = a.priority || Number.MAX_SAFE_INTEGER;
+            const priorityB = b.priority || Number.MAX_SAFE_INTEGER;
+            return priorityA - priorityB;
+          });
+        });
+        
+        setCommitteeMembers(updatedCommitteeMembers);
         setLoading(false);
       } catch (error) {
         setLoading(false);

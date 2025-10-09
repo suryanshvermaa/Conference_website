@@ -11,10 +11,15 @@ export default function Navbar(fetch, setfetch) {
   const [isOpen, setIsOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [openDropdown, setOpenDropdown] = useState("");
+  const [openNestedDropdown, setOpenNestedDropdown] = useState("");
   const [hoveredNested, setHoveredNested] = useState("");
 
   const toggleDropdown = (section) => {
     setOpenDropdown((prev) => (prev === section ? "" : section));
+  };
+
+  const toggleNestedDropdown = (section) => {
+    setOpenNestedDropdown((prev) => (prev === section ? "" : section));
   };
 
   useEffect(() => {
@@ -127,8 +132,52 @@ export default function Navbar(fetch, setfetch) {
 
               {openDropdown === key && (
                 <div className="ml-4 mt-1 flex flex-col space-y-1">
-                  {options.map((opt, i) => (
-                    opt == "CMT Acknowledgement" ? <a key={i} href={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}.html`} className="hover:text-gray-500" onClick={() => setIsOpen(false)}>{opt}</a> :
+                  {options.map((opt, i) => {
+                    // Handle Technical Session with nested dropdown
+                    if (opt === 'Technical Session') {
+                      return (
+                        <div key={i}>
+                          <div
+                            className="flex items-center justify-between w-full hover:text-gray-500 cursor-pointer py-1"
+                            onClick={() => toggleNestedDropdown('technical-session')}
+                          >
+                            <span>{opt}</span>
+                            {openNestedDropdown === 'technical-session' ? <HiChevronUp /> : <HiChevronDown />}
+                          </div>
+                          {openNestedDropdown === 'technical-session' && (
+                            <div className="ml-4 mt-1 flex flex-col space-y-1">
+                              {['EVs and Emerging Technologies', 'Photovoltaic Cell', 'Renewable Energy'].map((ses, j) => (
+                                <Link
+                                  key={j}
+                                  to={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}/${ses.toLowerCase().replace(/\s+/g, "-")}`}
+                                  className="hover:text-gray-500 py-1"
+                                  onClick={() => setIsOpen(false)}
+                                >
+                                  {ses}
+                                </Link>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    }
+
+                    // Handle CMT Acknowledgement
+                    if (opt === "CMT Acknowledgement") {
+                      return (
+                        <a 
+                          key={i} 
+                          href={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}.html`} 
+                          className="hover:text-gray-500" 
+                          onClick={() => setIsOpen(false)}
+                        >
+                          {opt}
+                        </a>
+                      );
+                    }
+
+                    // Handle normal options
+                    return (
                       <Link
                         key={i}
                         to={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}`}
@@ -137,7 +186,8 @@ export default function Navbar(fetch, setfetch) {
                       >
                         {opt}
                       </Link>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </div>

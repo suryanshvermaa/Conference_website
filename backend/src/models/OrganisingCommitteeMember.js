@@ -28,7 +28,11 @@ const OrganisingCommitteeMemberSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
-    }
+    },
+    priority: {
+        type: Number,
+        default: 0
+    },
 }, { timestamps: true });
 
 const OrganisingCommitteeMember = mongoose.model('OrganisingCommitteeMember', OrganisingCommitteeMemberSchema);

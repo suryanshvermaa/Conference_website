@@ -16,21 +16,24 @@ const TechnicalSession = () => {
                     image:'/technicalSession/RajeevKumar.png',
                     title: "Professor",
                     department: "Department of Electrical Engineering",
-                    institution: "Indian Institute of Technology (BHU), Varanasi, Uttar Pradesh, India"
+                    institution: "Indian Institute of Technology (BHU), Varanasi, Uttar Pradesh, India",
+                    bio: "Dr. Rajeev Kumar Singh is a distinguished Professor in the Department of Electrical Engineering at IIT (BHU) Varanasi. His research expertise spans power electronics, electric drives, renewable energy systems, and energy storage technologies. He has extensive experience in developing innovative solutions for electric vehicle technologies and grid integration of renewable energy sources. Dr. Singh has published numerous research papers in international journals and conferences, and has been actively involved in various national and international research projects focused on sustainable energy systems."
                 },
                 {
                     name: "Dr. Ranjan Kumar Behera",
                     image:'/technicalSession/RanjanKumar.png',
                     title: "Associate Professor",
                     department: "Department of Electrical Engineering",
-                    institution: "Indian Institute of Technology, Patna, Bihar, India"
+                    institution: "Indian Institute of Technology, Patna, Bihar, India",
+                    bio: "Dr. Ranjan Kumar Behera is an Associate Professor in the Department of Electrical Engineering at IIT Patna. His research interests include power electronics, motor drives, renewable energy systems, and electric vehicle technologies. He has made significant contributions to the field of power conversion systems and energy management in electric vehicles. Dr. Behera has authored several publications in reputed journals and has been involved in multiple research projects related to sustainable transportation and energy systems."
                 },
                 {
                     name: "Dr. Avanish Tripathi",
                     image:'/technicalSession/AvnishTripathi.png',
                     title: "Assistant Professor",
                     department: "Department of Energy Science and Engineering",
-                    institution: "Indian Institute of Technology, Delhi, India"
+                    institution: "Indian Institute of Technology, Delhi, India",
+                    bio: "Dr. Avanish Tripathi is an Assistant Professor in the Department of Energy Science and Engineering at IIT Delhi. His research focuses on energy storage systems, battery management systems, and electric vehicle technologies. He has expertise in developing advanced battery technologies and energy management solutions for electric and hybrid vehicles. Dr. Tripathi has published extensively in the field of energy storage and has been involved in several industry collaborations for developing next-generation energy storage solutions."
                 }
             ],
             coordinators: [
@@ -69,21 +72,24 @@ const TechnicalSession = () => {
                     image:'/technicalSession/sanjoyKumar.png',
                     title: "Associate Professor",
                     department: "Department of Electrical Engineering",
-                    institution: "Indian Institute of Technology, Patna, Bihar, India"
+                    institution: "Indian Institute of Technology, Patna, Bihar, India",
+                    bio: "Dr. Sanjoy Kumar Parida is an Associate Professor in the Department of Electrical Engineering at IIT Patna. His research expertise includes renewable energy systems, power electronics, smart grid technologies, and energy management systems. He has made significant contributions to the development of intelligent energy systems and grid integration of renewable sources. Dr. Parida has published numerous research papers in prestigious international journals and has been involved in various funded research projects related to sustainable energy technologies and smart grid applications."
                 },
                 {
                     name: "Dr. Saurabh Dutta",
                     image:'/technicalSession/SaurabhDatta.png',
                     title: "Research Associate",
                     department: "High Voltage Lab",
-                    institution: "University of Manchester , UK"
+                    institution: "University of Manchester , UK",
+                    bio: "Dr. Saurabh Dutta is a Research Associate at the High Voltage Lab, University of Manchester, UK. His research focuses on high voltage engineering, power system protection, renewable energy integration, and smart grid technologies. He has extensive experience in developing advanced protection schemes for renewable energy systems and grid-connected applications. Dr. Dutta has contributed to several international research projects and has published widely in the areas of power systems and renewable energy technologies."
                 },
                 {
                     name: "Dr PESN Raju",
                     image:'/technicalSession/PESNRaju.png',
                     title: "Assistant Professor",
                     department: "Department of Energy Science and Engineering",
-                    institution: "Indian Institute of Technology Guwahati, Assam, India"
+                    institution: "Indian Institute of Technology Guwahati, Assam, India",
+                    bio: "Dr. PESN Raju is an Assistant Professor in the Department of Energy Science and Engineering at IIT Guwahati. His research interests include renewable energy systems, energy storage technologies, power electronics, and sustainable energy solutions. He has expertise in developing innovative energy conversion systems and energy management strategies for renewable energy applications. Dr. Raju has authored several publications in reputed journals and has been actively involved in research projects focused on clean energy technologies and energy system optimization."
                 }
             ],
             coordinators: [
@@ -169,11 +175,41 @@ const TechnicalSession = () => {
         setImgError(prev => ({ ...prev, [key]: true }));
     }
 
-    const renderPerson = (person, index, type,image) => {
-        // generate a simple filename from the name (lowercase, replace spaces with underscores)
-        const filename = person.name.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
-        const imgPath = person.image
+    const renderPerson = (person, index, type) => {
+        const imgPath = person.image;
 
+        if (type === 'speaker') {
+            return (
+                <div key={`${type}-${index}`} className="bg-white rounded-lg shadow-lg p-8 mb-8 min-h-[400px]">
+                    <div className="flex flex-col md:flex-row gap-8 h-full">
+                        <div className="flex flex-col items-center md:w-64 flex-shrink-0">
+                            <img
+                                src={imgPath}
+                                alt={person.name}
+                                onError={() => handleImgError(`${type}-${index}`)}
+                                className="w-48 h-48 object-cover rounded-full shadow-md mb-6"
+                            />
+                            <div className="text-center space-y-2">
+                                <h3 className="text-xl font-bold text-gray-900">{person.name}</h3>
+                                <p className="text-lg text-indigo-600 font-semibold">{person.title}</p>
+                                {person.department && (
+                                    <p className="text-sm text-gray-600 leading-relaxed">{person.department}</p>
+                                )}
+                                <p className="text-sm text-gray-600 leading-relaxed">{person.institution}</p>
+                            </div>
+                        </div>
+                        {person.bio && (
+                            <div className="flex-1 flex flex-col">
+                                <h4 className="text-lg font-semibold text-gray-800 mb-4">About:</h4>
+                                <p className="text-sm text-gray-700 leading-relaxed text-justify flex-1">{person.bio}</p>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            );
+        }
+
+        // For coordinators, keep the original compact layout
         return (
             <div key={`${type}-${index}`} className="flex flex-col items-center text-center p-4">
                 <img
@@ -188,7 +224,7 @@ const TechnicalSession = () => {
                 {person.institution && <div className="text-sm text-gray-600">{person.institution}</div>}
                 {person.email && <div className="text-sm text-indigo-600">{person.email}</div>}
             </div>
-        )
+        );
     }
 
     return (
@@ -199,9 +235,9 @@ const TechnicalSession = () => {
 
             <p className="mb-8 text-justify">{session.introduction}</p>
 
-            <section className="mb-8">
-                <h2 className="text-2xl font-semibold mb-4">Speakers</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <section className="mb-12">
+                <h2 className="text-2xl font-semibold mb-6">Speakers</h2>
+                <div className="space-y-6">
                     {session.speakers.map((s, i) => renderPerson(s, i, 'speaker'))}
                 </div>
             </section>

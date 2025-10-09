@@ -13,7 +13,7 @@ const TechnicalSession = () => {
             speakers: [
                 {
                     name: "Dr. Rajeev Kumar Singh",
-                    image:'/technicalSession/RajeevKumar.png',
+                    image: '/technicalSession/RajeevKumar.png',
                     title: "Professor",
                     department: "Department of Electrical Engineering",
                     institution: "Indian Institute of Technology (BHU), Varanasi, Uttar Pradesh, India",
@@ -21,7 +21,7 @@ const TechnicalSession = () => {
                 },
                 {
                     name: "Dr. Ranjan Kumar Behera",
-                    image:'/technicalSession/RanjanKumar.png',
+                    image: '/technicalSession/RanjanKumar.png',
                     title: "Associate Professor",
                     department: "Department of Electrical Engineering",
                     institution: "Indian Institute of Technology, Patna, Bihar, India",
@@ -29,7 +29,7 @@ const TechnicalSession = () => {
                 },
                 {
                     name: "Dr. Avanish Tripathi",
-                    image:'/technicalSession/AvnishTripathi.png',
+                    image: '/technicalSession/AvnishTripathi.png',
                     title: "Assistant Professor",
                     department: "Department of Energy Science and Engineering",
                     institution: "Indian Institute of Technology, Delhi, India",
@@ -39,7 +39,7 @@ const TechnicalSession = () => {
             coordinators: [
                 {
                     name: "Chinmay Bera",
-                    image:'/technicalSession/ChinayBera.png',
+                    image: '/technicalSession/ChinayBera.png',
                     title: "Research Scholar, Nextgen Adaptive Systems Group",
                     department: "Department of Electrical Engineering",
                     institution: "National Institute of Technology Patna, Bihar, India",
@@ -48,14 +48,14 @@ const TechnicalSession = () => {
                 {
                     name: "Mr. Md Inayat Ali",
                     title: "Assistant Professor",
-                    image:'/technicalSession/InayatAli.png',
+                    image: '/technicalSession/InayatAli.png',
                     department: "Department of Electrical and Electronics Engineering",
                     institution: "Maulana Azad College of Engineering and Technology, Patna, Bihar, India",
                     email: "mda.ph21.ee@nitp.ac.in"
                 },
                 {
                     name: "Chandra Shekhar Singh Chandal",
-                    image:'/technicalSession/CSS.png',
+                    image: '/technicalSession/CSS.png',
                     title: "Assistant Professor",
                     department: "Department of Electrical & Electronics Engineering",
                     institution: "Motihari College of Engineering Motihari, Bihar India",
@@ -69,33 +69,33 @@ const TechnicalSession = () => {
             speakers: [
                 {
                     name: "Dr Sanjoy Kumar Parida",
-                    image:'/technicalSession/sanjoyKumar.png',
+                    image: '/technicalSession/sanjoyKumar.png',
                     title: "Associate Professor",
                     department: "Department of Electrical Engineering",
                     institution: "Indian Institute of Technology, Patna, Bihar, India",
                     bio: "Dr. Sanjoy Kumar Parida is an Associate Professor in the Department of Electrical Engineering at IIT Patna. His research expertise includes renewable energy systems, power electronics, smart grid technologies, and energy management systems. He has made significant contributions to the development of intelligent energy systems and grid integration of renewable sources. Dr. Parida has published numerous research papers in prestigious international journals and has been involved in various funded research projects related to sustainable energy technologies and smart grid applications."
                 },
                 {
-                    name: "Dr. Saurabh Dutta",
-                    image:'/technicalSession/SaurabhDatta.png',
-                    title: "Research Associate",
-                    department: "High Voltage Lab",
-                    institution: "University of Manchester , UK",
-                    bio: "Dr. Saurabh Dutta is a Research Associate at the High Voltage Lab, University of Manchester, UK. His research focuses on high voltage engineering, power system protection, renewable energy integration, and smart grid technologies. He has extensive experience in developing advanced protection schemes for renewable energy systems and grid-connected applications. Dr. Dutta has contributed to several international research projects and has published widely in the areas of power systems and renewable energy technologies."
-                },
-                {
                     name: "Dr PESN Raju",
-                    image:'/technicalSession/PESNRaju.png',
+                    image: '/technicalSession/PESNRaju.png',
                     title: "Assistant Professor",
                     department: "Department of Energy Science and Engineering",
                     institution: "Indian Institute of Technology Guwahati, Assam, India",
                     bio: "Dr. PESN Raju is an Assistant Professor in the Department of Energy Science and Engineering at IIT Guwahati. His research interests include renewable energy systems, energy storage technologies, power electronics, and sustainable energy solutions. He has expertise in developing innovative energy conversion systems and energy management strategies for renewable energy applications. Dr. Raju has authored several publications in reputed journals and has been actively involved in research projects focused on clean energy technologies and energy system optimization."
+                },
+                {
+                    name: "Dr. Saurabh Dutta",
+                    image: '/technicalSession/SaurabhDatta.png',
+                    title: "Research Associate",
+                    department: "High Voltage Lab",
+                    institution: "University of Manchester , UK",
+                    bio: "Dr. Saurabh Dutta is a Research Associate at the High Voltage Lab, University of Manchester, UK. His research focuses on high voltage engineering, power system protection, renewable energy integration, and smart grid technologies. He has extensive experience in developing advanced protection schemes for renewable energy systems and grid-connected applications. Dr. Dutta has contributed to several international research projects and has published widely in the areas of power systems and renewable energy technologies."
                 }
             ],
             coordinators: [
                 {
                     name: "Rohan Kumar Gupta",
-                    image:'/technicalSession/RohanKumarGupta.png',
+                    image: '/technicalSession/RohanKumarGupta.png',
                     title: "Research Scholar, Nextgen Adaptive Systems Group",
                     department: "Department of Electrical Engineering",
                     institution: "National Institute of Technology Patna, Bihar, India",
@@ -103,7 +103,7 @@ const TechnicalSession = () => {
                 },
                 {
                     name: "Rahul Kumar",
-                    image:'/technicalSession/RahulKumar.png',
+                    image: '/technicalSession/RahulKumar.png',
                     title: "", // Title not specified in the source document
                     department: "Department of Electrical Engineering",
                     institution: "National Institute of Technology Patna, Bihar, India",
@@ -111,7 +111,7 @@ const TechnicalSession = () => {
                 },
                 {
                     name: "Balmukund Kumar",
-                    image:'/technicalSession/BalMukund.png',
+                    image: '/technicalSession/BalMukund.png',
                     title: "Assistant Professor",
                     department: "Department of Electrical Engineering",
                     institution: "Government Engineering College, Munger, Bihar, India",
@@ -125,21 +125,21 @@ const TechnicalSession = () => {
             speakers: [
                 {
                     name: "Dr. Vivek Garg",
-                    image:'/technicalSession/vevekGarg.png',
+                    image: '/technicalSession/vevekGarg.png',
                     title: "Assistant Professor",
                     institution: "ECE Dept., SVNIT Surat",
                     bio: "Dr. Vivek Garg’s professional journey spans teaching, research, and academic leadership, with expertise in optoelectronic devices, quantum technologies, nanoscale device modeling, energy storage systems, and optical communication. He gained rich research experience as a Junior and Senior Research Fellow at IIT Indore and teaching experience as an Assistant Professor at DIAT Pune before joining SVNIT Surat. At SVNIT, he has taken on significant administrative and institutional roles, including Coordinator for national capacity-building programs (INUP i2i, LAM–IISc, and EICT Academy), Member of the DCC Sub-Committee on Quantum Technology Division, DoT, Govt. of India, and Digital Content Chair of IEEE Nanotechnology Council, Gujarat Chapter. His contributions extend to fostering research forums, student mentorship, and infrastructure development, reflecting his commitment to advancing both academic excellence and institutional growth."
                 },
                 {
                     name: "Dr. Brajendra Singh Sengar",
-                    image:'/technicalSession/brajendra.png',
+                    image: '/technicalSession/brajendra.png',
                     title: "Assistant Professor",
                     institution: "ECE Dept., NIT Srinagar",
                     bio: "Dr. Brajendra Singh Sengar’s research interests include semiconductor device simulation and fabrication, thin-film solar cells, and the application of machine learning in semiconductor-based devices. He earned his Ph.D. in Electrical Engineering from IIT Indore (2014–2019), where he was a CSIR Junior and Senior Research Fellow, and also received the prestigious BASE Inter Fellowship to work at the University of Nevada, Las Vegas, USA. He gained industry experience as a Network Engineer at the National Informatics Centre (2012–2014) before pursuing doctoral research. He later served as an Assistant Professor at the Centre for Advanced Studies, Lucknow (2019–2021) before moving to his current academic role."
                 },
                 {
                     name: "Dr. Gaurav Sidddharth",
-                    image:'/technicalSession/gauravSiddharth.png',
+                    image: '/technicalSession/gauravSiddharth.png',
                     title: "Assistant Professor",
                     institution: "ECE Dept., NIT Calicut",
                     bio: "Dr. Gaurav Siddharth received his Ph.D. in Electrical Engineering from IIT Indore. His research focuses on simulating, modeling, characterizing, and fabricating photoelectronic materials and devices, with particular emphasis on solar cells and photodetectors. He has served as Assistant Professor at IIIT Ranchi and SVNIT Surat before joining NIT Calicut, where he continues to contribute to research and teaching in advanced optoelectronic device technologies."
@@ -148,7 +148,7 @@ const TechnicalSession = () => {
             coordinators: [
                 {
                     name: "Dr. Pritam Kumar",
-                    image:'/technicalSession/pritamKumar.png',
+                    image: '/technicalSession/pritamKumar.png',
                     title: "Assistant Professor",
                     department: "EE Dept.",
                     institution: "Government Engineering College, Madhubani (DSTTE, Bihar)",
@@ -156,7 +156,7 @@ const TechnicalSession = () => {
                 },
                 {
                     name: "Dr. Parshuram Singh",
-                    image:'/technicalSession/parsuramSingh.png',
+                    image: '/technicalSession/parsuramSingh.png',
                     title: "Assistant Professor",
                     department: "EEE Dept.",
                     institution: "Vignan's Foundation for Science, Technology and Research (Deemed to be University), Vadlamudi, (Andhra Pradesh)",

@@ -18,7 +18,11 @@ const speakerSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
-    }
+    },
+    priority: {
+        type: Number,
+        default: 0
+    },
 }, { timestamps: true });
 
 const Speaker = mongoose.model('Speaker', speakerSchema);

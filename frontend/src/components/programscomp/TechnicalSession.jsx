@@ -115,7 +115,7 @@ const TechnicalSession = () => {
                     title: "Assistant Professor",
                     department: "Department of Electrical Engineering",
                     institution: "Government Engineering College, Munger, Bihar, India",
-                    email: "bmkumar14301@gmail.com"
+                    email: "balmukundk.ph21.ee@nitp.ac.in"
                 }
             ]
         },

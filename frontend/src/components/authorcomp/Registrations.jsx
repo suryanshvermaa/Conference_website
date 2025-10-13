@@ -63,6 +63,17 @@ const Registrations = () => {
             </tbody>
           </table>
         </div>
+         <div>
+            <p className="text-black mt-4 text-xl">Registration Fee for participants includes:</p>
+            <ul className="list-disc pl-6 text-black text-lg">
+              <li>Entry to all the sessions of the conference and workshop</li>
+              <li>Paper presentation/publication</li>
+              <li>Certificate</li>
+              <li>Registration Kit</li>
+              <li>High-Tea & Lunch (6th-8th March 2026)</li>
+              <li>Gala dinner (7th March 2026)</li>
+            </ul>
+          </div>
         <div className="mt-6">
           <h3 className="text-2xl font-semibold mb-3 text-black">Account Details</h3>
           <div className="space-y-4 text-lg text-black">

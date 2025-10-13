@@ -32,37 +32,48 @@ const Registrations = () => {
             <tbody>
               <tr>
                 <td className="px-6 py-3 border border-gray-300">Students/Research Scholar</td>
-                <td className="px-6 py-3 border border-gray-300">7000 INR</td>
-                <td className="px-6 py-3 border border-gray-300">9000 INR</td>
-                <td className="px-6 py-3 border border-gray-300">3500 INR</td>
+                <td className="px-6 py-3 border border-gray-300">6500 INR</td>
+                <td className="px-6 py-3 border border-gray-300">7500 INR</td>
+                <td className="px-6 py-3 border border-gray-300">50% of registration amount</td>
               </tr>
               <tr>
                 <td className="px-6 py-3 border border-gray-300">Academicians</td>
+                <td className="px-6 py-3 border border-gray-300">7500 INR</td>
                 <td className="px-6 py-3 border border-gray-300">8500 INR</td>
-                <td className="px-6 py-3 border border-gray-300">10000 INR</td>
-                <td className="px-6 py-3 border border-gray-300">4250 INR</td>
+                <td className="px-6 py-3 border border-gray-300">50% of registration amount</td>
               </tr>
               <tr>
                 <td className="px-6 py-3 border border-gray-300">Industry Participants</td>
-                <td className="px-6 py-3 border border-gray-300">11000 INR</td>
-                <td className="px-6 py-3 border border-gray-300">13000 INR</td>
-                <td className="px-6 py-3 border border-gray-300">5500 INR</td>
+                <td className="px-6 py-3 border border-gray-300">9000 INR</td>
+                <td className="px-6 py-3 border border-gray-300">10000 INR</td>
+                <td className="px-6 py-3 border border-gray-300">50% of registration amount</td>
               </tr>
               <tr>
                 <td className="px-6 py-3 border border-gray-300">Foreign Authors</td>
                 <td className="px-6 py-3 border border-gray-300">250 USD</td>
                 <td className="px-6 py-3 border border-gray-300">280 USD</td>
-                <td className="px-6 py-3 border border-gray-300">125 USD</td>
+                <td className="px-6 py-3 border border-gray-300">50% of registration amount</td>
               </tr>
               <tr>
                 <td className="px-6 py-3 border border-gray-300">Accompanying Person</td>
                 <td className="px-6 py-3 border border-gray-300">50% of registration amount</td>
                 <td className="px-6 py-3 border border-gray-300">50% of registration amount</td>
-                <td className="px-6 py-3 border border-gray-300">50% of registration amount</td>
+                <td className="px-6 py-3 border border-gray-300 text-center">-----</td>
               </tr>
             </tbody>
           </table>
         </div>
+         <div>
+            <p className="text-black mt-4 text-xl">Registration Fee for participants includes:</p>
+            <ul className="list-disc pl-6 text-black text-lg">
+              <li>Entry to all the sessions of the conference and workshop</li>
+              <li>Paper presentation/publication</li>
+              <li>Certificate</li>
+              <li>Registration Kit</li>
+              <li>High-Tea & Lunch (6th-8th March 2026)</li>
+              <li>Gala dinner (7th March 2026)</li>
+            </ul>
+          </div>
         <div className="mt-6">
           <h3 className="text-2xl font-semibold mb-3 text-black">Account Details</h3>
           <div className="space-y-4 text-lg text-black">

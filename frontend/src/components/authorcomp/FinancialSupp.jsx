@@ -9,7 +9,7 @@ const FinancialSupp = () => {
         </h1>
 
         <p className="mt-6 text-lg">
-          The ICNARI offers financial support to eligible students and faculty members from non-centrally funded technical institutes (CFTIs) in India.
+          The ICNARI offers financial support to eligible students and faculty members from non-centrally funded technical institutes (CFTIs) in India, based on the recommendation of our experts.
         </p>
 
         <h2 className="mt-6 text-xl font-semibold text-blue-700">Eligibility Criteria</h2>

@@ -27,8 +27,8 @@ const Guidelines = () => {
 
         <p className="text-lg text-gray-700 mt-6">Please refer to the author templates given below:</p>
         <ul className="list-disc pl-6 text-gray-700 space-y-2 text-base">
-          <li><strong>MS Word template:</strong> <Link target='blank' to="https://drive.google.com/drive/folders/17kJUd9-buu3O-etJV6EGUJjWq_48f7Tl?usp=sharing" className="text-blue-600 underline hover:text-blue-800">Doc Template</Link></li>
-          <li><strong>LaTex Formatting Macros:</strong> <Link target='blank' to="https://www.overleaf.com/latex/templates/springer-conference-proceedings-template-updated-2022-01-12/wcvbtmwtykqj" className="text-blue-600 underline hover:text-blue-800">Tex Template</Link></li>
+          <li><strong>MS Word template:</strong> <Link target='blank' to="https://drive.google.com/drive/folders/1PwjhJU9x_VdgRv8rZyTBSAB4YEDuJtiF?usp=drive_link" className="text-blue-600 underline hover:text-blue-800">Doc Template</Link></li>
+          <li><strong>LaTex Formatting Macros:</strong> <Link target='blank' to="https://drive.google.com/drive/folders/1nzoBNldcT1HoLlvvkx5qTBtRIr7SXkTT?usp=drive_link" className="text-blue-600 underline hover:text-blue-800">Tex Template</Link></li>
         </ul>
       </section>
     </div>

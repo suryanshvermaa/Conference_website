@@ -111,50 +111,55 @@ const OrganisingCom = () => {
   else {
     return (
       <div className="min-h-screen bg-gray-50 flex justify-center items-center py-12 px-4 sm:px-6 lg:px-8">
-        <section className="w-full max-w-7xl bg-white rounded-2xl shadow-2xl p-8 md:p-12">
-          <h2 className="text-3xl md:text-4xl lg:text-4xl font-semibold text-gray-700 mb-8 pb-4 text-center underline">
-            Organizing Committee
-          </h2>
-          <div className="space-y-12">
-            {roles.map((role, index) => (
-              committeeMembers[role].length > 0 && (
-                <div key={index} className="space-y-6">
-                  <h3 className="text-2xl font-semibold text-gray-800 pl-4">
-                    {role=="Honorary Chairs (Chairman)"?"Chairs":role}
-                  </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {committeeMembers[role].map((member, idx) => (
-                      member?.name && (
-                        <div
-                          key={idx}
-                          className="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-300"
-                        >
-                          <img
-                            src={member.imageUrl}
-                            alt={member.name}
-                            className="w-40 h-40 rounded-full mx-auto mb-4 border-4 border-gray-100 object-cover"
-                          />
-                          <h4 className="text-xl font-semibold text-gray-900 text-center">
-                            {member.name}
-                          </h4>
-                          <p className="text-sm text-gray-600 text-center mt-1">
-                            {member.college}
-                          </p>
-                          <p className="text-xs text-gray-500 text-center mt-2 italic">
-                            {Array.isArray(member.specialization)
-                              ? member.specialization.join(', ')
-                              : member.specialization}
-                          </p>
-                        </div>
-                      )
-                    ))}
-                  </div>
-                </div>
+      <section className="w-full max-w-7xl bg-white rounded-2xl shadow-2xl p-8 md:p-12">
+        <h2 className="text-3xl md:text-4xl lg:text-4xl font-semibold text-gray-700 mb-8 pb-4 text-center underline">
+        Organizing Committee
+        </h2>
+        <div className="space-y-12">
+        {roles.map((role) => (
+          committeeMembers[role] && committeeMembers[role].length > 0 && (
+          <div key={role} className="space-y-6">
+            <h3 className="text-2xl font-semibold text-gray-800 pl-4">
+            {role === 'Honorary Chairs (Chairman)'
+              ? 'Chairman'
+              : role === 'Organizing Chair'
+              ? 'Organizing Chair/Convenor'
+              : role}
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {committeeMembers[role].map((member, idx) => (
+              member?.name && (
+              <div
+                key={member._id ?? idx}
+                className="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition-shadow duration-300"
+              >
+                <img
+                src={member.imageUrl}
+                alt={member.name}
+                className="w-40 h-40 rounded-full mx-auto mb-4 border-4 border-gray-100 object-cover"
+                />
+                <h4 className="text-xl font-semibold text-gray-900 text-center">
+                {member.name}
+                </h4>
+                <p className="text-sm text-gray-600 text-center mt-1">
+                {member.college}
+                </p>
+                <p className="text-xs text-gray-500 text-center mt-2 italic">
+                {Array.isArray(member.specialization)
+                  ? member.specialization.join(', ')
+                  : member.specialization}
+                </p>
+              </div>
               )
             ))}
+            </div>
           </div>
-        </section>
-      </div>)
+          )
+        ))}
+        </div>
+      </section>
+      </div>
+    );
   }
 };
 

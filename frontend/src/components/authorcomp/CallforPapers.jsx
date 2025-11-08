@@ -35,7 +35,7 @@ const CallforPapers = () => {
       ]
     },
     {
-      "domain": "Electronics and Instrumentation Engineering",
+      "domain": "Electronics, Communication and Instrumentation Engineering",
       "topics": [
         "Industrial Electronics and Automation",
         "Control Systems: Modelling, Design, and Applications",

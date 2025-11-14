@@ -7,6 +7,13 @@ import {
   HiChevronUp,
 } from "react-icons/hi";
 
+const technicalSessions=[
+  'EVs and Emerging Technologies',
+  'Photovoltaic Cell',
+  'Renewable Energy',
+  'Next Generation Sensing and Computing'
+];
+
 export default function Navbar(fetch, setfetch) {
   const [isOpen, setIsOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -69,7 +76,7 @@ export default function Navbar(fetch, setfetch) {
                         </div>
                         {/* Nested submenu appears only when hoveredNested matches */}
                         <div className={`absolute left-full top-0 ${hoveredNested === 'technical-session' ? 'flex' : 'hidden'} flex-col bg-gray-100 py-2 rounded shadow-lg min-w-[250px] z-50`}>
-                          {['EVs and Emerging Technologies', 'Photovoltaic Cell','Renewable Energy'].map((ses, j) => (
+                          {technicalSessions.map((ses, j) => (
                             <Link
                               key={j}
                               to={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}/${ses.toLowerCase().replace(/\s+/g, "-")}`}

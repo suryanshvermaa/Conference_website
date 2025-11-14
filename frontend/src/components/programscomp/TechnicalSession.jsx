@@ -3,7 +3,8 @@ import { useState } from "react";
 
 const TechnicalSession = () => {
     const { ts } = useParams();
-    const technicalSessionForComponent = ts.split("-").join(" ");
+    // Normalize route segment like "evs-and-emerging-technologies" to lookup key
+    const technicalSessionForComponent = (ts || "").split("-").join(" ").toLowerCase();
     const [imgError, setImgError] = useState({});
 
     const tss = {
@@ -163,8 +164,61 @@ const TechnicalSession = () => {
                     email: "parshurams.ph21.ee@nitp.ac.in"
                 }
             ]
+                },
+                "next generation sensing and computing": {
+                        workshopTitle: "Next-Generation Sensing and Computing: Biosensors Meet Neuromorphic Devices",
+                        introduction: "The rapid convergence of biology and electronics is opening new frontiers in healthcare, computing, and intelligent systems. Biosensors, which detect biological signals and convert them into measurable outputs, are playing a vital role in disease diagnosis, environmental monitoring, and personalized medicine. On the other hand, neuromorphic devices, inspired by the architecture and functioning of the human brain, are revolutionizing computation by enabling energy-efficient, adaptive, and brain-like information processing.\n\nThis workshop aims to bring together researchers, students, and professionals to explore the synergy between biosensors and neuromorphic devices. By integrating advanced sensing platforms with bio-inspired computing, future technologies can achieve real-time data analysis, enhanced decision-making, and transformative applications in fields ranging from healthcare and biotechnology to artificial intelligence and robotics.\n\nParticipants will gain insights into the fundamentals, recent advancements, and emerging challenges in these areas, while also engaging in discussions on future opportunities for interdisciplinary innovation.",
+                        speakers: [
+                                {
+                                        name: "Prof. Jawar Singh",
+                                        image: "/technicalSession/jawar.jpeg",
+                                        title: "Professor",
+                                        institution: "Indian Institute of Technology, Patna, Bihar",
+                                        bio: "Prof. Jawar Singh is a Professor in the Department of Electrical Engineering at the Indian Institute of Technology (IIT) Patna. His research focuses on neuromorphic devices, VLSI design, emerging memory technologies, and low-power circuits. With numerous publications in reputed journals and conferences, he has made significant contributions to advancing bio-inspired computing and next-generation electronic systems. Prof. Singh has also been actively involved in guiding research scholars and collaborating on interdisciplinary projects that link biosensors, neuromorphic engineering, and artificial intelligence."
+                                },
+                                {
+                                        name: "Dr. Sanjay Kumar",
+                                        image: "/technicalSession/sanjay.jpeg",
+                                        title: "Inspire Faculty",
+                                        institution: "Indian Institute of Technology, Patna, Bihar",
+                                        bio: "Dr. Sanjay Kumar is an INSPIRE Faculty in the Department of Electrical Engineering at the Indian Institute of Technology (IIT) Patna). His research focuses on non-volatile memories, memristor /ReRAM devices, and 2D materials, with applications in neuromorphic computing, artificial synapses, and in-memory computation. He is also actively involved in the development of advanced memory technologies for human bionic visual systems, MEMS-based capacitive transducers, and biological sensors. Dr. Kumar has published extensively in reputed journals and conferences and is engaged in advancing interdisciplinary research at the interface of electronics, nanotechnology, and bio-inspired systems."
+                                },
+                                {
+                                        name: "Dr. Mangal Das",
+                                        image: "/technicalSession/Mangal_Das.jpeg",
+                                        title: "Assistant Professor",
+                                        institution: "Gautam Buddha University, Delhi-NCR Uttar Pradesh",
+                                        bio: "Dr. Mangal Das is an Assistant Professor in the Department of Electronics & Communication Engineering at Gautam Buddha University, Greater Noida, Uttar Pradesh. He earned his Ph.D. from IIT Indore, with work focused on memristive systems for neuromorphic applications. His research spans memristive systems, neuromorphic computing, advanced materials, semiconductor fabrication, nanotechnology, robotics and AI/ML. He has authored several SCI journal papers, book chapters, patents, and is actively involved in interdisciplinary technology development for next-generation intelligent systems."
+                                }
+                        ],
+                        coordinators: [
+                                {
+                                        name: "Mr. Anirban Kolay",
+                                        image: "/technicalSession/Arnirban.png",
+                                        title: "Assistant Professor",
+                                        department: "Department of Electrical Engineering",
+                                        institution: "Heritage Institute of Technology",
+                                        email: "anirbank.ph21.ee@nitp.ac.in"
+                                },
+                                {
+                                        name: "Mr. Reetwik Bhadra",
+                                        image: "/technicalSession/Reetwik.jpeg",
+                                        title: "Assistant Professor",
+                                        department: "Department of Electrical Engineering",
+                                        institution: "Heritage Institute of Technology",
+                                        email: "reetwikb.ph21.ee@nitp.ac.in"
+                                },
+                                {
+                                        name: "Mr. Milind Kumar",
+                                        image: "/technicalSession/milind.jpeg",
+                                        title: "Research scholar",
+                                        department: "Department of Electrical Engineering",
+                                        institution: "National Institute of Technology, Patna",
+                                        email: "milindk.phd22.ee@nitp.ac.in"
+                                }
+                        ]
+                }
         }
-    }
     const session = tss[technicalSessionForComponent];
 
     if (!session) return (
@@ -175,20 +229,33 @@ const TechnicalSession = () => {
         setImgError(prev => ({ ...prev, [key]: true }));
     }
 
+    const getInitials = (name = "") => {
+        const parts = name.trim().split(/\s+/);
+        const initials = parts.slice(0, 2).map(p => p[0]?.toUpperCase() || "").join("");
+        return initials || "?";
+    }
+
     const renderPerson = (person, index, type) => {
         const imgPath = person.image;
+        const imgKey = `${type}-${index}`;
 
         if (type === 'speaker') {
             return (
                 <div key={`${type}-${index}`} className="bg-white rounded-lg shadow-lg p-8 mb-8 min-h-[400px]">
                     <div className="flex flex-col md:flex-row gap-8 h-full">
                         <div className="flex flex-col items-center md:w-64 flex-shrink-0">
-                            <img
-                                src={imgPath}
-                                alt={person.name}
-                                onError={() => handleImgError(`${type}-${index}`)}
-                                className="w-48 h-48 object-cover rounded-full shadow-md mb-6"
-                            />
+                            {(!imgPath || imgError[imgKey]) ? (
+                                <div className="w-48 h-48 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center text-3xl font-semibold shadow-md mb-6">
+                                    {getInitials(person.name)}
+                                </div>
+                            ) : (
+                                <img
+                                    src={imgPath}
+                                    alt={person.name}
+                                    onError={() => handleImgError(imgKey)}
+                                    className="w-48 h-48 object-cover rounded-full shadow-md mb-6"
+                                />
+                            )}
                             <div className="text-center space-y-2">
                                 <h3 className="text-xl font-bold text-gray-900">{person.name}</h3>
                                 <p className="text-lg text-indigo-600 font-semibold">{person.title}</p>
@@ -212,12 +279,18 @@ const TechnicalSession = () => {
         // For coordinators, keep the original compact layout
         return (
             <div key={`${type}-${index}`} className="flex flex-col items-center text-center p-4">
-                <img
-                    src={imgPath}
-                    alt={person.name}
-                    onError={() => handleImgError(`${type}-${index}`)}
-                    className="w-32 h-32 object-cover rounded-full mb-2 shadow"
-                />
+                {(!imgPath || imgError[imgKey]) ? (
+                    <div className="w-32 h-32 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center text-xl font-semibold mb-2 shadow">
+                        {getInitials(person.name)}
+                    </div>
+                ) : (
+                    <img
+                        src={imgPath}
+                        alt={person.name}
+                        onError={() => handleImgError(imgKey)}
+                        className="w-32 h-32 object-cover rounded-full mb-2 shadow"
+                    />
+                )}
                 <div className="font-semibold">{person.name}</div>
                 <div className="text-sm text-gray-600">{person.title}</div>
                 {person.department && <div className="text-sm text-gray-600">{person.department}</div>}

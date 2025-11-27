@@ -1,4 +1,3 @@
-import React from 'react';
 const dates = [
   {
     title: "Paper Submission Start Date",
@@ -7,7 +6,7 @@ const dates = [
   },
     {
       title: "Paper Submission Deadline",
-      date: "November 28, 2025",
+      date: "December 14, 2025 (extended)",
       description: "Final date to submit research papers for review.",
     },
     {
@@ -60,9 +59,18 @@ const EventTimeline = () => {
           <tbody>
             {dates.map((event, index) => (
               <tr key={index} className="hover:bg-blue-100">
-                <td className="p-2 border-b border-blue-200 font-semibold">{event.title}</td>
-                <td className="p-2 border-b border-blue-200 text-blue-600 font-bold">{event.date}</td>
-                <td className="p-2 border-b border-blue-200 text-gray-700">{event.description}</td>
+                {
+                  event.title === "Paper Submission Deadline" ?
+                     <>
+                     <td className="p-2 border-b border-blue-200 font-extrabold underline">{event.title}</td>
+                      <td className="p-2 border-b border-blue-200 text-gray-800 font-extrabold underline">{event.date}</td>
+                      <td className="p-2 border-b border-blue-200 text-gray-700 font-extrabold underline">{event.description}</td>
+                     </>:
+                      <>
+                       <td className="p-2 border-b border-blue-200 font-semibold">{event.title}</td>
+                      <td className="p-2 border-b border-blue-200 text-blue-600 font-bold">{event.date}</td>
+                      <td className="p-2 border-b border-blue-200 text-gray-700">{event.description}</td></>
+                }
               </tr>
             ))}
           </tbody>

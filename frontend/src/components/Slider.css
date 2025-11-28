@@ -98,27 +98,53 @@ body {
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
-    /* background: #111; Dark background */
-    color: black;
-    padding: 10px 0;
+    color: #111827;
+    padding: 8px 12px;
     position: relative;
+    min-height: 2.2rem;
+    background: linear-gradient(90deg, rgba(255,248,225,0.9), rgba(255,255,255,0.6));
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(15,23,42,0.08);
+    border: 1px solid rgba(15,23,42,0.04);
   }
-  
-  .marquee-content {
-    display: inline-block;
-    padding-left: 100%;
-    animation: marquee 30s linear infinite;
-    font-size: 1.2rem;
+
+  /* Track contains two copies of the message for a seamless loop */
+  .marquee-track {
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    will-change: transform;
+    /* Use CSS variables set by JS: --marquee-shift, --marquee-duration and --marquee-delay */
+    animation: marquee-js var(--marquee-duration, 40s) linear infinite;
+    animation-delay: var(--marquee-delay, 1s);
+    animation-fill-mode: both;
+  }
+
+  .marquee-text {
+    white-space: nowrap;
+    font-size: 1.05rem;
     font-weight: 600;
+    color: #0f172a;
+    padding-right: 0.5rem;
   }
-  
-  @keyframes marquee {
-    from {
-      transform: translateX(100%);
-    }
-    to {
-      transform: translateX(-100%);
-    }
+
+  /* Pause animation on hover for readability */
+  .marquee-container:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee-js {
+    0% { transform: translateX(0) translateY(-50%); }
+    100% { transform: translateX(calc(var(--marquee-shift) * -1)) translateY(-50%); }
+  }
+
+  /* Respect users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
   }
   
   .highlight {

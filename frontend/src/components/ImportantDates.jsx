@@ -6,7 +6,7 @@ const dates = [
   },
     {
       title: "Paper Submission Deadline",
-      date: "December 14, 2025 (extended)",
+      date: "December 18, 2025 (extended)",
       description: "Final date to submit research papers for review.",
     },
     {

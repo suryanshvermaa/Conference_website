@@ -82,70 +82,75 @@ const AddSpeaker = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-8">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
-        <h2 className="text-3xl font-semibold text-center mb-6">Add New Speaker</h2>
-
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700">Name</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter speaker name"
-              required
-            />
+    <div className="mx-auto w-full max-w-3xl">
+      <div className="admin-card">
+        <div className="admin-card-inner">
+          <div className="mb-6">
+            <h2 className="admin-title">Add Speaker</h2>
+            <p className="admin-muted mt-1">Create a new speaker profile.</p>
           </div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700">Specialization</label>
-            <input
-              type="text"
-              value={specialization}
-              onChange={(e) => setSpecialization(e.target.value)}
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter speaker's specialization separated by commas"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">Description</label>
-            <textarea
-              rows="4"
-              type="text"
-              value={desription}
-              onChange={(e) => setdescription(e.target.value)}
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter speaker's specialization separated by commas"
-              required
-            />
-          </div>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="admin-label">Name</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="admin-input"
+                placeholder="Enter speaker name"
+                required
+              />
+            </div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700">Upload Image</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="w-full mt-2"
-            />
-            {imageUrl && (
-              <div className="mt-4">
-                <h3 className="text-gray-700">Image Preview</h3>
-                <img src={imageUrl} alt="Preview" className="w-full mt-2 rounded-lg" />
-              </div>
-            )}
-          </div>
+            <div>
+              <label className="admin-label">Specialization</label>
+              <input
+                type="text"
+                value={specialization}
+                onChange={(e) => setSpecialization(e.target.value)}
+                className="admin-input"
+                placeholder="Enter speaker's specialization separated by commas"
+                required
+              />
+            </div>
+            <div>
+              <label className="admin-label">Description</label>
+              <textarea
+                rows="4"
+                type="text"
+                value={desription}
+                onChange={(e) => setdescription(e.target.value)}
+                className="admin-textarea"
+                placeholder="Enter a short bio/description"
+                required
+              />
+            </div>
 
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600 transition duration-300"
-          >
-            Add Speaker
-          </button>
-        </form>
+            <div>
+              <label className="admin-label">Upload Image</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="mt-2 block w-full text-sm text-zinc-700 file:mr-3 file:rounded-lg file:border-0 file:bg-zinc-100 file:px-4 file:py-2 file:text-sm file:font-medium file:text-zinc-700 hover:file:bg-zinc-200"
+              />
+              {imageUrl && (
+                <div className="mt-4">
+                  <div className="admin-muted">Preview</div>
+                  <img src={imageUrl} alt="Preview" className="mt-2 w-full rounded-xl border border-zinc-200" />
+                </div>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              className="admin-button-primary w-full"
+            >
+              Add Speaker
+            </button>
+          </form>
+        </div>
       </div>
       <ToastContainer position="bottom-center" />
     </div>

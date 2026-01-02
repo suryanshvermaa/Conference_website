@@ -75,94 +75,99 @@ const AddTechnicalCommitteeMember = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-8">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
-        <h2 className="text-3xl font-semibold text-center mb-6">Add new Technical Programme Committee Member </h2>
+    <div className="mx-auto w-full max-w-3xl">
+      <div className="admin-card">
+        <div className="admin-card-inner">
+          <div className="mb-6">
+            <h2 className="admin-title">Add Technical Committee Member</h2>
+            <p className="admin-muted mt-1">Create a new technical committee profile.</p>
+          </div>
 
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700">Name</label>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="admin-label">Name</label>
             <input
               type="text"
               value={organisingMemberData.name}
               onChange={(e) => setOrganisingMemberData({...organisingMemberData,name:e.target.value})}
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="admin-input"
               placeholder="Enter Member name"
               required
             />
           </div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700">Specialization</label>
+          <div>
+            <label className="admin-label">Specialization</label>
             <input
               type="text"
               value={organisingMemberData.specialization}
               onChange={(e) => setOrganisingMemberData({...organisingMemberData,specialization:e.target.value})}
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="admin-input"
               placeholder="Enter member's specialization separated by commas"
               required
             />
           </div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700">College</label>
+          <div>
+            <label className="admin-label">College</label>
             <input
               type="text"
               value={organisingMemberData.college}
               onChange={(e) => setOrganisingMemberData({...organisingMemberData,college:e.target.value})}
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="admin-input"
               placeholder="Enter member's college"
               required
             />
           </div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700">Committee</label>
+          <div>
+            <label className="admin-label">Committee</label>
             <input
               type="text"
               value={organisingMemberData.committee}
               onChange={(e) => setOrganisingMemberData({...organisingMemberData,committee:e.target.value})}
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="admin-input"
               placeholder="Description about organising member"
               required
             />
           </div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700">Description</label>
+          <div>
+            <label className="admin-label">Description</label>
             <input
               type="text"
               value={organisingMemberData.description}
               onChange={(e) => setOrganisingMemberData({...organisingMemberData,description:e.target.value})}
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="admin-input"
               placeholder="Description about organising member"
               required
             />
           </div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700">Upload Image</label>
+          <div>
+            <label className="admin-label">Upload Image</label>
             <input
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              className="w-full mt-2"
+              className="mt-2 block w-full text-sm text-zinc-700 file:mr-3 file:rounded-lg file:border-0 file:bg-zinc-100 file:px-4 file:py-2 file:text-sm file:font-medium file:text-zinc-700 hover:file:bg-zinc-200"
             />
             {organisingMemberData.imageUrl && (
               <div className="mt-4">
-                <h3 className="text-gray-700">Image Preview</h3>
-                <img src={organisingMemberData.imageUrl} alt="Preview" className="w-full mt-2 rounded-lg" />
+                <div className="admin-muted">Preview</div>
+                <img src={organisingMemberData.imageUrl} alt="Preview" className="mt-2 w-full rounded-xl border border-zinc-200" />
               </div>
             )}
           </div>
 
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600 transition duration-300"
+            className="admin-button-primary w-full"
           >
             Add Committee Member 
           </button>
         </form>
+      </div>
       </div>
       <ToastContainer position="bottom-center" />
     </div>

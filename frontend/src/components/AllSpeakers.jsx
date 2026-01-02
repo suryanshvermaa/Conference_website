@@ -3,16 +3,19 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {useNavigate} from "react-router-dom";
+import AdminLoader from './AdminLoader';
 
 const AllSpeakers = () => {
   const [speakers, setSpeakers] = useState([]);
   const [priorities, setPriorities] = useState({});
+  const [loading, setLoading] = useState(true);
   const token = localStorage.getItem('token');
   const navigate=useNavigate();
 
   useEffect(() => {
     // Fetch all speakers when the component mounts
     const fetchSpeakers = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_API_URL}/speaker/all`
@@ -28,6 +31,8 @@ const AllSpeakers = () => {
       } catch (error) {
         console.error('Error fetching speakers:', error);
         toast.error('Failed to fetch speakers. Please try again.');
+      } finally {
+        setLoading(false);
       }
     };
     fetchSpeakers();
@@ -92,75 +97,88 @@ const AllSpeakers = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-        <h2 className="text-3xl font-semibold text-center mb-8">All Speakers</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {speakers.map((speaker) => (
-          <div key={speaker._id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200">
-            {/* Image Section */}
-            <div className="w-full h-40 bg-gray-200">
-              <img
-                src={speaker.imageUrl}
-                alt={speaker.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            
-            {/* Content Section */}
-            <div className="p-4">
-              {/* Speaker Info */}
-              <div className="mb-3">
-                <h3 className="font-semibold text-base mb-1 text-gray-900 truncate">{speaker.name}</h3>
-                <p className="text-gray-600 text-xs leading-relaxed line-clamp-2">
-                  {speaker.specialization.join(', ')}
-                </p>
+    <div className="space-y-6">
+      <div>
+        <h2 className="admin-title">All Speakers</h2>
+        <p className="admin-muted mt-1">Manage speaker profiles and priority.</p>
+      </div>
+      {loading ? (
+        <div className="admin-card">
+          <div className="admin-card-inner">
+            <AdminLoader label="Loading speakers..." />
+          </div>
+        </div>
+      ) : speakers.length === 0 ? (
+        <p className="text-center text-zinc-600 text-sm">No speakers found.</p>
+      ) : (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {speakers.map((speaker) => (
+            <div key={speaker._id} className="admin-card overflow-hidden">
+              {/* Image Section */}
+              <div className="w-full h-44 bg-zinc-100">
+                <img
+                  src={speaker.imageUrl}
+                  alt={speaker.name}
+                  className="w-full h-full object-cover"
+                />
               </div>
-              
-              {/* Priority Section */}
-              <div className="mb-3 p-2 bg-gray-50 rounded border">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-medium text-gray-700">Priority</span>
-                  <span className="bg-gray-200 text-gray-800 text-xs px-2 py-0.5 rounded">
-                    {speaker.priority || 0}
-                  </span>
+
+              {/* Content Section */}
+              <div className="p-4">
+                {/* Speaker Info */}
+                <div className="mb-3">
+                  <h3 className="font-semibold text-base mb-1 text-zinc-900 truncate">{speaker.name}</h3>
+                  <p className="text-zinc-600 text-xs leading-relaxed line-clamp-2">
+                    {speaker.specialization.join(', ')}
+                  </p>
                 </div>
-                <div className="flex gap-1">
-                  <input
-                    type="number"
-                    min="0"
-                    value={priorities[speaker._id] || 0}
-                    onChange={(e) => handlePriorityChange(speaker._id, e.target.value)}
-                    className="flex-1 px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-blue-400"
-                    placeholder="0"
-                  />
+
+                {/* Priority Section */}
+                <div className="mb-3 rounded-lg border border-zinc-200 bg-zinc-50 p-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-medium text-zinc-700">Priority</span>
+                    <span className="rounded bg-zinc-100 text-zinc-800 text-xs px-2 py-0.5">
+                      {speaker.priority || 0}
+                    </span>
+                  </div>
+                  <div className="flex gap-1">
+                    <input
+                      type="number"
+                      min="0"
+                      value={priorities[speaker._id] || 0}
+                      onChange={(e) => handlePriorityChange(speaker._id, e.target.value)}
+                      className="admin-input py-1.5 text-xs"
+                      placeholder="0"
+                    />
+                    <button
+                      onClick={() => handleSetPriority(speaker._id)}
+                      className="admin-button-primary px-3 py-1.5 text-xs"
+                    >
+                      Set
+                    </button>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex gap-2">
                   <button
-                    onClick={() => handleSetPriority(speaker._id)}
-                    className="bg-blue-500 text-white px-2 py-1 rounded text-xs hover:bg-blue-600 transition-colors"
+                    onClick={() => handleDelete(speaker._id)}
+                    className="admin-button-danger flex-1 py-2 text-xs"
                   >
-                    Set
+                    Delete
+                  </button>
+                  <button
+                    onClick={() => navigate(`/admin/all-speakers/update/${speaker._id}`)}
+                    className="admin-button-primary flex-1 py-2 text-xs"
+                  >
+                    Update
                   </button>
                 </div>
               </div>
-
-              {/* Action Buttons */}
-              <div className="flex gap-2">
-                <button
-                  onClick={() => handleDelete(speaker._id)}
-                  className="flex-1 bg-red-500 text-white py-1.5 px-2 rounded hover:bg-red-600 transition-colors text-xs font-medium"
-                >
-                  Delete
-                </button>
-                <button
-                  onClick={() => navigate(`/admin/all-speakers/update/${speaker._id}`)}
-                  className="flex-1 bg-green-500 text-white py-1.5 px-2 rounded hover:bg-green-600 transition-colors text-xs font-medium"
-                >
-                  Update
-                </button>
-              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
       <ToastContainer position="bottom-center" />
     </div>
   );

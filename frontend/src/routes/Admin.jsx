@@ -1,196 +1,134 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import AdminLayout from '../components/AdminLayout';
+import React from "react";
+import { Link } from "react-router-dom";
+import {
+  UserPlus,
+  FilePlus2,
+  Mic2,
+  BellPlus,
+  Files,
+  Users,
+  Bell,
+  ImagePlus,
+  Mail,
+  Trash2,
+  UsersRound,
+  Wrench,
+  Globe,
+} from "lucide-react";
 
-export default function Admin({ setfetch }) {
-  const navigate = useNavigate();
-
-  const handleNavigation = (path) => {
-    navigate(path); // Redirect to the appropriate page
-  };
+export default function Admin() {
+  const tiles = [
+    {
+      title: "Create Admin",
+      desc: "Add a new admin account",
+      to: "/admin/add-admin",
+      icon: UserPlus,
+    },
+    {
+      title: "Add Paper",
+      desc: "Publish accepted papers",
+      to: "/admin/add-papers",
+      icon: FilePlus2,
+    },
+    {
+      title: "Add Speaker",
+      desc: "Create a speaker profile",
+      to: "/admin/add-speakers",
+      icon: Mic2,
+    },
+    {
+      title: "Add Update",
+      desc: "Post recent announcements",
+      to: "/admin/add-recent-updates",
+      icon: BellPlus,
+    },
+    {
+      title: "All Papers",
+      desc: "View and delete papers",
+      to: "/admin/all-papers",
+      icon: Files,
+    },
+    {
+      title: "All Speakers",
+      desc: "Manage speakers & priority",
+      to: "/admin/all-speakers",
+      icon: Users,
+    },
+    {
+      title: "All Updates",
+      desc: "Manage announcements",
+      to: "/admin/all-updates",
+      icon: Bell,
+    },
+    {
+      title: "Upload Photos",
+      desc: "Add photos to gallery",
+      to: "/admin/photogalleryupload",
+      icon: ImagePlus,
+    },
+    {
+      title: "Contact Messages",
+      desc: "View contact form messages",
+      to: "/admin/contact-messages",
+      icon: Mail,
+    },
+    {
+      title: "Delete Photos",
+      desc: "Remove photos from gallery",
+      to: "/admin/deletephoto",
+      icon: Trash2,
+    },
+    {
+      title: "Org Committee",
+      desc: "Add or manage members",
+      to: "/admin/all-organising-members",
+      icon: UsersRound,
+    },
+    {
+      title: "Technical Committee",
+      desc: "Add or manage members",
+      to: "/admin/all-technical-members",
+      icon: Wrench,
+    },
+    {
+      title: "International Committee",
+      desc: "Add or manage members",
+      to: "/admin/all-international-members",
+      icon: Globe,
+    },
+  ];
 
   return (
-    <AdminLayout setfetch={setfetch}>
-    <div className="admin-container flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <div className="admin-header mb-10 text-center">
-        <h1 className="text-4xl font-bold text-gray-800 uppercase border-b-4 border-blue-500 pb-3">
-          Admin Dashboard
-        </h1>
+    <div className="space-y-6">
+      <div>
+        <h1 className="admin-title">Dashboard</h1>
+        <p className="admin-muted">Quick actions for managing the conference website.</p>
       </div>
 
-      <div className="admin-content grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
-        {/* Create New Admin */}
-        <div
-          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
-          onClick={() => handleNavigation('/admin/add-admin')}
-        >
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">Create New Admin</h2>
-          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
-            Create
-          </button>
-        </div>
-
-        {/* Add New Papers */}
-        <div
-          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
-          onClick={() => handleNavigation('/admin/add-papers')}
-        >
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">Add New Papers</h2>
-          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
-            Add Papers
-          </button>
-        </div>
-
-        {/* Add New Speakers */}
-        <div
-          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
-          onClick={() => handleNavigation('/admin/add-speakers')}
-        >
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">Add New Speakers</h2>
-          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
-            Add Speakers
-          </button>
-        </div>
-
-         {/* Add New Organising Committee Member */}
-         <div
-          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
-          onClick={() => handleNavigation('/admin/add-organising-member')}
-        >
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">Add Committee Members</h2>
-          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
-          Add Members
-          </button>
-        </div>
-
-         {/* All Organising Committee Members */}
-         <div
-          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
-          onClick={() => handleNavigation('/admin/all-organising-members')}
-        >
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">All Committee Members</h2>
-          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
-          All Organising Members
-          </button>
-        </div>
-
-    {/* Add New Technical Programme Committee Member */}
- <div
-          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
-          onClick={() => handleNavigation('/admin/add-technical-member')}
-        >
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">Add Technical Members</h2>
-          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
-          Add Members
-          </button>
-        </div>
-
-         {/* All  Technical Programme Committee Members */}
-         <div
-          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
-          onClick={() => handleNavigation('/admin/all-technical-members')}
-        >
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">All Technical Members</h2>
-          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
-          All Technical Members
-          </button>
-        </div>
-
- {/* Add New International advisory Committee Member */}
- <div
-          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
-          onClick={() => handleNavigation('/admin/add-international-member')}
-        >
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">Add International Members</h2>
-          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
-          Add Members
-          </button>
-        </div>
-
-         {/* All International Advisory Committee Members */}
-         <div
-          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
-          onClick={() => handleNavigation('/admin/all-international-members')}
-        >
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">All International Members</h2>
-          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
-          All International Members
-          </button>
-        </div>
-
-
-        {/* Add New Updates */}
-        <div
-          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
-          onClick={() => handleNavigation('/admin/add-recent-updates')}
-        >
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">Add New Updates</h2>
-          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
-            Add Updates
-          </button>
-        </div>
-
-        {/* All Papers */}
-        <div
-          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
-          onClick={() => handleNavigation('/admin/all-papers')}
-        >
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">All Papers</h2>
-          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
-            View Papers
-          </button>
-        </div>
-
-        {/* All Speakers */}
-        <div
-          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
-          onClick={() => handleNavigation('/admin/all-speakers')}
-        >
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">All Speakers</h2>
-          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
-            View Speakers
-          </button>
-        </div>
-
-        {/* All Updates */}
-        <div
-          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
-          onClick={() => handleNavigation('/admin/all-updates')}
-        >
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">All Updates</h2>
-          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
-            View Updates
-          </button>
-        </div>
-        <div
-          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
-          onClick={() => handleNavigation('/admin/photogalleryupload')}
-        >
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">Photo Gallery</h2>
-          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
-            Upload Image
-          </button>
-        </div>
-        <div
-          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
-          onClick={() => handleNavigation('/admin/contact-messages')}
-        >
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">Contact Requests</h2>
-          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
-            See Requests 
-          </button>
-        </div>
-        <div
-          className="card bg-yellow-100 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center cursor-pointer transition-transform duration-300 transform hover:scale-105"
-          onClick={() => handleNavigation('/admin/deletephoto')}
-        >
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">PhotoGallery</h2>
-          <button className="admin-btn bg-blue-500 text-white py-2 px-6 rounded-md text-lg hover:bg-blue-600">
-            delete photo
-          </button>
-        </div>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {tiles.map(({ title, desc, to, icon: Icon }) => (
+          <Link
+            key={to}
+            to={to}
+            className="admin-card group block overflow-hidden"
+          >
+            <div className="admin-card-inner">
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex min-w-0 items-start gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-600/15 ring-1 ring-inset ring-indigo-500/20">
+                    <Icon className="h-5 w-5 text-indigo-700" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-sm font-semibold text-zinc-900">{title}</div>
+                    <div className="mt-1 text-sm text-zinc-600">{desc}</div>
+                  </div>
+                </div>
+                <div className="text-zinc-400 group-hover:text-zinc-700">→</div>
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
-    </AdminLayout>
   );
 }

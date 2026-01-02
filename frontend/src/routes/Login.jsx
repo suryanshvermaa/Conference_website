@@ -59,17 +59,22 @@ export default function Login({setfetch}) {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
+    <div className="min-h-screen bg-zinc-50 text-zinc-900 flex items-center justify-center px-4 py-10">
+      <div className="w-full max-w-md">
+        <div className="admin-card overflow-hidden">
+          <div className="admin-card-inner">
+            <div className="mb-6">
+              <h2 className="admin-title">Admin Login</h2>
+              <p className="admin-muted mt-1">Sign in to manage the conference website.</p>
+            </div>
 
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleLogin} className="space-y-4">
           {/* Email Field */}
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">Email</label>
+          <div>
+            <label className="admin-label">Email</label>
             <input
               type="email"
-              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="admin-input"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -78,11 +83,11 @@ export default function Login({setfetch}) {
           </div>
 
           {/* Password Field */}
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">Password</label>
+          <div>
+            <label className="admin-label">Password</label>
             <input
               type="password"
-              className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="admin-input"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -93,12 +98,14 @@ export default function Login({setfetch}) {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition duration-200"
+            className="admin-button-primary w-full"
             disabled={loading}
           >
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
+          </div>
+        </div>
       </div>
     </div>
   );

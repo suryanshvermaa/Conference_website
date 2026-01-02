@@ -3,10 +3,12 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router-dom";
+import AdminLoader from "./AdminLoader";
 
 const UpdateSpeaker = () => {
   const [image, setImage] = useState(null);
   const [prevImage, setPrevImage] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [speaker, setSpeaker] = useState({
     name: "",
     specialization: "",
@@ -19,23 +21,30 @@ const UpdateSpeaker = () => {
   const token = localStorage.getItem("token"); // Get the token from localStorage
   useEffect(() => {
     async function getSpeaker() {
-      const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/speaker/get/${id}`,
-        {
-          headers: {
-            token: localStorage.getItem("token"),
-          },
-        }
-      );
-      const speakerData = res.data;
-      const specialization = speakerData.specialization?.join(", ") || "";
-      setSpeaker({
-        name: speakerData.name,
-        imageUrl: speakerData.imageUrl,
-        description: speakerData.description,
-        specialization,
-      });
-      setPrevImage(speakerData.imageUrl);
+      setLoading(true);
+      try {
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/speaker/get/${id}`,
+          {
+            headers: {
+              token: localStorage.getItem("token"),
+            },
+          }
+        );
+        const speakerData = res.data;
+        const specialization = speakerData.specialization?.join(", ") || "";
+        setSpeaker({
+          name: speakerData.name,
+          imageUrl: speakerData.imageUrl,
+          description: speakerData.description,
+          specialization,
+        });
+        setPrevImage(speakerData.imageUrl);
+      } catch (error) {
+        toast.error("Failed to load speaker details. Please try again.");
+      } finally {
+        setLoading(false);
+      }
     }
     getSpeaker();
   }, []);
@@ -104,40 +113,45 @@ const UpdateSpeaker = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-8">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
-        <h2 className="text-3xl font-semibold text-center mb-6">
-          Update Speaker
-        </h2>
+    <div className="mx-auto w-full max-w-3xl">
+      <div className="admin-card">
+        <div className="admin-card-inner">
+          <div className="mb-6">
+            <h2 className="admin-title">Update Speaker</h2>
+            <p className="admin-muted mt-1">Edit speaker details and image.</p>
+          </div>
 
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700">Name</label>
+        {loading ? (
+          <AdminLoader label="Loading speaker..." />
+        ) : (
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="admin-label">Name</label>
             <input
               type="text"
               value={speaker.name}
               onChange={(e) => setSpeaker({ ...speaker, name: e.target.value })}
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="admin-input"
               placeholder="Enter speaker name"
               required
             />
           </div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700">Specialization</label>
+          <div>
+            <label className="admin-label">Specialization</label>
             <input
               type="text"
               value={speaker.specialization}
               onChange={(e) =>
                 setSpeaker({ ...speaker, specialization: e.target.value })
               }
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="admin-input"
               placeholder="Enter speaker's specialization separated by commas"
               required
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">Description</label>
+          <div>
+            <label className="admin-label">Description</label>
             <textarea
               rows="4"
               type="text"
@@ -145,27 +159,27 @@ const UpdateSpeaker = () => {
               onChange={(e) =>
                 setSpeaker({ ...speaker, description: e.target.value })
               }
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter speaker's specialization separated by commas"
+              className="admin-textarea"
+              placeholder="Enter a short bio/description"
               required
             />
           </div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700">Upload Image</label>
+          <div>
+            <label className="admin-label">Upload Image</label>
             <input
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              className="w-full mt-2"
+              className="mt-2 block w-full text-sm text-zinc-700 file:mr-3 file:rounded-lg file:border-0 file:bg-zinc-100 file:px-4 file:py-2 file:text-sm file:font-medium file:text-zinc-700 hover:file:bg-zinc-200"
             />
             {speaker.imageUrl && (
               <div className="mt-4">
-                <h3 className="text-gray-700">Image Preview</h3>
+                <div className="admin-muted">Preview</div>
                 <img
                   src={speaker.imageUrl}
                   alt="Preview"
-                  className="w-full mt-2 rounded-lg"
+                  className="mt-2 w-full rounded-xl border border-zinc-200"
                 />
               </div>
             )}
@@ -173,11 +187,13 @@ const UpdateSpeaker = () => {
 
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600 transition duration-300"
+            className="admin-button-primary w-full"
           >
             Update Speaker
           </button>
         </form>
+		)}
+      </div>
       </div>
       <ToastContainer position="bottom-center" />
     </div>

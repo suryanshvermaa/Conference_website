@@ -1,1 +1,71 @@
 @import "tailwindcss";
+
+@layer components {
+	.admin-card {
+		@apply rounded-xl border border-zinc-200 bg-white shadow-sm;
+	}
+
+	.admin-card-inner {
+		@apply p-5 sm:p-6;
+	}
+
+	.admin-title {
+		@apply text-xl font-semibold tracking-tight text-zinc-900 sm:text-2xl;
+	}
+
+	.admin-muted {
+		@apply text-sm text-zinc-500;
+	}
+
+	.admin-label {
+		@apply block text-sm font-medium text-zinc-700;
+	}
+
+	.admin-input {
+		@apply mt-2 w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40;
+	}
+
+	.admin-textarea {
+		@apply mt-2 w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/40;
+	}
+
+	.admin-select {
+		@apply mt-2 w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/40;
+	}
+
+	.admin-button {
+		@apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-indigo-500/60 disabled:opacity-60;
+	}
+
+	.admin-button-primary {
+		@apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-indigo-500/40 disabled:opacity-60 bg-indigo-600 text-white hover:bg-indigo-500;
+	}
+
+	.admin-button-danger {
+		@apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-red-500/30 disabled:opacity-60 bg-red-600 text-white hover:bg-red-500;
+	}
+
+	.admin-button-neutral {
+		@apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-indigo-500/40 disabled:opacity-60 border border-zinc-300 bg-white text-zinc-900 hover:bg-zinc-50;
+	}
+
+	.admin-icon-button {
+		@apply inline-flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50;
+	}
+
+	.admin-nav {
+		@apply flex flex-col gap-1;
+	}
+
+	.admin-nav-item {
+		@apply flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition;
+	}
+
+	.admin-nav-item-inactive {
+		@apply text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900;
+	}
+
+	.admin-nav-item-active {
+		@apply bg-indigo-600/10 text-indigo-700 ring-1 ring-inset ring-indigo-200;
+	}
+}

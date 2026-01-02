@@ -56,64 +56,69 @@ const AddRecentUpdates = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-8">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
-        <h2 className="text-3xl font-semibold text-center mb-6">Add New Update</h2>
-
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700">Title</label>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter update title"
-              required
-            />
+    <div className="mx-auto w-full max-w-3xl">
+      <div className="admin-card">
+        <div className="admin-card-inner">
+          <div className="mb-6">
+            <h2 className="admin-title">Add Update</h2>
+            <p className="admin-muted mt-1">Post an announcement or important update.</p>
           </div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700">Description</label>
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter update description"
-              rows="5"
-              required
-            />
-          </div>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="admin-label">Title</label>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="admin-input"
+                placeholder="Enter update title"
+                required
+              />
+            </div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700">Link (Optional)</label>
-            <input
-              type="url"
-              value={link}
-              onChange={(e) => setLink(e.target.value)}
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Add a link if available"
-            />
-          </div>
+            <div>
+              <label className="admin-label">Description</label>
+              <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                className="admin-textarea"
+                placeholder="Enter update description"
+                rows="5"
+                required
+              />
+            </div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700">Event Date</label>
-            <input
-              type="datetime-local"
-              value={eventDate}
-              onChange={(e) => setEventDate(e.target.value)}
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
+            <div>
+              <label className="admin-label">Link (Optional)</label>
+              <input
+                type="url"
+                value={link}
+                onChange={(e) => setLink(e.target.value)}
+                className="admin-input"
+                placeholder="Add a link if available"
+              />
+            </div>
 
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600 transition duration-300"
-          >
-            Add Update
-          </button>
-        </form>
+            <div>
+              <label className="admin-label">Event Date</label>
+              <input
+                type="datetime-local"
+                value={eventDate}
+                onChange={(e) => setEventDate(e.target.value)}
+                className="admin-input"
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="admin-button-primary w-full"
+            >
+              Add Update
+            </button>
+          </form>
+      </div>
       </div>
 
       {/* ToastContainer with position set to bottom-center */}

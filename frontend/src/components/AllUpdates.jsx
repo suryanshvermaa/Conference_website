@@ -2,14 +2,17 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AdminLoader from './AdminLoader';
 
 const AllUpdates = () => {
   const [updates, setUpdates] = useState([]);
+  const [loading, setLoading] = useState(true);
   const token = localStorage.getItem('token');
 
   useEffect(() => {
     // Fetch all updates when the component mounts
     const fetchUpdates = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_API_URL}/recentupdate/all`,
@@ -21,6 +24,8 @@ const AllUpdates = () => {
       } catch (error) {
         console.error('Error fetching updates:', error);
         toast.error('Failed to fetch updates. Please try again.');
+      } finally {
+        setLoading(false);
       }
     };
     fetchUpdates();
@@ -50,33 +55,48 @@ const AllUpdates = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <h2 className="text-3xl font-semibold text-center mb-8">All Updates</h2>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {updates.map((update) => (
-          <div key={update._id} className="bg-white p-6 rounded-lg shadow-lg flex flex-col">
-            <div className="flex-grow">
-              <h3 className="text-xl font-bold mb-2">{update.title}</h3>
-              <p className="text-gray-700 mb-4">{update.description.slice(0, 150)}...</p> {/* Show description preview */}
-              {update.link && (
-                <a href={update.link} target="_blank" rel="noopener noreferrer" className="text-blue-500 mb-4">
-                  View Update Link
-                </a>
-              )}
-              <p className="text-gray-600 mb-4">Event Date: {new Date(update.eventDate).toLocaleString()}</p> {/* Format event date */}
-            </div>
-            <div className="mt-auto">
-              <button
-                onClick={() => handleDelete(update._id)}
-                className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 w-full"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
+    <div className="space-y-6">
+      <div>
+        <h2 className="admin-title">All Updates</h2>
+        <p className="admin-muted mt-1">Manage announcements and event updates.</p>
       </div>
+
+      {loading ? (
+        <div className="admin-card">
+          <div className="admin-card-inner">
+            <AdminLoader label="Loading updates..." />
+          </div>
+        </div>
+      ) : updates.length === 0 ? (
+        <p className="text-center text-zinc-600 text-sm">No updates found.</p>
+      ) : (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {updates.map((update) => (
+            <div key={update._id} className="admin-card flex flex-col">
+              <div className="admin-card-inner flex flex-col flex-1">
+                <div className="flex-grow">
+                <h3 className="text-base font-semibold text-zinc-900 mb-2 line-clamp-2">{update.title}</h3>
+                <p className="text-zinc-700 text-sm mb-4 line-clamp-4">{update.description.slice(0, 150)}...</p>
+                {update.link && (
+                  <a href={update.link} target="_blank" rel="noopener noreferrer" className="text-indigo-700 hover:text-indigo-800 text-sm mb-4 inline-block">
+                    View Update Link
+                  </a>
+                )}
+                <p className="text-zinc-600 text-sm mb-4">Event Date: {new Date(update.eventDate).toLocaleString()}</p>
+              </div>
+              <div className="mt-auto">
+                <button
+                  onClick={() => handleDelete(update._id)}
+                  className="admin-button-danger w-full"
+                >
+                  Delete
+                </button>
+              </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
       <ToastContainer position="bottom-center" />
     </div>
   );

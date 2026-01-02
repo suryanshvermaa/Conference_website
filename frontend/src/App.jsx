@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, useLocation } from "react-router-dom"
 import Navbar from "./components/Navbar"
 import Home from "./routes/Home"
 import Authors from "./routes/Authors"
@@ -10,6 +10,7 @@ import Footer from "./components/Footer"
 import { ToastContainer } from "react-toastify"; // Import Toastify
 import "react-toastify/dist/ReactToastify.css"; 
 import ProtectedRoute from "./components/ProtectedRoutes"
+import AdminRouteLayout from "./components/AdminRouteLayout"
 import AddSpeakers from "./components/AddSpeakers"
 import AddPapers from "./components/AddPapers"
 import AddRecentUpdates from "./components/AddRecentUpdates"
@@ -59,10 +60,14 @@ import Publication from "./components/authorcomp/Publication"
 
 function App() {
   const [fetch,setfetch]=useState(false)
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
+  const isLoginRoute = location.pathname === "/login";
+  const showPublicChrome = !(isAdminRoute || isLoginRoute);
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar fetch={fetch} setfetch={setfetch}/>
-      <main className="flex-grow mt-6">
+      {showPublicChrome ? <Navbar fetch={fetch} setfetch={setfetch}/> : null}
+      <main className={showPublicChrome ? "flex-grow mt-6" : "flex-grow"}>
       < ToastContainer/>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -106,31 +111,33 @@ function App() {
         <Route path="/login" element={<Login setfetch={setfetch}/>} />
         <Route element={<ProtectedRoute />}>
         {/* Admin routes */}
-          <Route path="/admin" element={<Admin setfetch={setfetch}/>} />
-          <Route path="/admin/add-speakers" element={<AddSpeakers />} />
-          <Route path="/admin/add-papers" element={<AddPapers />} />
-          <Route path="/admin/add-recent-updates" element={<AddRecentUpdates />} />
-          <Route path="/admin/add-admin" element={<AddAdmin />} />
-          <Route path="/admin/all-papers" element={<AllPapers />} />
-          <Route path="/admin/all-speakers" element={<AllSpeakers />} />
-          <Route path="/admin/all-speakers/update/:id" element={<UpdateSpeaker />} />
-          <Route path="/admin/all-updates" element={<AllUpdates />} />
-          <Route path="/admin/photogalleryupload" element={<AddPhotoGallery />} />
-          <Route path="/admin/contact-messages" element={<AllMessages />} />
-          <Route path="/admin/deletephoto" element={<Allphotosgallery />} />
-          <Route path="/admin/add-organising-member" element={<AddOrganisingCommitteeMember />} />
-          <Route path="/admin/all-organising-members" element={<AllOrganisingCommitteeMembers />} />
-          <Route path="/admin/all-organising-members/:id" element={<UpdateMember />} />
-          <Route path="/admin/add-international-member" element={<InternationalMember />} />
-          <Route path="/admin/all-international-members" element={<AllInternationalAdvisoryCommitteeMembers />} />
-          <Route path="/admin/all-international-members/:id" element={<UpdateInternationalMember />} />
-          <Route path="/admin/add-technical-member" element={<AddTechnicalCommitteeMember />} />
-          <Route path="/admin/all-technical-members" element={<AllTechnicalCommitteeMembers />} />
-          <Route path="/admin/all-technical-members/:id" element={<UpdateTechnicalMember />} />
+          <Route path="/admin" element={<AdminRouteLayout setfetch={setfetch} />}>
+            <Route index element={<Admin />} />
+            <Route path="add-speakers" element={<AddSpeakers />} />
+            <Route path="add-papers" element={<AddPapers />} />
+            <Route path="add-recent-updates" element={<AddRecentUpdates />} />
+            <Route path="add-admin" element={<AddAdmin />} />
+            <Route path="all-papers" element={<AllPapers />} />
+            <Route path="all-speakers" element={<AllSpeakers />} />
+            <Route path="all-speakers/update/:id" element={<UpdateSpeaker />} />
+            <Route path="all-updates" element={<AllUpdates />} />
+            <Route path="photogalleryupload" element={<AddPhotoGallery />} />
+            <Route path="contact-messages" element={<AllMessages />} />
+            <Route path="deletephoto" element={<Allphotosgallery />} />
+            <Route path="add-organising-member" element={<AddOrganisingCommitteeMember />} />
+            <Route path="all-organising-members" element={<AllOrganisingCommitteeMembers />} />
+            <Route path="all-organising-members/:id" element={<UpdateMember />} />
+            <Route path="add-international-member" element={<InternationalMember />} />
+            <Route path="all-international-members" element={<AllInternationalAdvisoryCommitteeMembers />} />
+            <Route path="all-international-members/:id" element={<UpdateInternationalMember />} />
+            <Route path="add-technical-member" element={<AddTechnicalCommitteeMember />} />
+            <Route path="all-technical-members" element={<AllTechnicalCommitteeMembers />} />
+            <Route path="all-technical-members/:id" element={<UpdateTechnicalMember />} />
+          </Route>
         </Route>
       </Routes>
       </main>
-      <Footer/>
+      {showPublicChrome ? <Footer/> : null}
     </div>
   )
 }

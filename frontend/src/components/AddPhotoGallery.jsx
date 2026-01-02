@@ -82,47 +82,52 @@ const AddPhotoGallery = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl mx-auto">
-        <h2 className="text-3xl font-semibold text-center mb-6">Add New Photo to Gallery</h2>
-
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700">Upload Image</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-            {imageUrl && (
-              <div className="mt-4">
-                <img src={imageUrl} alt="Image Preview" className="max-w-full h-auto rounded-md" />
-              </div>
-            )}
+    <div className="mx-auto w-full max-w-3xl">
+      <div className="admin-card">
+        <div className="admin-card-inner">
+          <div className="mb-6">
+            <h2 className="admin-title">Upload Photo</h2>
+            <p className="admin-muted mt-1">Add an image to the photo gallery.</p>
           </div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700">Tags</label>
-            <input
-              type="text"
-              value={tags}
-              onChange={(e) => setTags(e.target.value)}
-              className="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter tags separated by commas"
-              required
-            />
-          </div>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="admin-label">Upload Image</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="mt-2 block w-full text-sm text-zinc-700 file:mr-3 file:rounded-lg file:border-0 file:bg-zinc-100 file:px-4 file:py-2 file:text-sm file:font-medium file:text-zinc-700 hover:file:bg-zinc-200"
+                required
+              />
+              {imageUrl && (
+                <div className="mt-4">
+                  <img src={imageUrl} alt="Image Preview" className="w-full rounded-xl border border-zinc-200" />
+                </div>
+              )}
+            </div>
 
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600 transition duration-300"
-            disabled={loading}
-          >
-            {loading ? 'Uploading...' : 'Add Photo to Gallery'}
-          </button>
-        </form>
+            <div>
+              <label className="admin-label">Tags</label>
+              <input
+                type="text"
+                value={tags}
+                onChange={(e) => setTags(e.target.value)}
+                className="admin-input"
+                placeholder="Enter tags separated by commas"
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="admin-button-primary w-full"
+              disabled={loading}
+            >
+              {loading ? 'Uploading...' : 'Add Photo to Gallery'}
+            </button>
+          </form>
+        </div>
       </div>
       <ToastContainer position="bottom-center" />
     </div>

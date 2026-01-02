@@ -4,146 +4,148 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AddAdmin = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [image, setImage] = useState(null);
-  const [imageLink, setImageLink] = useState('');
+	const [name, setName] = useState('');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [image, setImage] = useState(null);
+	const [imageLink, setImageLink] = useState('');
 
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+	// Handle form submission
+	const handleSubmit = async (e) => {
+		e.preventDefault();
 
-    try {
-      // First, upload the image to your API
-      const formData = new FormData();
-      formData.append('image', image); // Pass the image as 'image' field
+		try {
+			// First, upload the image to your API
+			const formData = new FormData();
+			formData.append('image', image); // Pass the image as 'image' field
 
-      const imageUploadResponse = await axios.post(`${import.meta.env.VITE_API_URL}/user/image`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+			const imageUploadResponse = await axios.post(`${import.meta.env.VITE_API_URL}/user/image`, formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			});
 
-      const imageUrl = imageUploadResponse.data.result; // Assuming your API returns the image URL in the 'imageUrl' field
+			const imageUrl = imageUploadResponse.data.result;
+			setImageLink(imageUrl);
 
-      setImageLink(imageUrl); // Store the image URL in the state
+			// Now create a new admin with the image URL
+			const newAdminData = {
+				name,
+				email,
+				password,
+				pic: imageUrl,
+			};
 
-      // Now create a new admin with the image URL
-      const newAdminData = {
-        name,
-        email,
-        password,
-        pic: imageUrl, // Pass the image URL to create the admin
-      };
+			const createAdminResponse = await axios.post(
+				`${import.meta.env.VITE_API_URL}/user/newuser`,
+				newAdminData,
+				{ headers: { token: localStorage.getItem('token') } }
+			);
+			console.log(createAdminResponse);
+			if (createAdminResponse.status === 200) {
+				toast.success(createAdminResponse.data.msg);
+				// Reset form after successful admin creation
+				setName('');
+				setEmail('');
+				setPassword('');
+				setImage(null);
+				setImageLink('');
+			}
+		} catch (error) {
+			console.error('Error:', error);
+			toast.error('Something went wrong! Please try again.');
+		}
+	};
 
-      const createAdminResponse = await axios.post(`${import.meta.env.VITE_API_URL}/user/newuser`, newAdminData,{headers:{token:localStorage.getItem('token')}});
-      console.log(createAdminResponse);
-      if (createAdminResponse.status === 200) {
-        toast.success(createAdminResponse.data.msg);
-        // Reset form after successful admin creation
-        setName('');
-        setEmail('');
-        setPassword('');
-        setImage(null);
-        setImageLink('');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      toast.error('Something went wrong! Please try again.');
-    }
-  };
+	// Handle image selection
+	const handleImageChange = (e) => {
+		const file = e.target.files[0];
+		if (file) {
+			setImage(file);
+			const imageUrl = URL.createObjectURL(file);
+			setImageLink(imageUrl);
+		}
+	};
 
-  // Handle image selection
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImage(file);
-      const imageUrl = URL.createObjectURL(file);
-      setImageLink(imageUrl);
-    }
-  };
+	return (
+		<div className="mx-auto w-full max-w-2xl">
+			<div className="admin-card">
+				<div className="admin-card-inner">
+					<div className="mb-6">
+						<h2 className="admin-title">Add Admin</h2>
+						<p className="admin-muted mt-1">Create a new admin account.</p>
+					</div>
 
-  return (
-    <div className="add-admin-container flex justify-center items-center p-8">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
-        <h2 className="text-2xl font-semibold text-center mb-6">Add New Admin</h2>
+					<form onSubmit={handleSubmit} className="space-y-4">
+						<div>
+							<label className="admin-label">Name</label>
+							<input
+								type="text"
+								className="admin-input"
+								value={name}
+								onChange={(e) => setName(e.target.value)}
+								required
+							/>
+						</div>
 
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700">Name</label>
-            <input
-              type="text"
-              className="w-full px-4 py-2 mt-2 border rounded-lg"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
+						<div>
+							<label className="admin-label">Email</label>
+							<input
+								type="email"
+								className="admin-input"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+								required
+							/>
+						</div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700">Email</label>
-            <input
-              type="email"
-              className="w-full px-4 py-2 mt-2 border rounded-lg"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
+						<div>
+							<label className="admin-label">Password</label>
+							<input
+								type="password"
+								className="admin-input"
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+								required
+							/>
+						</div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700">Password</label>
-            <input
-              type="password"
-              className="w-full px-4 py-2 mt-2 border rounded-lg"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
+						<div>
+							<label className="admin-label">Profile Image</label>
+							<input
+								type="file"
+								accept="image/*"
+								onChange={handleImageChange}
+								className="mt-2 block w-full text-sm text-zinc-700 file:mr-3 file:rounded-lg file:border-0 file:bg-zinc-100 file:px-4 file:py-2 file:text-sm file:font-medium file:text-zinc-700 hover:file:bg-zinc-200"
+								required
+							/>
+						</div>
 
-          <div className="mb-4">
-            <label className="block text-gray-700">Profile Image</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="w-full px-4 py-2 mt-2 border rounded-lg"
-              required
-            />
-          </div>
-          {imageLink && (
-            <div className="mb-4">
-              <label className="block text-gray-700">Image Preview</label>
-              <img
-                src={imageLink}
-                alt="Image Preview"
-                className="w-full h-auto mt-2 border rounded-lg"
-                style={{ objectFit: 'cover', maxHeight: '200px' }}
-              />
-            </div>
-          )}
-          <div className="mb-4">
-            <label className="block text-gray-700">Image URL (Result)</label>
-            <input
-              type="text"
-              className="w-full px-4 py-2 mt-2 border rounded-lg"
-              value={imageLink}
-              readOnly
-            />
-          </div>
+						{imageLink && (
+							<div>
+								<div className="admin-label">Preview</div>
+								<img
+									src={imageLink}
+									alt="Image Preview"
+									className="mt-2 w-full rounded-xl border border-zinc-200"
+									style={{ objectFit: 'cover', maxHeight: '200px' }}
+								/>
+							</div>
+						)}
 
-          <button
-            type="submit"
-            className="bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600 transition w-full"
-          >
-            Create Admin
-          </button>
-        </form>
-      </div>
-    </div>
-  );
+						<div>
+							<label className="admin-label">Image URL (Result)</label>
+							<input type="text" className="admin-input" value={imageLink} readOnly />
+						</div>
+
+						<button type="submit" className="admin-button-primary w-full">
+							Create Admin
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default AddAdmin;

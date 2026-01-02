@@ -1,55 +1,98 @@
 import React, { useEffect, useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import AdminLoader from './AdminLoader';
 
 const AllMessages = () => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     const fetchMessages = async () => {
+      setLoading(true);
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/contact`); // Update this if your endpoint differs
+        if (!token) {
+          setMessages([]);
+          toast.error('Please log in first.');
+          return;
+        }
+
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/contact`, {
+          headers: {
+            token,
+          },
+        });
+
+        if (!res.ok) {
+          let errorPayload = null;
+          try {
+            errorPayload = await res.json();
+          } catch {
+            // ignore
+          }
+          const msg =
+            errorPayload?.error ||
+            errorPayload?.message ||
+            `Failed to fetch messages (HTTP ${res.status}).`;
+          toast.error(msg);
+          setMessages([]);
+          return;
+        }
+
         const data = await res.json();
-        setMessages(data);
-        setLoading(false);
+        setMessages(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error('Error fetching messages:', error);
+        toast.error('Failed to fetch messages. Please try again.');
+        setMessages([]);
+      } finally {
         setLoading(false);
       }
     };
 
     fetchMessages();
-  }, []);
+  }, [token]);
 
   return (
-    <div className="px-8 py-16 bg-gray-100 min-h-screen">
-      <h2 className="text-3xl font-bold mb-6 text-center text-blue-700 border-b-4 border-blue-500 pb-2">
-        All Contact Messages
-      </h2>
+    <div className="space-y-6">
+      <div>
+        <h2 className="admin-title">Contact Messages</h2>
+        <p className="admin-muted mt-1">Messages submitted from the contact form.</p>
+      </div>
 
       {loading ? (
-        <p className="text-center text-gray-700 text-lg">Loading...</p>
+        <div className="admin-card">
+          <div className="admin-card-inner">
+            <AdminLoader label="Loading messages..." />
+          </div>
+        </div>
       ) : messages.length === 0 ? (
-        <p className="text-center text-gray-700 text-lg">No messages found.</p>
+        <p className="text-center text-zinc-600 text-sm">No messages found.</p>
       ) : (
         <div className="space-y-6">
           {messages.map((msg) => (
             <div
               key={msg._id}
-              className="bg-white rounded-xl shadow-md p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+              className="admin-card"
             >
-              <div>
-                <h3 className="text-xl font-semibold text-gray-800">{msg.name}</h3>
-                <p className="text-gray-600 text-sm">{msg.email} | {msg.phone}</p>
-                <p className="mt-2 text-gray-700">{msg.message}</p>
+              <div className="admin-card-inner flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                <div className="min-w-0">
+                  <h3 className="text-base font-semibold text-zinc-900">{msg.name}</h3>
+                  <p className="text-zinc-600 text-sm">{msg.email} | {msg.phone}</p>
+                  <p className="mt-2 text-zinc-800 text-sm whitespace-pre-wrap">{msg.message}</p>
+                </div>
+                <span className="text-xs text-zinc-500 mt-1 md:mt-0 shrink-0">
+                  {new Date(msg.createdAt).toLocaleString()}
+                </span>
               </div>
-              <span className="text-sm text-gray-500 mt-2 md:mt-0">
-                {new Date(msg.createdAt).toLocaleString()}
-              </span>
             </div>
           ))}
           
         </div>
       )}
+
+      <ToastContainer position="bottom-center" />
     </div>
   );
 };

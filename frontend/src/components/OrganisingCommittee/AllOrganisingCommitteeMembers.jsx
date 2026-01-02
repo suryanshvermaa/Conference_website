@@ -3,14 +3,17 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {useNavigate} from "react-router-dom";
+import AdminLoader from '../AdminLoader';
 const AllOrganisingCommitteeMembers = () => {
   const [organisingMembers, setOrganisingMembers] = useState([]);
   const [priorityValues, setPriorityValues] = useState({});
+  const [loading, setLoading] = useState(true);
   const token = localStorage.getItem('token');
   const navigate=useNavigate();
 
   useEffect(() => {
     const fetchMembers = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_API_URL}/organisingcommitee/getAllMembers`,
@@ -24,6 +27,8 @@ const AllOrganisingCommitteeMembers = () => {
       } catch (error) {
         console.error('Error fetching members:', error);
         toast.error('Failed to fetch members. Please try again.');
+      } finally {
+        setLoading(false);
       }
     };
     fetchMembers();
@@ -107,76 +112,89 @@ const AllOrganisingCommitteeMembers = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-        <h2 className="text-3xl font-semibold text-center mb-8">All Organising Committee Members</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {organisingMembers.map((member) => (
-          <div key={member._id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
-            <div className="w-full h-48 bg-gray-200 flex-shrink-0">
-              <img
-                src={member.imageUrl}
-                alt={member.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
+    <div className="space-y-6">
+      <div>
+        <h2 className="admin-title">Organising Committee</h2>
+        <p className="admin-muted mt-1">Manage organising committee members and priority.</p>
+      </div>
+      {loading ? (
+        <div className="admin-card">
+          <div className="admin-card-inner">
+            <AdminLoader label="Loading members..." />
+          </div>
+        </div>
+      ) : organisingMembers.length === 0 ? (
+        <p className="text-center text-zinc-600 text-sm">No members found.</p>
+      ) : (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {organisingMembers.map((member) => (
+            <div key={member._id} className="admin-card overflow-hidden flex flex-col">
+              <div className="w-full h-52 bg-zinc-100 flex-shrink-0">
+                <img
+                  src={member.imageUrl}
+                  alt={member.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
-            <div className="p-4 flex flex-col flex-grow">
-              <h3 className="font-bold text-lg mb-2 text-gray-800 line-clamp-2">{member.name}</h3>
-              <p className="text-gray-600 mb-2 text-sm line-clamp-2">
-                {member.specialization.join(', ')}
-              </p>
-              <p className="text-gray-700 mb-3 font-medium text-sm line-clamp-2">
-                {member.college}
-              </p>
-              
-              {/* Priority Section */}
-              <div className="mb-3 p-2 bg-gray-50 rounded-lg flex-shrink-0">
-                <div className="flex justify-between items-center mb-1">
-                  <label className="block text-xs font-medium text-gray-700">
-                    Set Priority
-                  </label>
-                  {member.priority && (
-                    <span className="text-xs text-blue-600 font-medium">
-                      Current: {member.priority}
-                    </span>
-                  )}
+              <div className="p-4 flex flex-col flex-grow">
+                <h3 className="font-semibold text-base mb-2 text-zinc-900 line-clamp-2">{member.name}</h3>
+                <p className="text-zinc-600 mb-2 text-sm line-clamp-2">
+                  {member.specialization.join(', ')}
+                </p>
+                <p className="text-zinc-700 mb-3 font-medium text-sm line-clamp-2">
+                  {member.college}
+                </p>
+
+                {/* Priority Section */}
+                <div className="mb-3 p-3 rounded-lg border border-zinc-200 bg-zinc-50 flex-shrink-0">
+                  <div className="flex justify-between items-center mb-1">
+                    <label className="block text-xs font-medium text-zinc-700">
+                      Set Priority
+                    </label>
+                    {member.priority && (
+                      <span className="text-xs text-indigo-700 font-medium">
+                        Current: {member.priority}
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex gap-2">
+                    <input
+                      type="number"
+                      placeholder="Priority"
+                      value={priorityValues[member._id] || ''}
+                      onChange={(e) => handlePriorityInputChange(member._id, e.target.value)}
+                      className="admin-input py-1.5 text-xs"
+                    />
+                    <button
+                      onClick={() => handleSetPriority(member._id)}
+                      className="admin-button-primary px-3 py-1.5 text-xs"
+                    >
+                      Set
+                    </button>
+                  </div>
                 </div>
-                <div className="flex gap-2">
-                  <input
-                    type="number"
-                    placeholder="Priority"
-                    value={priorityValues[member._id] || ''}
-                    onChange={(e) => handlePriorityInputChange(member._id, e.target.value)}
-                    className="flex-1 px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent"
-                  />
+
+                {/* Action Buttons */}
+                <div className="flex gap-2 mt-auto">
                   <button
-                    onClick={() => handleSetPriority(member._id)}
-                    className="bg-blue-500 text-white py-1 px-2 text-xs rounded hover:bg-blue-600 transition-colors duration-200 font-medium"
+                    onClick={() => navigate(`/admin/all-organising-members/${member._id}`)}
+                    className="admin-button-primary flex-1 py-2 text-xs"
                   >
-                    Set
+                    Update
+                  </button>
+                  <button
+                    onClick={() => handleDelete(member._id)}
+                    className="admin-button-danger flex-1 py-2 text-xs"
+                  >
+                    Delete
                   </button>
                 </div>
               </div>
-
-              {/* Action Buttons */}
-              <div className="flex gap-2 mt-auto">
-                <button
-                  onClick={() => navigate(`/admin/all-organising-members/${member._id}`)}
-                  className="flex-1 bg-green-500 text-white py-2 px-2 text-xs rounded hover:bg-green-600 transition-colors duration-200 font-medium"
-                >
-                  Update
-                </button>
-                <button
-                  onClick={() => handleDelete(member._id)}
-                  className="flex-1 bg-red-500 text-white py-2 px-2 text-xs rounded hover:bg-red-600 transition-colors duration-200 font-medium"
-                >
-                  Delete
-                </button>
-              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
       <ToastContainer position="bottom-center" />
     </div>
   );

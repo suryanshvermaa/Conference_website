@@ -1,10 +1,85 @@
-# Conference Website
+# ICNARI 2026 Conference Website
 
-A comprehensive full-stack web application for managing academic conferences, built with modern technologies including React frontend, Node.js backend, and MongoDB database. This platform provides complete conference management capabilities from speaker registration to paper submissions and attendee engagement.
+This website is for the ICNARI 2026 conference hosted by NIT Patna (Bihta campus) and managed by NASL. It provides public pages (Authors, Programs, Committees, Gallery, Sponsorship, Contact) and an admin dashboard for content management.
 
-## 🚀 Live Deployment
+Live: https://icnari26.nasl.in
 
-- **Production Site**: [https://icnari26.nasl.in](https://icnari26.nasl.in)
+## Stack
+- Backend: Node.js, Express, MongoDB (Mongoose), JWT, Multer, Cloudinary
+- Frontend: React + Vite, React Router, Chakra UI, Tailwind, Axios, Toastify, Swiper
+
+## Quick Start
+1) MongoDB (Docker):
+```bash
+docker-compose up -d
+```
+2) Backend:
+```bash
+cd backend
+pnpm install
+# backend/.env
+# PORT=3000
+# URI=mongodb://root:example@localhost:27017/conference_db?authSource=admin
+# secret=<jwt_secret>
+# cloud_name=<cloudinary_cloud>
+# api_key=<cloudinary_key>
+# api_secret=<cloudinary_secret>
+pnpm run dev
+```
+3) Frontend:
+```bash
+cd frontend
+pnpm install
+# frontend/.env
+# VITE_API_URL=http://localhost:3000
+pnpm run dev
+```
+
+## Authentication
+- Use header `token: <JWT>` for protected endpoints (401 if missing/invalid).
+
+## API Overview
+- `/user` — login, create admin (auth), image upload/delete
+- `/speaker` — create/update/delete/list, set priority (auth for write)
+- `/papers` — notices add/delete/list (auth for write)
+- `/recentupdate` — add/delete/list (auth for write)
+- `/contact` — submit (public), list (auth)
+- `/organisingcommitee` — members CRUD + priority
+- `/internationalcommitee` — members CRUD
+- `/technicalcommitee` — members CRUD
+
+## CORS
+- Allowed origins: `https://icnari26.nasl.in`, `https://conference-website-three.vercel.app`, `http://localhost:5173`
+
+## Docker
+- MongoDB `mongo:8.0` on `27017`, volume `./data`; connect via `mongodb://root:example@localhost:27017/<db>?authSource=admin`.
+
+## Deployment
+- Frontend: Vercel (see `vercel.json`)
+- Backend: Node.js server with envs above
+
+## Quick API (cURL)
+Login (get JWT):
+```bash
+curl -X POST http://localhost:3000/user/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"admin@example.com","password":"your_password"}'
+```
+Upload photo (field `image`, auth):
+```bash
+curl -X POST http://localhost:3000/photogallery/upload \
+  -H "token: YOUR_JWT_TOKEN" \
+  -F image=@/path/to/image.jpg
+```
+List speakers:
+```bash
+curl http://localhost:3000/speaker/all
+```
+Delete photo by id (auth):
+```bash
+curl -X DELETE http://localhost:3000/photogallery/delete/PHOTO_ID \
+  -H "token: YOUR_JWT_TOKEN"
+```
 
 ## 📁 Project Structure
 
@@ -77,7 +152,6 @@ Conference_website/
 
 ## ✨ Key Features
 
-### 🎯 Core Functionality
 - **Complete Conference Management**: Full-featured platform for academic conferences
 - **Multi-Committee Support**: Organizing, Technical, and International Advisory committees
 - **Speaker & Session Management**: Comprehensive speaker profiles and session scheduling
@@ -145,7 +219,7 @@ The fastest way to get the project running locally:
 ```bash
 # Clone the repository
 git clone https://github.com/suryanshvermaa/Conference_website.git
-cd Conference_website
+└── README.md                        # Project documentation
 
 # Start MongoDB with Docker
 docker-compose up -d
@@ -153,11 +227,6 @@ docker-compose up -d
 # The MongoDB container will be available at localhost:27017
 # Default credentials: root/example (for development only)
 ```
-
-### 🔧 Backend Setup
-
-1. **Navigate to backend directory**:
-```bash
 cd backend
 ```
 
@@ -187,42 +256,14 @@ cloud_name=your_cloudinary_cloud_name
 api_key=your_cloudinary_api_key
 api_secret=your_cloudinary_api_secret
 ```
-
 4. **Start the development server**:
 ```bash
-# Development mode with auto-reload
-pnpm run dev
-
-# Or production mode
-pnpm start
 ```
 
-The backend API will be available at `http://localhost:3000`
-
-### 🎨 Frontend Setup
-
-1. **Navigate to frontend directory**:
-```bash
-cd frontend
-```
-
-2. **Install dependencies**:
-```bash
-# Using PNPM (recommended)
-pnpm install
-
-# Or using npm
-npm install
-```
-
-3. **Environment Configuration**:
 Create a `.env` file in the frontend directory:
 ```env
-# API Configuration
 VITE_API_URL=http://localhost:3000
 ```
-
-4. **Start the development server**:
 ```bash
 # Development mode with hot reload
 pnpm run dev
@@ -335,6 +376,116 @@ pnpm run build
 # Preview production build
 pnpm run preview
 ```
+
+## 🔗 API Reference
+
+Base URL (development): `http://localhost:3000`
+
+Authentication
+- Header: `token: <JWT>` is required for protected endpoints
+- Unauthorized responses return `401` with a JSON message
+
+User
+- POST `/user/image` — Upload profile image (field: `image`)
+- DELETE `/user/image` — Delete profile image (auth)
+- POST `/user/newuser` — Create new admin user (auth)
+- POST `/user/login` — Login, returns JWT
+- GET `/user/Allusers` — List all users (auth)
+
+Photo Gallery
+- POST `/photogallery/upload` — Upload image (auth, field: `image`)
+- DELETE `/photogallery/delete/:id` — Delete image by id (auth)
+- GET `/photogallery/all` — List all images
+
+Speakers
+- POST `/speaker/create` — Create speaker (auth)
+- DELETE `/speaker/delete/:id` — Delete speaker (auth)
+- GET `/speaker/all` — List all speakers
+- GET `/speaker/get/:id` — Get speaker by id (auth)
+- PUT `/speaker/update/:id` — Update speaker (auth)
+- PATCH `/speaker/setPriority/:id` — Set speaker priority (auth)
+
+Papers (Notices)
+- POST `/papers/add` — Add a notice (auth)
+- DELETE `/papers/delete/:id` — Delete notice by id (auth)
+- GET `/papers/all` — List all notices
+
+Recent Updates
+- POST `/recentupdate/add` — Add an update (auth)
+- GET `/recentupdate/all` — List updates
+- DELETE `/recentupdate/delete/:id` — Delete update (auth)
+
+Contact
+- POST `/contact/` — Submit contact message
+- GET `/contact/` — List contact messages (auth)
+
+Organising Committee
+- POST `/organisingcommitee/createMember` — Create member (auth)
+- GET `/organisingcommitee/getAllMembers` — List members
+- DELETE `/organisingcommitee/deleteMember/:id` — Delete member (auth)
+- PUT `/organisingcommitee/updateMember/:id` — Update member (auth)
+- GET `/organisingcommitee/getMember/:id` — Get member
+- PATCH `/organisingcommitee/setPriority/:id` — Set member priority (auth)
+
+International Advisory Committee
+- POST `/internationalcommitee/createMember` — Create member (auth)
+- GET `/internationalcommitee/getAllMembers` — List members
+- DELETE `/internationalcommitee/deleteMember/:id` — Delete member (auth)
+- PUT `/internationalcommitee/updateMember/:id` — Update member (auth)
+- GET `/internationalcommitee/getMember/:id` — Get member
+
+Technical Programme Committee
+- POST `/technicalcommitee/createMember` — Create member (auth)
+- GET `/technicalcommitee/getAllMembers` — List members
+- DELETE `/technicalcommitee/deleteMember/:id` — Delete member (auth)
+- PUT `/technicalcommitee/updateMember/:id` — Update member (auth)
+- GET `/technicalcommitee/getMember/:id` — Get member
+
+Notes
+- File uploads use Multer with disk storage; controllers upload to Cloudinary.
+- Protected endpoints require a valid JWT in the `token` header.
+
+## 🌐 CORS Configuration
+
+Allowed origins (backend `cors`):
+- `https://icnari26.nasl.in`
+- `https://conference-website-three.vercel.app`
+- `http://localhost:5173`
+
+## 🐳 Docker Compose (MongoDB)
+
+This repository includes a ready-to-run MongoDB service:
+
+```yaml
+version: '3.8'
+services:
+  db:
+    image: mongo:8.0
+    container_name: mongo_container
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+```
+
+- Data persists in the local `./data` directory.
+- Connect using `mongodb://root:example@localhost:27017/<db>?authSource=admin`.
+
+## 🔧 Environment Variables Summary
+
+Backend (`backend/.env`)
+- `PORT` — API port, e.g., `3000`
+- `URI` — MongoDB connection string
+- `secret` — JWT secret
+- `cloud_name` — Cloudinary cloud name
+- `api_key` — Cloudinary API key
+- `api_secret` — Cloudinary API secret
+
+Frontend (`frontend/.env`)
+- `VITE_API_URL` — Backend base URL, e.g., `http://localhost:3000`
 
 ## 📁 File Structure Deep Dive
 

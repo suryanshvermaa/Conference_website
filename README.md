@@ -1,5 +1,8 @@
 # ICNARI 2026 Conference Website
 
+## New to this codebase?
+Start with the beginner-friendly guide: [docs/DEVELOPER_GUIDE.md](docs/DEVELOPER_GUIDE.md)
+
 This website is for the ICNARI 2026 conference hosted by NIT Patna (Bihta campus) and managed by NASL. It provides public pages (Authors, Programs, Committees, Gallery, Sponsorship, Contact) and an admin dashboard for content management.
 
 Live: https://icnari26.nasl.in

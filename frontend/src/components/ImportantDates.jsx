@@ -11,7 +11,7 @@ const dates = [
     },
     {
       title: "Notification of Acceptance",
-      date: "December 29, 2025",
+      date: "January 10, 2026",
       description: "Authors will receive acceptance or rejection notifications.",
     },
     {

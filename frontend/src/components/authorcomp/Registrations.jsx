@@ -78,12 +78,6 @@ const Registrations = () => {
           <h3 className="text-2xl font-semibold mb-3 text-black">Account Details</h3>
           <div className="space-y-4 text-lg text-black">
             <div>
-              <strong className="font-semibold">Bank Name:</strong> Indian Bank
-            </div>
-            <div>
-              <strong className="font-semibold">Branch:</strong> NIT Patna Campus
-            </div>
-            <div>
               <strong className="font-semibold">Account Name:</strong> NIT Patna CF Account
             </div>
             <div>
@@ -93,7 +87,19 @@ const Registrations = () => {
               <strong className="font-semibold">IFSC Code:</strong> IDIB000B810
             </div>
             <div>
+              <strong className="font-semibold">Bank Name:</strong> Indian Bank
+            </div>
+            <div>
+              <strong className="font-semibold">Branch:</strong> NIT Patna Campus
+            </div>
+            <div>
+              <strong className="font-semibold">Complete Branch Address:</strong> Indian Bank, NIT Patna Campus, Ashok Rajpath, Patna, Bihar, PIN-800005
+            </div>
+            <div>
               <strong className="font-semibold">MICR Code:</strong> 800019027
+            </div>
+            <div>
+              <strong className="font-semibold">Account Type:</strong> Savings 
             </div>
           </div>
         </div>

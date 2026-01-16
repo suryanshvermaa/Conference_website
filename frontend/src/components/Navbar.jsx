@@ -152,12 +152,12 @@ export default function Navbar(fetch, setfetch) {
                             {openNestedDropdown === 'technical-session' ? <HiChevronUp /> : <HiChevronDown />}
                           </div>
                           {openNestedDropdown === 'technical-session' && (
-                            <div className="ml-4 mt-1 flex flex-col space-y-1">
-                              {['EVs and Emerging Technologies', 'Photovoltaic Cell', 'Renewable Energy'].map((ses, j) => (
+                            <div className="ml-4 mt-1 flex flex-col space-y-1 max-h-64 overflow-y-auto">
+                              {technicalSessions.map((ses, j) => (
                                 <Link
                                   key={j}
                                   to={`/${key}/${opt.toLowerCase().replace(/\s+/g, "-")}/${ses.toLowerCase().replace(/\s+/g, "-")}`}
-                                  className="hover:text-gray-500 py-1"
+                                  className="hover:text-gray-500 py-1 whitespace-normal break-words"
                                   onClick={() => setIsOpen(false)}
                                 >
                                   {ses}

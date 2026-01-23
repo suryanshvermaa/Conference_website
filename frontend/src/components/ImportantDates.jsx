@@ -68,7 +68,7 @@ const EventTimeline = () => {
                      </>:
                       <>
                        <td className="p-2 border-b border-blue-200 font-semibold">{event.title}</td>
-                      <td className="p-2 border-b border-blue-200 text-blue-600 font-bold">{event.date}</td>
+                      <td className="p-2 border-b border-blue-200 text-gray-700 font-bold">{event.date}</td>
                       <td className="p-2 border-b border-blue-200 text-gray-700">{event.description}</td></>
                 }
               </tr>

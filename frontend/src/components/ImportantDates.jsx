@@ -59,18 +59,9 @@ const EventTimeline = () => {
           <tbody>
             {dates.map((event, index) => (
               <tr key={index} className="hover:bg-blue-100">
-                {
-                  event.title === "Paper Submission Deadline" ?
-                     <>
-                     <td className="p-2 border-b border-blue-200 font-extrabold underline">{event.title}</td>
-                      <td className="p-2 border-b border-blue-200 text-gray-800 font-extrabold underline">{event.date}</td>
-                      <td className="p-2 border-b border-blue-200 text-gray-700 font-extrabold underline">{event.description}</td>
-                     </>:
-                      <>
-                       <td className="p-2 border-b border-blue-200 font-semibold">{event.title}</td>
-                      <td className="p-2 border-b border-blue-200 text-gray-700 font-bold">{event.date}</td>
-                      <td className="p-2 border-b border-blue-200 text-gray-700">{event.description}</td></>
-                }
+                <td className="p-2 border-b border-blue-200 font-semibold">{event.title}</td>
+                <td className="p-2 border-b border-blue-200 text-green-800 font-bold">{event.date}</td>
+                <td className="p-2 border-b border-blue-200 text-gray-700">{event.description}</td>
               </tr>
             ))}
           </tbody>

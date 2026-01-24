@@ -11,22 +11,22 @@ const dates = [
     },
     {
       title: "Notification of Acceptance",
-      date: "January 10, 2026",
+      date: "25 January, 2026",
       description: "Authors will receive acceptance or rejection notifications.",
     },
     {
       title: "Early Bird Registration",
-      date: "January 25, 2026",
+      date: "7 February, 2026",
       description: "Deadline for early bird registration for the conference.",
     },
     {
       title: "Camera-Ready Submission",
-      date: "February 16, 2026",
+      date: "15 February, 2026",
       description: "Final versions of accepted papers must be submitted.",
     },
     {
       title: "Last Date of Registration",
-      date: "February 23, 2026",
+      date: "21 February, 2026",
       description: "Final date for all participants to register for the conference.",
     },
     {

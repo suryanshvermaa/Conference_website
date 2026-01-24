@@ -58,10 +58,10 @@ const EventTimeline = () => {
           </thead>
           <tbody>
             {dates.map((event, index) => (
-              <tr key={index} className="hover:bg-blue-100">
-                <td className="p-2 border-b border-blue-200 font-semibold">{event.title}</td>
-                <td className="p-2 border-b border-blue-200 text-green-800 font-bold">{event.date}</td>
-                <td className="p-2 border-b border-blue-200 text-gray-700">{event.description}</td>
+              <tr key={index} className="hover:bg-blue-100 transition-colors">
+                <td className={`p-2 border-b border-gray-400 ${index >= 2 ? 'text-blue-900 font-bold' : 'text-gray-800 font-medium'}`}>{event.title}</td>
+                <td className={`p-2 border-b border-gray-400 ${index >= 2 ? 'text-blue-900 font-bold' : 'text-gray-800 font-medium'}`}>{event.date}</td>
+                <td className={`p-2 border-b border-gray-400 ${index >= 2 ? 'text-gray-800 font-semibold' : 'text-gray-600'}`}>{event.description}</td>
               </tr>
             ))}
           </tbody>

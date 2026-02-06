@@ -21,11 +21,15 @@ export default function Footer() {
 
         {/* Middle Section: Contact Info */}
         <div className="flex flex-col text-center md:text-left">
-          <div className="flex items-center justify-center md:justify-start mt-2">
-            <FaPhone className="text-green-400 mr-2" />
-            <span className="text-gray-300">+91 7840809129</span>
+          <div className="flex items-start justify-center md:justify-start mt-2">
+            <FaPhone className="text-green-400 mr-2 mt-1" />
+            <div className="flex flex-col text-gray-300">
+              <span>+91 9304640178</span>
+              <span>+91 8105093004</span>
+              <span>+91 7840809129</span>
+            </div>
           </div>
-          <div className="flex items-center justify-center md:justify-start mt-1">
+          <div className="flex items-center justify-center md:justify-start mt-3">
             <FaEnvelope className="text-red-400 mr-2" />
             <span className="text-gray-300">nasl@nitp.ac.in</span>
           </div>

@@ -37,7 +37,7 @@ export default function Navbar(fetch, setfetch) {
   }, [setfetch, fetch]);
 
   const menuSections = [
-    { label: "About", key: "about", options: ["About the Conference", "About NIT Patna", "Organising Committee", "International Advisory Committee", "Technical Programme Committee", "Venue and Travels", "Accomodations", "About NIT Patna (Bihta Campus)", "PhotoGallery"] },
+    { label: "About", key: "about", options: ["About the Conference", "About NIT Patna", "Organising Committee", "International Advisory Committee", "Technical Programme Committee", "Industry Programme Committee", "Venue and Travels", "Accomodations", "About NIT Patna (Bihta Campus)", "PhotoGallery"] },
     { label: "Authors", key: "authors", options: ["Call for Papers", "Guidelines to Authors", "Paper Submissions", "Registrations", "Best Student Paper Award", "Financial support", "CMT Acknowledgement", "Paper Publication"] },
     { label: "Programs", key: "programs", options: ["Speakers", "Technical Session", "Tours", "Cultural Event"] },
     { label: "Sponsors", key: "sponsors", options: ["Become a Sponsor", "Benefits of Sponsorship"] },

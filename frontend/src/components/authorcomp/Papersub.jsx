@@ -12,7 +12,7 @@ const Papersub = () => {
           <li><strong className="font-semibold">Paper Submission Deadline:</strong><span className='underline bg-amber-200'>December 18, 2025 (extended)</span></li>
           <li><strong className="font-semibold">Notification Acceptance:</strong> 25 January, 2026</li>
           <li><strong className="font-semibold">Date of Conference:</strong>March 6th - 8th, 2026</li>
-          <li><strong className="font-semibold">Early Bird Registration:</strong>7 February, 2026</li>
+          <li><strong className="font-semibold">Early Bird Registration:</strong>15 February, 2026</li>
           <li><strong className="font-semibold">Camera-Ready Submission:</strong>15 February, 2026</li>
           <li>
             <strong className="font-semibold">Submission link:</strong> 

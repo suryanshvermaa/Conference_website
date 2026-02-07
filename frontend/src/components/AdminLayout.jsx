@@ -44,6 +44,8 @@ const AdminLayout = ({ children, setfetch }) => {
         { to: "/admin/all-organising-members", label: "All Org Members", icon: UsersRound },
         { to: "/admin/add-technical-member", label: "Add Tech Member", icon: Wrench },
         { to: "/admin/all-technical-members", label: "All Tech Members", icon: Wrench },
+        { to: "/admin/add-industry-programme-member", label: "Add Industry Member", icon: Wrench },
+        { to: "/admin/all-industry-programme-members", label: "All Industry Members", icon: Wrench },
         { to: "/admin/add-international-member", label: "Add Intl Member", icon: Globe },
         { to: "/admin/all-international-members", label: "All Intl Members", icon: Globe },
       ],

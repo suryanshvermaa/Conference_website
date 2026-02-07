@@ -8,6 +8,7 @@ const contactRouter = require('./contactroute');
 const organisingCommitteeRouter = require('./organisingcommitteeRoutes');
 const internationalCommitteeRouter = require('./internationalRoutes');
 const technicalCommitteeRouter = require('./technicalRoutes.js');
+const industryProgrammeRouter=require("./industryProgrammeCommiteeRoutes.js");
 
 const router=Router();
 
@@ -21,4 +22,5 @@ router
 .use("/organisingcommitee",organisingCommitteeRouter)
 .use("/internationalcommitee",internationalCommitteeRouter)
 .use("/technicalcommitee",technicalCommitteeRouter)
+.use("/industryprogramme",industryProgrammeRouter)
 module.exports=router;

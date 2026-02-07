@@ -49,6 +49,7 @@ import UpdateMember from "./components/OrganisingCommittee/UpdateMember"
 import UpdateSpeaker from "./components/UpdateSpeaker"
 import CMTAcknowledgement from "./components/authorcomp/CMTAcknowledgement"
 import TechnicalProgrammeCommittee from "./components/aboutcomp/TechnicalProgrammeCommittee"
+import IndustryProgrammeCommittee from "./components/aboutcomp/IndustryProgrammeCommittee"
 import InternationalAdvisoryCommittee from "./components/aboutcomp/InternationalAdvisoryCommittee"
 import InternationalMember from "./components/InternationalCommittee/AddMember"
 import AllInternationalAdvisoryCommitteeMembers from "./components/InternationalCommittee/AllMembers"
@@ -56,6 +57,9 @@ import UpdateInternationalMember from "./components/InternationalCommittee/Updat
 import AddTechnicalCommitteeMember from "./components/TechnicalCommittee/AddMember"
 import UpdateTechnicalMember from "./components/TechnicalCommittee/UpdateMember"
 import AllTechnicalCommitteeMembers from "./components/TechnicalCommittee/AllMembers"
+import AddIndustryProgrammeCommitteeMember from "./components/IndustryProgrammeCommittee/AddMember"
+import UpdateIndustryProgrammeMember from "./components/IndustryProgrammeCommittee/UpdateMember"
+import AllIndustryProgrammeCommitteeMembers from "./components/IndustryProgrammeCommittee/AllMembers"
 import Publication from "./components/authorcomp/Publication"
 
 function App() {
@@ -81,6 +85,7 @@ function App() {
         <Route path="/about/about-nit-patna-(bihta-campus)" element={<Abounithistory/>} />
         <Route path="/about/photogallery" element={<AllImages />} />
         <Route path="/about/technical-programme-committee" element={<TechnicalProgrammeCommittee />} />
+        <Route path="/about/industry-programme-committee" element={<IndustryProgrammeCommittee />} />
         <Route path="/about/international-advisory-committee" element={<InternationalAdvisoryCommittee />} />
 
         {/* Authors routes */}
@@ -133,6 +138,9 @@ function App() {
             <Route path="add-technical-member" element={<AddTechnicalCommitteeMember />} />
             <Route path="all-technical-members" element={<AllTechnicalCommitteeMembers />} />
             <Route path="all-technical-members/:id" element={<UpdateTechnicalMember />} />
+            <Route path="add-industry-programme-member" element={<AddIndustryProgrammeCommitteeMember />} />
+            <Route path="all-industry-programme-members" element={<AllIndustryProgrammeCommitteeMembers />} />
+            <Route path="all-industry-programme-members/:id" element={<UpdateIndustryProgrammeMember />} />
           </Route>
         </Route>
       </Routes>

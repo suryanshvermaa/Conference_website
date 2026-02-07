@@ -16,7 +16,7 @@ const dates = [
     },
     {
       title: "Early Bird Registration",
-      date: "7 February, 2026",
+      date: "15 February, 2026",
       description: "Deadline for early bird registration for the conference.",
     },
     {

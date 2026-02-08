@@ -21,7 +21,7 @@ const dates = [
     },
     {
       title: "Camera-Ready Submission",
-      date: "15 February, 2026",
+      date: "20 February, 2026",
       description: "Final versions of accepted papers must be submitted.",
     },
     {

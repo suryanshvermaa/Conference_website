@@ -70,9 +70,7 @@ const Registrations = () => {
               <li>Entry to all the sessions of the conference and workshop</li>
               <li>Paper presentation/publication</li>
               <li>Certificate</li>
-              <li>Registration Kit</li>
-              <li>High-Tea & Lunch (6th-8th March 2026)</li>
-              <li>Gala dinner (7th March 2026)</li>
+              <li>* Registration Kit, High-Tea & Lunch (6th-8th March 2026), Gala dinner (7th March 2026) for participants attending physically</li>
             </ul>
           </div>
         <div className="mt-6">

@@ -60,7 +60,7 @@ const SponsorshipPage = () => {
               <tr>
                 <th className="border px-4 py-2">Category</th>
                 <th className="border px-4 py-2">Facilities</th>
-                <th className="border px-4 py-2">Support (Rs)</th>
+                {/* <th className="border px-4 py-2">Support (Rs)</th> */}
               </tr>
             </thead>
             <tbody>
@@ -74,7 +74,7 @@ const SponsorshipPage = () => {
                 <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
                   <td className="border px-4 py-2 font-bold">{item.name}</td>
                   <td className="border px-4 py-2">{item.facilities}</td>
-                  <td className="border px-4 py-2">{item.price}</td>
+                  {/* <td className="border px-4 py-2">{item.price}</td> */}
                 </tr>
               ))}
             </tbody>
@@ -86,15 +86,15 @@ const SponsorshipPage = () => {
           <ul className="list-disc list-inside space-y-2">
             {[ 
               "Delegate Kit",
-              "Conference Lunch – XXXX INR/Day",
-              "High Tea – XXXX INR/Day",
-              "Conference Breakfast – XXXX INR/Day",
-              "Tea Break – XXXX INR/Break",
-              "Plenary Lecture – XXXX INR/Lecture",
-              "Poster Sessions – XXXX INR/Lecture",
-              "Abstract Book – XXXX INR",
-              "Conference Proceedings – XXXX INR",
-              "Banner – XXXX INR",
+              "Conference Lunch",
+              "High Tea",
+              "Conference Breakfast",
+              "Tea Break",
+              "Plenary Lecture",
+              "Poster Sessions",
+              "Abstract Book",
+              "Conference Proceedings",
+              "Banner",
             ].map((item, i) => (
               <li key={i}>Sponsorship of {item}</li>
             ))}
@@ -107,7 +107,7 @@ const SponsorshipPage = () => {
         <section className="mb-10">
           <h3 className="text-xl font-semibold mb-2">Important Dates</h3>
           <p>
-            Last date for receipt of advertisement materials: <strong>XXXX</strong>
+            Last date for receipt of advertisement materials: <strong></strong>
           </p>
         </section>
 

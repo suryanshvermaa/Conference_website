@@ -9,8 +9,12 @@ const TechnicalSession = () => {
 
     const tss = {
         "evs and emerging technologies": {
-            workshopTitle: "Next-Gen Transportation: EVs & Emerging Technologies",
-            introduction: "In the context of rising global emissions and climate change, the focus is on safeguarding the planet. Extensive research is being conducted globally to mitigate emissions, the primary contributor to global warming. Electric and hybrid vehicles are essentials that not only demonstrate reduced emissions but also utilize renewable energy sources, thereby mitigating the depletion of fossil resources. Despite extensive global research on electric and hybrid vehicle technology, significant gaps remain in the field. The program elucidates existing electric and hybrid vehicle technologies while enabling attendees to understand future market and technological developments. This will allow participants to pinpoint their areas of study interest. This is a platform for the sharing of ideas that can lead to sustainable industrial development.",
+            workshopTitle: "Next-Gen Transportation: EVs, Drone Technology & Emerging Innovations",
+            introduction: `In the context of rising global emissions and climate change, the global focus is on safeguarding the planet. Extensive research is being conducted worldwide to mitigate emissions—the primary contributor to global warming. Electric and hybrid vehicles are essential solutions that not only demonstrate reduced emissions but also utilize renewable energy sources, thereby mitigating the depletion of fossil fuels.
+                        Alongside advancements in electric mobility, drone technology (Unmanned Aerial Systems - UAS) is emerging as a transformative component of next-generation transportation. Electric-powered drones are revolutionizing logistics, surveillance, agriculture, emergency response, and urban mobility. By reducing dependency on traditional fuel-based transport systems—especially for last-mile delivery—drones contribute to lower carbon footprints and improved energy efficiency.
+                        Despite extensive global research in electric, hybrid, and autonomous mobility systems, significant technological and infrastructural gaps remain. Challenges such as battery efficiency, energy storage, charging infrastructure, airspace regulation, safety frameworks, and integration of AI-driven autonomous systems continue to shape ongoing research and development efforts.
+                        This program elucidates existing electric, hybrid, and drone technologies while enabling attendees to understand future market trends, regulatory landscapes, and technological developments. Participants will gain insight into sustainable transportation ecosystems, smart mobility integration, and the role of renewable energy in next-generation transport systems.
+                        This platform fosters the sharing of ideas and interdisciplinary collaboration, paving the way for sustainable industrial development and innovative solutions for a greener future.`,
             speakers: [
                 {
                     name: "Dr. Rajeev Kumar Singh",
@@ -164,61 +168,61 @@ const TechnicalSession = () => {
                     email: "parshurams.ph21.ee@nitp.ac.in"
                 }
             ]
+        },
+        "next generation sensing and computing": {
+            workshopTitle: "Next-Generation Sensing and Computing: Biosensors Meet Neuromorphic Devices",
+            introduction: "The rapid convergence of biology and electronics is opening new frontiers in healthcare, computing, and intelligent systems. Biosensors, which detect biological signals and convert them into measurable outputs, are playing a vital role in disease diagnosis, environmental monitoring, and personalized medicine. On the other hand, neuromorphic devices, inspired by the architecture and functioning of the human brain, are revolutionizing computation by enabling energy-efficient, adaptive, and brain-like information processing.\n\nThis workshop aims to bring together researchers, students, and professionals to explore the synergy between biosensors and neuromorphic devices. By integrating advanced sensing platforms with bio-inspired computing, future technologies can achieve real-time data analysis, enhanced decision-making, and transformative applications in fields ranging from healthcare and biotechnology to artificial intelligence and robotics.\n\nParticipants will gain insights into the fundamentals, recent advancements, and emerging challenges in these areas, while also engaging in discussions on future opportunities for interdisciplinary innovation.",
+            speakers: [
+                {
+                    name: "Prof. Jawar Singh",
+                    image: "/technicalSession/jawar.jpeg",
+                    title: "Professor",
+                    institution: "Indian Institute of Technology, Patna, Bihar",
+                    bio: "Prof. Jawar Singh is a Professor in the Department of Electrical Engineering at the Indian Institute of Technology (IIT) Patna. His research focuses on neuromorphic devices, VLSI design, emerging memory technologies, and low-power circuits. With numerous publications in reputed journals and conferences, he has made significant contributions to advancing bio-inspired computing and next-generation electronic systems. Prof. Singh has also been actively involved in guiding research scholars and collaborating on interdisciplinary projects that link biosensors, neuromorphic engineering, and artificial intelligence."
                 },
-                "next generation sensing and computing": {
-                        workshopTitle: "Next-Generation Sensing and Computing: Biosensors Meet Neuromorphic Devices",
-                        introduction: "The rapid convergence of biology and electronics is opening new frontiers in healthcare, computing, and intelligent systems. Biosensors, which detect biological signals and convert them into measurable outputs, are playing a vital role in disease diagnosis, environmental monitoring, and personalized medicine. On the other hand, neuromorphic devices, inspired by the architecture and functioning of the human brain, are revolutionizing computation by enabling energy-efficient, adaptive, and brain-like information processing.\n\nThis workshop aims to bring together researchers, students, and professionals to explore the synergy between biosensors and neuromorphic devices. By integrating advanced sensing platforms with bio-inspired computing, future technologies can achieve real-time data analysis, enhanced decision-making, and transformative applications in fields ranging from healthcare and biotechnology to artificial intelligence and robotics.\n\nParticipants will gain insights into the fundamentals, recent advancements, and emerging challenges in these areas, while also engaging in discussions on future opportunities for interdisciplinary innovation.",
-                        speakers: [
-                                {
-                                        name: "Prof. Jawar Singh",
-                                        image: "/technicalSession/jawar.jpeg",
-                                        title: "Professor",
-                                        institution: "Indian Institute of Technology, Patna, Bihar",
-                                        bio: "Prof. Jawar Singh is a Professor in the Department of Electrical Engineering at the Indian Institute of Technology (IIT) Patna. His research focuses on neuromorphic devices, VLSI design, emerging memory technologies, and low-power circuits. With numerous publications in reputed journals and conferences, he has made significant contributions to advancing bio-inspired computing and next-generation electronic systems. Prof. Singh has also been actively involved in guiding research scholars and collaborating on interdisciplinary projects that link biosensors, neuromorphic engineering, and artificial intelligence."
-                                },
-                                {
-                                        name: "Dr. Sanjay Kumar",
-                                        image: "/technicalSession/sanjay.jpeg",
-                                        title: "Inspire Faculty",
-                                        institution: "Indian Institute of Technology, Patna, Bihar",
-                                        bio: "Dr. Sanjay Kumar is an INSPIRE Faculty in the Department of Electrical Engineering at the Indian Institute of Technology (IIT) Patna). His research focuses on non-volatile memories, memristor /ReRAM devices, and 2D materials, with applications in neuromorphic computing, artificial synapses, and in-memory computation. He is also actively involved in the development of advanced memory technologies for human bionic visual systems, MEMS-based capacitive transducers, and biological sensors. Dr. Kumar has published extensively in reputed journals and conferences and is engaged in advancing interdisciplinary research at the interface of electronics, nanotechnology, and bio-inspired systems."
-                                },
-                                {
-                                        name: "Dr. Mangal Das",
-                                        image: "/technicalSession/Mangal_Das.jpeg",
-                                        title: "Assistant Professor",
-                                        institution: "Gautam Buddha University, Delhi-NCR Uttar Pradesh",
-                                        bio: "Dr. Mangal Das is an Assistant Professor in the Department of Electronics & Communication Engineering at Gautam Buddha University, Greater Noida, Uttar Pradesh. He earned his Ph.D. from IIT Indore, with work focused on memristive systems for neuromorphic applications. His research spans memristive systems, neuromorphic computing, advanced materials, semiconductor fabrication, nanotechnology, robotics and AI/ML. He has authored several SCI journal papers, book chapters, patents, and is actively involved in interdisciplinary technology development for next-generation intelligent systems."
-                                }
-                        ],
-                        coordinators: [
-                                {
-                                        name: "Mr. Anirban Kolay",
-                                        image: "/technicalSession/Arnirban.png",
-                                        title: "Assistant Professor",
-                                        department: "Department of Electrical Engineering",
-                                        institution: "Heritage Institute of Technology",
-                                        email: "anirbank.ph21.ee@nitp.ac.in"
-                                },
-                                {
-                                        name: "Mr. Reetwik Bhadra",
-                                        image: "/technicalSession/Reetwik.jpeg",
-                                        title: "Assistant Professor",
-                                        department: "Department of Electrical Engineering",
-                                        institution: "Heritage Institute of Technology",
-                                        email: "reetwikb.ph21.ee@nitp.ac.in"
-                                },
-                                {
-                                        name: "Mr. Milind Kumar",
-                                        image: "/technicalSession/milind.jpeg",
-                                        title: "Research scholar",
-                                        department: "Department of Electrical Engineering",
-                                        institution: "National Institute of Technology, Patna",
-                                        email: "milindk.phd22.ee@nitp.ac.in"
-                                }
-                        ]
+                {
+                    name: "Dr. Sanjay Kumar",
+                    image: "/technicalSession/sanjay.jpeg",
+                    title: "Inspire Faculty",
+                    institution: "Indian Institute of Technology, Patna, Bihar",
+                    bio: "Dr. Sanjay Kumar is an INSPIRE Faculty in the Department of Electrical Engineering at the Indian Institute of Technology (IIT) Patna). His research focuses on non-volatile memories, memristor /ReRAM devices, and 2D materials, with applications in neuromorphic computing, artificial synapses, and in-memory computation. He is also actively involved in the development of advanced memory technologies for human bionic visual systems, MEMS-based capacitive transducers, and biological sensors. Dr. Kumar has published extensively in reputed journals and conferences and is engaged in advancing interdisciplinary research at the interface of electronics, nanotechnology, and bio-inspired systems."
+                },
+                {
+                    name: "Dr. Mangal Das",
+                    image: "/technicalSession/Mangal_Das.jpeg",
+                    title: "Assistant Professor",
+                    institution: "Gautam Buddha University, Delhi-NCR Uttar Pradesh",
+                    bio: "Dr. Mangal Das is an Assistant Professor in the Department of Electronics & Communication Engineering at Gautam Buddha University, Greater Noida, Uttar Pradesh. He earned his Ph.D. from IIT Indore, with work focused on memristive systems for neuromorphic applications. His research spans memristive systems, neuromorphic computing, advanced materials, semiconductor fabrication, nanotechnology, robotics and AI/ML. He has authored several SCI journal papers, book chapters, patents, and is actively involved in interdisciplinary technology development for next-generation intelligent systems."
                 }
+            ],
+            coordinators: [
+                {
+                    name: "Mr. Anirban Kolay",
+                    image: "/technicalSession/Arnirban.png",
+                    title: "Assistant Professor",
+                    department: "Department of Electrical Engineering",
+                    institution: "Heritage Institute of Technology",
+                    email: "anirbank.ph21.ee@nitp.ac.in"
+                },
+                {
+                    name: "Mr. Reetwik Bhadra",
+                    image: "/technicalSession/Reetwik.jpeg",
+                    title: "Assistant Professor",
+                    department: "Department of Electrical Engineering",
+                    institution: "Heritage Institute of Technology",
+                    email: "reetwikb.ph21.ee@nitp.ac.in"
+                },
+                {
+                    name: "Mr. Milind Kumar",
+                    image: "/technicalSession/milind.jpeg",
+                    title: "Research scholar",
+                    department: "Department of Electrical Engineering",
+                    institution: "National Institute of Technology, Patna",
+                    email: "milindk.phd22.ee@nitp.ac.in"
+                }
+            ]
         }
+    }
     const session = tss[technicalSessionForComponent];
 
     if (!session) return (

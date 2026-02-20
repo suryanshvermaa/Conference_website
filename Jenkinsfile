@@ -15,10 +15,27 @@ pipeline{
                 echo "cloning code successful."
             }
         }
+        stage("print root paths"){
+            steps{
+                echo "Jenkins WORKSPACE: ${env.WORKSPACE}"
+                echo "Jenkins HOME: ${env.HOME}"
+                sh 'pwd && ls -la'
+            }
+        }
         stage("copy env file"){
             steps{
                 echo "copying env file..."
-                sh "cp ~/env/conference-site/app.env ./app.env"
+                sh '''
+                    set -e
+                    ENV_FILE="/home/suryansh/env/conference-site/app.env"
+                    if [ ! -f "$ENV_FILE" ]; then
+                      echo "Missing env file at: $ENV_FILE"
+                      echo "Directory listing (best-effort):"
+                      ls -la "/home/suryansh/env/conference-site" || true
+                      exit 1
+                    fi
+                    cp "$ENV_FILE" "$WORKSPACE/app.env"
+                '''
                 echo "copying env file successful."
             }
         }

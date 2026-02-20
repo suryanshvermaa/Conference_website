@@ -18,7 +18,7 @@ pipeline{
         stage("copy env file"){
             steps{
                 echo "copying env file..."
-                sh "cp /env/conference-site/app.env ./app.env"
+                sh "cp ~/env/conference-site/app.env ./app.env"
                 echo "copying env file successful."
             }
         }

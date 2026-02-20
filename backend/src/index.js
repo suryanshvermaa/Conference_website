@@ -11,7 +11,7 @@ app.use(cors({origin:["https://icnari26.nasl.in","https://conference-website-thr
 app.use(express.json())
 app.use("/",router)
 
-const PORT=process.env.PORT
+const PORT=process.env.PORT||3000
 db().then(
     app.listen(PORT,()=>{
         console.log(clc.bgGreen.whiteBright(`server connection  successfull on port:${PORT} 😍😍`))

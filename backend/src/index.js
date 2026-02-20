@@ -10,6 +10,12 @@ dotenv.config();
 app.use(cors({origin:["https://icnari26.nasl.in","https://conference-website-three.vercel.app","http://localhost:5173"]}))
 app.use(express.json())
 app.use("/",router)
+app.get("/health",(req,res)=>{
+    res.status(200).json({
+        success:true,
+        message:"server heathy"
+    });
+})
 
 const PORT=process.env.PORT||3000
 db().then(

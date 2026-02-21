@@ -26,7 +26,7 @@ const dates = [
     },
     {
       title: "Last Date of Registration",
-      date: "21 February, 2026",
+      date: "25 February, 2026",
       description: "Final date for all participants to register for the conference.",
     },
     {

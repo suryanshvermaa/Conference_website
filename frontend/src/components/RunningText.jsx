@@ -7,7 +7,7 @@ const RunningText = () => {
 
   const message = (
     <>
-      As per request received from several potential authors, the paper deadline has been extended to 14th December 2025. <span className="highlight">International Conference on Next-Generation Adaptive Research and Innovations 2026 </span>
+     The last date of registration for ICNARI 2026 has been extended till 25th February 2026. <span className="highlight">International Conference on Next-Generation Adaptive Research and Innovations 2026 </span>
       on <span className="date">6<sup>th</sup>, 7<sup>th</sup> & 8<sup>th</sup> March ,2026</span> at NIT Patna! Engage with top researchers, innovators, and industry leaders. Don't miss this opportunity! 🚀📚
     </>
   );

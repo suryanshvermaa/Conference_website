@@ -8,3 +8,13 @@ services:
       - "3000:3000"
     env_file:
       - app.env
+    
+  app_replica_2:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: app_replica_2_container
+    ports:
+      - "3001:3000"
+    env_file:
+      - app.env

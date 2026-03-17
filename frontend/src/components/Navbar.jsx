@@ -111,6 +111,7 @@ export default function Navbar(fetch, setfetch) {
             </div>
           ))}
           <Link to="/contact" className="hover:text-gray-500">Contact</Link>
+          <Link to="/icnari-in-news" className="hover:text-gray-500">ICNARI in news</Link>
           {isAuthenticated && (
             <Link to="/admin" className="hover:text-gray-500 font-semibold">Admin</Link>
           )}
@@ -200,6 +201,13 @@ export default function Navbar(fetch, setfetch) {
             </div>
           ))}
           <Link to="/contact" className="hover:text-gray-500">Contact</Link>
+          <Link
+            to="/icnari-in-news"
+            className="hover:text-gray-500"
+            onClick={() => setIsOpen(false)}
+          >
+            ICNARI in news
+          </Link>
           {isAuthenticated && (
             <Link
               to="/admin"

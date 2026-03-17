@@ -61,6 +61,7 @@ import AddIndustryProgrammeCommitteeMember from "./components/IndustryProgrammeC
 import UpdateIndustryProgrammeMember from "./components/IndustryProgrammeCommittee/UpdateMember"
 import AllIndustryProgrammeCommitteeMembers from "./components/IndustryProgrammeCommittee/AllMembers"
 import Publication from "./components/authorcomp/Publication"
+import IcnariInNews from "./routes/IcnariInNews"
 
 function App() {
   const [fetch,setfetch]=useState(false)
@@ -111,6 +112,7 @@ function App() {
         <Route path="/sponsors/become-a-sponsor" element={<SponsorshipPage />} />
         <Route path="/sponsors/benefits-of-sponsorship" element={<BenefitsOfBecomeSponser />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/icnari-in-news" element={<IcnariInNews />} />
         <Route path="/allpapers" element={<AllPapersUser />} />
         <Route path="/allupdates" element={<AllUpdatesUser />} />
         <Route path="/login" element={<Login setfetch={setfetch}/>} />

@@ -15,7 +15,6 @@ const AllSpeakerprog = () => {
                 const response = await axios.get(
                     `${import.meta.env.VITE_API_URL}/speaker/all`
                 );
-                console.log(response.data)
                 setSpeakers(response.data.slice(0, 3));
             } catch (error) {
                 console.error('Error fetching speakers:', error);

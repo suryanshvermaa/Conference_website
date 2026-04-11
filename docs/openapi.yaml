@@ -1,0 +1,1798 @@
+openapi: 3.0.3
+info:
+  title: ICNARI 2026 API
+  version: 1.0.0
+  description: |
+    REST API for the ICNARI 2026 (NIT Patna) conference website.
+
+    Notes:
+    - The backend uses JWT for protected routes, but the token is sent in a custom header named `token` (not `Authorization`).
+    - Many endpoints return slightly different response shapes; this spec documents responses as implemented.
+servers:
+  - url: http://localhost:3000
+    description: Local development server (default `PORT=3000`)
+  - url: https://icnari26.nasl.in
+    description: "Public site origin (API host may differ) (<!-- TODO: verify -->)"
+
+tags:
+  - name: Health
+    description: Service health checks
+  - name: Auth
+    description: Admin login and user management
+  - name: Media
+    description: Cloudinary image upload/delete helpers
+  - name: Speakers
+    description: Speaker management
+  - name: Papers
+    description: Notices / papers management
+  - name: Recent Updates
+    description: Recent updates management
+  - name: Photo Gallery
+    description: Photo gallery management
+  - name: Contact
+    description: Contact form and admin inbox
+  - name: Committees
+    description: Committee member management (Organising / International / Technical / Industry Programme)
+
+paths:
+  /health:
+    get:
+      tags: [Health]
+      summary: Health check
+      description: Returns a basic JSON response if the server is running.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: server heathy
+
+  /user/login:
+    post:
+      tags: [Auth]
+      summary: Admin login
+      description: |
+        Validates email + password and returns a JWT token.
+
+        The token must be sent on protected requests via the `token` header.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            examples:
+              example:
+                value:
+                  email: admin@example.com
+                  password: your-password
+      responses:
+        '200':
+          description: Login result (success or failure)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /user/newuser:
+    post:
+      tags: [Auth]
+      summary: Create a new admin user
+      description: |
+        Creates a new admin user.
+
+        Important implementation detail:
+        - The controller accepts a `pic` field, but the `User` model currently defines `photo`.
+          This may mean `pic` is not persisted. (<!-- TODO: verify -->)
+      security:
+        - tokenAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAdminRequest'
+      responses:
+        '200':
+          description: Create result (success or failure)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAdminResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /user/Allusers:
+    get:
+      tags: [Auth]
+      summary: List users (excluding current)
+      description: |
+        Returns users matching an optional name/email search.
+
+        Query param is named `name` (used as a regex against name and email).
+      security:
+        - tokenAuth: []
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+          required: false
+          description: Search keyword applied to name/email (case-insensitive regex)
+      responses:
+        '200':
+          description: User list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserListItem'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '400':
+          description: Failed to load users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /user/image:
+    post:
+      tags: [Media]
+      summary: Upload an image to Cloudinary
+      description: |
+        Uploads an image file and returns the hosted URL.
+
+        The file field name must be `image`.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [image]
+              properties:
+                image:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Upload result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  msg:
+                    type: string
+                    example: " uploaded 😍"
+                  result:
+                    type: string
+                    description: Cloudinary URL
+                    example: https://res.cloudinary.com/demo/image/upload/v123/example.jpg
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    delete:
+      tags: [Media]
+      summary: Delete an image from Cloudinary
+      description: |
+        Deletes an image using its URL.
+
+        The backend derives Cloudinary `public_id` from the URL.
+      security:
+        - tokenAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [imageurl]
+              properties:
+                imageurl:
+                  type: string
+                  description: Full Cloudinary image URL
+      responses:
+        '200':
+          description: Delete result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  msg:
+                    type: string
+                    example: deleted successfully
+                  result:
+                    type: object
+                    description: Cloudinary deletion response
+                    additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /speaker/all:
+    get:
+      tags: [Speakers]
+      summary: List all speakers
+      description: Returns all speakers sorted by newest first.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Speaker'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /speaker/create:
+    post:
+      tags: [Speakers]
+      summary: Create a speaker
+      security:
+        - tokenAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSpeakerRequest'
+      responses:
+        '201':
+          description: Speaker created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Speaker added successfully
+                  speaker:
+                    $ref: '#/components/schemas/Speaker'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /speaker/delete/{id}:
+    delete:
+      tags: [Speakers]
+      summary: Delete a speaker
+      security:
+        - tokenAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Speaker deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /speaker/get/{id}:
+    get:
+      tags: [Speakers]
+      summary: Get speaker by id
+      security:
+        - tokenAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Speaker
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Speaker'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /speaker/update/{id}:
+    put:
+      tags: [Speakers]
+      summary: Update a speaker
+      security:
+        - tokenAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSpeakerRequest'
+      responses:
+        '201':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Speaker updated successfully
+                  speaker:
+                    $ref: '#/components/schemas/Speaker'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /speaker/setPriority/{id}:
+    patch:
+      tags: [Speakers]
+      summary: Set speaker priority
+      security:
+        - tokenAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [priority]
+              properties:
+                priority:
+                  type: integer
+                  minimum: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Priority set successfully
+                  speaker:
+                    $ref: '#/components/schemas/Speaker'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /papers/all:
+    get:
+      tags: [Papers]
+      summary: List all papers
+      description: Returns all papers/notices sorted by newest first.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notice'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /papers/add:
+    post:
+      tags: [Papers]
+      summary: Add a paper
+      security:
+        - tokenAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddNoticeRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Paper added successfully
+                  notice:
+                    $ref: '#/components/schemas/Notice'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /papers/delete/{id}:
+    delete:
+      tags: [Papers]
+      summary: Delete a paper
+      security:
+        - tokenAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Paper deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /recentupdate/all:
+    get:
+      tags: [Recent Updates]
+      summary: List all recent updates
+      description: Returns all recent updates sorted by newest first.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecentUpdate'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /recentupdate/add:
+    post:
+      tags: [Recent Updates]
+      summary: Add a recent update
+      security:
+        - tokenAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddRecentUpdateRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Recent update added successfully
+                  recentUpdate:
+                    $ref: '#/components/schemas/RecentUpdate'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /recentupdate/delete/{id}:
+    delete:
+      tags: [Recent Updates]
+      summary: Delete a recent update
+      security:
+        - tokenAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Recent update deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /photogallery/all:
+    get:
+      tags: [Photo Gallery]
+      summary: List all gallery photos
+      description: Returns all photos sorted by newest first.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Photo'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /photogallery/upload:
+    post:
+      tags: [Photo Gallery]
+      summary: Add a photo to the gallery
+      description: |
+        Creates a photo entry in MongoDB.
+
+        Implementation note:
+        - The route uses `upload.single('image')`, but the controller currently reads `imageUrl` from the request body.
+          Typical usage is to upload the file via `POST /user/image` first, then submit the returned URL here. (<!-- TODO: verify -->)
+      security:
+        - tokenAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [imageUrl]
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: "Optional file (currently not read by controller) (<!-- TODO: verify -->)"
+                imageUrl:
+                  type: string
+                  description: Cloudinary URL
+                tags:
+                  type: string
+                  description: Comma-separated tags
+                  example: campus,opening
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Photo uploaded successfully
+                  photo:
+                    $ref: '#/components/schemas/Photo'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /photogallery/delete/{id}:
+    delete:
+      tags: [Photo Gallery]
+      summary: Delete a gallery photo by id
+      security:
+        - tokenAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Photo deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /contact:
+    post:
+      tags: [Contact]
+      summary: Submit a contact message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateContactRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Your message has been submitted successfully.
+        '400':
+          description: Missing required fields
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    get:
+      tags: [Contact]
+      summary: List all contact messages (admin)
+      security:
+        - tokenAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contact'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /organisingcommitee/getAllMembers:
+    get:
+      tags: [Committees]
+      summary: List organising committee members
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  members:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OrganisingCommitteeMember'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /organisingcommitee/createMember:
+    post:
+      tags: [Committees]
+      summary: Create organising committee member
+      security:
+        - tokenAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCommitteeMemberRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicSuccess'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /organisingcommitee/getMember/{id}:
+    get:
+      tags: [Committees]
+      summary: Get organising committee member by id
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  member:
+                    $ref: '#/components/schemas/OrganisingCommitteeMember'
+        '400':
+          description: Bad request / not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /organisingcommitee/updateMember/{id}:
+    put:
+      tags: [Committees]
+      summary: Update organising committee member
+      security:
+        - tokenAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCommitteeMemberRequest'
+      responses:
+        '201':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicSuccess'
+        '400':
+          description: Bad request / not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /organisingcommitee/deleteMember/{id}:
+    delete:
+      tags: [Committees]
+      summary: Delete organising committee member
+      security:
+        - tokenAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicSuccess'
+        '400':
+          description: Bad request / not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /organisingcommitee/setPriority/{id}:
+    patch:
+      tags: [Committees]
+      summary: Set organising committee member priority
+      security:
+        - tokenAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [priority]
+              properties:
+                priority:
+                  type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicSuccess'
+        '400':
+          description: Bad request / not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /internationalcommitee/getAllMembers:
+    get:
+      tags: [Committees]
+      summary: List international advisory committee members
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  members:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/InternationalAdvisoryCommitteeMember'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /internationalcommitee/createMember:
+    post:
+      tags: [Committees]
+      summary: Create international advisory committee member
+      security:
+        - tokenAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCommitteeMemberRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicSuccess'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /internationalcommitee/getMember/{id}:
+    get:
+      tags: [Committees]
+      summary: Get international advisory committee member by id
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  member:
+                    $ref: '#/components/schemas/InternationalAdvisoryCommitteeMember'
+        '400':
+          description: Bad request / not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /internationalcommitee/updateMember/{id}:
+    put:
+      tags: [Committees]
+      summary: Update international advisory committee member
+      security:
+        - tokenAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCommitteeMemberRequest'
+      responses:
+        '201':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicSuccess'
+        '400':
+          description: Bad request / not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /internationalcommitee/deleteMember/{id}:
+    delete:
+      tags: [Committees]
+      summary: Delete international advisory committee member
+      security:
+        - tokenAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicSuccess'
+        '400':
+          description: Bad request / not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /technicalcommitee/getAllMembers:
+    get:
+      tags: [Committees]
+      summary: List technical programme committee members
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  members:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TechnicalProgrammeCommitteeMember'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /technicalcommitee/createMember:
+    post:
+      tags: [Committees]
+      summary: Create technical programme committee member
+      security:
+        - tokenAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCommitteeMemberRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicSuccess'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /technicalcommitee/getMember/{id}:
+    get:
+      tags: [Committees]
+      summary: Get technical programme committee member by id
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  member:
+                    $ref: '#/components/schemas/TechnicalProgrammeCommitteeMember'
+        '400':
+          description: Bad request / not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /technicalcommitee/updateMember/{id}:
+    put:
+      tags: [Committees]
+      summary: Update technical programme committee member
+      security:
+        - tokenAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCommitteeMemberRequest'
+      responses:
+        '201':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicSuccess'
+        '400':
+          description: Bad request / not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /technicalcommitee/deleteMember/{id}:
+    delete:
+      tags: [Committees]
+      summary: Delete technical programme committee member
+      security:
+        - tokenAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicSuccess'
+        '400':
+          description: Bad request / not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /industryprogramme/getAllMembers:
+    get:
+      tags: [Committees]
+      summary: List industry programme committee members
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  members:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/IndustryProgrammeCommitteeMember'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /industryprogramme/createMember:
+    post:
+      tags: [Committees]
+      summary: Create industry programme committee member
+      security:
+        - tokenAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCommitteeMemberRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicSuccess'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /industryprogramme/getMember/{id}:
+    get:
+      tags: [Committees]
+      summary: Get industry programme committee member by id
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  member:
+                    $ref: '#/components/schemas/IndustryProgrammeCommitteeMember'
+        '400':
+          description: Bad request / not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /industryprogramme/updateMember/{id}:
+    put:
+      tags: [Committees]
+      summary: Update industry programme committee member
+      security:
+        - tokenAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCommitteeMemberRequest'
+      responses:
+        '201':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicSuccess'
+        '400':
+          description: Bad request / not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /industryprogramme/deleteMember/{id}:
+    delete:
+      tags: [Committees]
+      summary: Delete industry programme committee member
+      security:
+        - tokenAuth: []
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicSuccess'
+        '400':
+          description: Bad request / not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicError'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: token
+      description: "JWT token sent via `token: <JWT>` header"
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: "Not used by this backend (it expects the `token` header) (<!-- TODO: verify -->)"
+
+  parameters:
+    IdParam:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: MongoDB ObjectId
+
+  responses:
+    Unauthorized:
+      description: Missing/invalid token
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: authorization invalid
+    InternalServerError:
+      description: Server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: Server Error
+
+  schemas:
+    BasicError:
+      type: object
+      properties:
+        success:
+          type: boolean
+          nullable: true
+        msg:
+          type: string
+          nullable: true
+        message:
+          type: string
+          nullable: true
+        error:
+          type: string
+          nullable: true
+
+    BasicSuccess:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        msg:
+          type: string
+          example: OK
+
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+
+    LoginResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        msg:
+          type: string
+          example: Welcome Admin ! your login successfull
+        token:
+          type: string
+          description: JWT token
+        user:
+          $ref: '#/components/schemas/User'
+
+    CreateAdminRequest:
+      type: object
+      required: [name, email, password, pic]
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+        pic:
+          type: string
+          description: Profile image URL (field name used by controller)
+
+    CreateAdminResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        msg:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+
+    UserListItem:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        pic:
+          type: string
+          nullable: true
+          description: "Returned by controller projection, but not present in current schema (<!-- TODO: verify -->)"
+        photo:
+          type: string
+          nullable: true
+          description: "Defined in the model, but not selected in the list projection (<!-- TODO: verify -->)"
+
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          description: Hashed password (returned by login as currently implemented)
+        photo:
+          type: string
+          description: Profile photo URL
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    Speaker:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        specialization:
+          type: array
+          items:
+            type: string
+        imageUrl:
+          type: string
+        description:
+          type: string
+        priority:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    CreateSpeakerRequest:
+      type: object
+      required: [name, description]
+      properties:
+        name:
+          type: string
+        specialization:
+          type: string
+          description: Comma-separated list of specializations
+          example: AI, NLP, Security
+        imageUrl:
+          type: string
+          description: Cloudinary URL
+        description:
+          type: string
+
+    UpdateSpeakerRequest:
+      type: object
+      required: [name, specialization, description, imageUrl]
+      properties:
+        name:
+          type: string
+        specialization:
+          type: string
+          description: Comma-separated list of specializations
+        description:
+          type: string
+        imageUrl:
+          type: string
+
+    Notice:
+      type: object
+      properties:
+        _id:
+          type: string
+        heading:
+          type: string
+        content:
+          type: string
+        link:
+          type: string
+          nullable: true
+        authors:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    AddNoticeRequest:
+      type: object
+      required: [heading, content]
+      properties:
+        heading:
+          type: string
+        content:
+          type: string
+        link:
+          type: string
+          nullable: true
+        authors:
+          type: string
+          description: Comma-separated list of author names
+
+    RecentUpdate:
+      type: object
+      properties:
+        _id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        eventDate:
+          type: string
+          format: date-time
+        link:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    AddRecentUpdateRequest:
+      type: object
+      required: [title, description, eventDate]
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        eventDate:
+          type: string
+          format: date-time
+          example: 2026-04-11T00:00:00.000Z
+        link:
+          type: string
+          nullable: true
+
+    Photo:
+      type: object
+      properties:
+        _id:
+          type: string
+        imageUrl:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    Contact:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        subject:
+          type: string
+        phone:
+          type: string
+          nullable: true
+        message:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    CreateContactRequest:
+      type: object
+      required: [name, email, subject, message]
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        subject:
+          type: string
+        phone:
+          type: string
+        message:
+          type: string
+
+    CreateCommitteeMemberRequest:
+      type: object
+      required: [name, specialization, college, committee, imageUrl, description]
+      properties:
+        name:
+          type: string
+        specialization:
+          type: string
+          description: Comma-separated list
+          example: Computer Vision, IoT
+        college:
+          type: string
+        committee:
+          type: string
+          description: Committee subgroup/role label used in UI
+        imageUrl:
+          type: string
+        description:
+          type: string
+
+    OrganisingCommitteeMember:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        specialization:
+          type: array
+          items:
+            type: string
+        college:
+          type: string
+        committee:
+          type: string
+        imageUrl:
+          type: string
+        description:
+          type: string
+        priority:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    InternationalAdvisoryCommitteeMember:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        specialization:
+          type: array
+          items:
+            type: string
+        college:
+          type: string
+        committee:
+          type: string
+        imageUrl:
+          type: string
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    TechnicalProgrammeCommitteeMember:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        specialization:
+          type: array
+          items:
+            type: string
+        college:
+          type: string
+        committee:
+          type: string
+        imageUrl:
+          type: string
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    IndustryProgrammeCommitteeMember:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        specialization:
+          type: array
+          items:
+            type: string
+        college:
+          type: string
+        committee:
+          type: string
+        imageUrl:
+          type: string
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time

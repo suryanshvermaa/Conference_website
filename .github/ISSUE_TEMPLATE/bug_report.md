@@ -1,38 +1,46 @@
 ---
-name: Bug Report
+name: "🐛 Bug Report"
 about: Report a reproducible bug or issue in the project
 title: "[Bug] <short summary>"
 labels: bug
 assignees: ''
 ---
 
-## 🐞 Description
+## 🐛 Description
 
 <!-- A clear and concise description of what the bug is. -->
 
-## ✅ Reproduction Steps
+## 🔁 Reproduction steps
 
-<!-- Steps to reproduce the behavior: -->
-1. Run command `...`
-2. Use configuration `...`
-3. Execute action `...`
-4. Observe the error
+<!-- Steps to reproduce the behavior -->
+1.
+2.
+3.
 
-## 🧪 Expected Behavior
+## ✅ Expected behavior
 
-<!-- A clear and concise description of what you expected to happen. -->
+<!-- What you expected to happen. -->
+
+## ❌ Actual behavior
+
+<!-- What actually happened. Include error messages if any. -->
 
 ## 🖥️ Environment
 
-| Key       | Value              |
-|-----------|--------------------|
-| OS        | e.g. Ubuntu 22.04  |
-| Node.js   | e.g. 20.x          |
-| Version   | e.g. 1.3.2         |
+| Key     | Value |
+|---------|-------|
+| OS      |       |
+| Node.js |       |
 
-## 📸 Screenshots
+## 🧾 Logs / screenshots
 
-<!-- If applicable, add screenshots or terminal output to help explain the problem. -->
+<!-- Paste relevant logs or screenshots. You can wrap logs in ``` to format them. -->
 
-<details>
+```
+paste logs here
+```
+
+## 📝 Additional context
+
+<!-- Anything else that may help (e.g., which endpoint, which browser, what data, etc.). -->
 

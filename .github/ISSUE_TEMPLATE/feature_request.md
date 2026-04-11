@@ -1,22 +1,23 @@
 ---
-name: 💡 Feature Request
+name: "✨ Feature Request"
 about: Suggest an idea or enhancement
 title: "[Feature] "
 labels: enhancement
 assignees: ''
 ---
-## Feature Description
 
-Describe the feature you would like to see added.
+## 🧩 Problem statement
 
-## Use Case
+<!-- What problem are you trying to solve? Who is affected? -->
 
-Explain the problem it solves or the benefit it brings to the project.
+## 💡 Proposed solution
 
-## Suggested Solution
+<!-- What would you like the product to do? Include UI/API expectations if relevant. -->
 
-If you have any ideas for implementation, describe them here.
+## 🔀 Alternatives considered
 
-## Additional Context
+<!-- Optional: other approaches you considered. -->
 
-Links, screenshots, references, or examples from other projects are welcome.
+## 📝 Additional context
+
+<!-- Links, screenshots, references, or examples from other projects are welcome. -->

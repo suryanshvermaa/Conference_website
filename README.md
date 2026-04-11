@@ -1,76 +1,87 @@
 # 🎓 ICNARI 2026 — NIT Patna Conference Website
 
-A **Conference Management Platform** (MERN) for the official **ICNARI 2026** conference at **NIT Patna (Patna + Bihta Campus)**.
+A Conference Management Platform (MERN) for the official ICNARI 2026 conference at NIT Patna (Patna + Bihta Campus).
 
-It includes:
+Live: [https://icnari26.nasl.in](https://icnari26.nasl.in)
 
-- A **public website** for attendees/authors (About, Authors, Program, Committees, Gallery, Sponsors, Contact)
-- A **secure admin dashboard** for organizers to manage content without editing code
-
-Live site: https://icnari26.nasl.in
-
-New to this codebase? Start here: [docs/DEVELOPER_GUIDE.md](docs/DEVELOPER_GUIDE.md)
+New to this codebase? Start with [docs/DEVELOPER_GUIDE.md](./docs/DEVELOPER_GUIDE.md). ✨
 
 ---
 
-## What this project is
+## 📖 About
 
-- **Official:** Maintained for the ICNARI 2026 conference at NIT Patna
-- **Production-grade:** Active deployment, real users, real ops constraints
-- **Community contributions:** Now welcoming contributions from the community (all levels)
+This repository powers:
+- A public conference website (About, Authors, Program, Committees, Gallery, Sponsors, Contact)
+- A secure admin dashboard used by organizers to manage website content without editing code
 
----
-
-## Key features
-
-- **Admin dashboard** for managing:
-	- Speakers
-	- Notices/Papers
-	- Recent updates
-	- Photo gallery
-	- Committee members (Organising / International / Technical / Industry Programme)
-	- Contact form submissions (admin view)
-- **JWT-protected admin actions**
-	- Token is sent via a custom request header: `token: <JWT>`
-- **Media uploads** with Multer + Cloudinary
-- **MongoDB + Mongoose** data models for conference content
-- **Docker Compose** setup for local MongoDB (dev)
-- **Deployment-ready backend** via Docker Compose + Jenkins pipeline
+The backend is an Express API backed by MongoDB (Mongoose). Media is stored on Cloudinary and referenced by URL.
 
 ---
 
-## Tech stack
+## ✅ Features
 
-- **Frontend:** React + Vite, React Router, Tailwind CSS, Chakra UI
-- **Backend:** Node.js, Express
-- **Database:** MongoDB (Mongoose)
-- **Auth:** JWT (token via `token` header, not `Authorization`)
-- **Uploads:** Multer + Cloudinary
-
----
-
-## Repository layout
-
-- [backend](backend) — Express API server
-- [frontend](frontend) — React SPA (Vite)
-- [docs/DEVELOPER_GUIDE.md](docs/DEVELOPER_GUIDE.md) — detailed beginner-friendly guide
-- [docker-compose.dev.yml](docker-compose.dev.yml) — MongoDB for local development
-- [docker-compose.prod.yml](docker-compose.prod.yml) — backend container (used by [Jenkinsfile](Jenkinsfile))
-- [Jenkinsfile](Jenkinsfile) — Jenkins pipeline for backend Docker deployment
-- [backend/scripts/createAdmin.js](backend/scripts/createAdmin.js) — bootstrap initial admin user
-- [frontend/vercel.json](frontend/vercel.json) — Vercel configuration
+- Admin dashboard to manage:
+  - Speakers
+  - Papers/Notices
+  - Recent updates
+  - Photo gallery
+  - Committee members (Organising / International / Technical / Industry Programme)
+  - Contact form submissions (admin inbox)
+- JWT-protected admin actions
+  - Token is sent via a custom request header: `token: <JWT>`
+- Cloudinary uploads (Multer + Cloudinary SDK)
+- MongoDB support (local install / Atlas / or Docker Compose for dev)
+- Deployment-ready backend via Docker Compose + Jenkins pipeline
 
 ---
 
-## Getting started (beginner-friendly)
+## 🧰 Tech stack (from the repository)
+
+Frontend (frontend/package.json):
+- React (Vite)
+- React Router
+- Tailwind CSS
+- Chakra UI
+- Axios
+
+Backend (backend/package.json):
+- Node.js + Express
+- MongoDB + Mongoose
+- JWT (jsonwebtoken)
+- bcryptjs (password hashing)
+- Multer + Cloudinary (uploads)
+
+---
+
+## 🗂️ Project structure
+
+Top-level layout:
+
+```
+.
+├── backend/                 # Express API
+├── frontend/                # React SPA (Vite)
+├── docs/                    # Developer guide + OpenAPI spec
+├── docker-compose.dev.yml   # Local MongoDB
+├── docker-compose.prod.yml  # Backend containers (used by Jenkins)
+└── Jenkinsfile              # CI/CD pipeline for Docker deployment
+```
+
+---
+
+## ⚙️ Setup (local development)
 
 ### Prerequisites
 
-- Node.js 18+ (Node 20 works)
+- Node.js 20 (the backend Docker image uses `node:20-bookworm-slim`)
 - pnpm (recommended) or npm
-- Docker + Docker Compose (for local MongoDB)
+- MongoDB (choose one): local MongoDB install, MongoDB Atlas, or Docker + Docker Compose
 
-### 1) Start MongoDB locally (Docker)
+### 1) Start MongoDB
+
+Pick **one** option:
+
+#### Option A: Docker (easy)
 
 From the repository root:
 
@@ -78,13 +89,37 @@ From the repository root:
 docker compose -f docker-compose.dev.yml up -d
 ```
 
-MongoDB will be reachable at:
+MongoDB root credentials from docker-compose.dev.yml:
+- Username: `root`
+- Password: `example`
+- Host/port: `localhost:27017`
 
-- `mongodb://root:example@localhost:27017`
+#### Option B: No Docker (local MongoDB or MongoDB Atlas)
 
-### 2) Backend setup
+✅ Local MongoDB (typical default, no auth):
 
-Install and run the backend:
+- Install MongoDB for your OS (Ubuntu users can install via official MongoDB docs).
+- Start MongoDB service (`mongod`).
+- Use this connection string in `backend/.env`:
+
+```env
+URI=mongodb://127.0.0.1:27017/conference_db
+```
+
+✅ MongoDB Atlas (cloud):
+
+- Create a free cluster on Atlas and copy the connection string.
+- Use this connection string in `backend/.env`:
+
+```env
+URI=mongodb+srv://<username>:<password>@<cluster-host>/conference_db?retryWrites=true&w=majority
+```
+
+If you use the admin bootstrap script, set `MONGO_URI` similarly.
+
+### 2) Backend
+
+Install dependencies and start the API server:
 
 ```bash
 cd backend
@@ -92,13 +127,51 @@ pnpm install
 pnpm run dev
 ```
 
-Create `backend/.env`:
+Alternative (npm):
+
+```bash
+cd backend
+npm install
+npm run dev
+```
+
+Health check:
+- `GET http://localhost:3000/health`
+
+### 3) Frontend
+
+Install dependencies and start the Vite dev server:
+
+```bash
+cd frontend
+pnpm install
+pnpm run dev
+```
+
+Alternative (npm):
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend default URL:
+- `http://localhost:5173`
+
+---
+
+## 🔑 Environment variables
+
+### Backend (backend/.env)
+
+These variables are read in backend/src/*:
 
 ```env
 # API
 PORT=3000
 
-# MongoDB (backend runtime)
+# MongoDB
 URI=mongodb://root:example@localhost:27017/conference_db?authSource=admin
 
 # JWT
@@ -108,126 +181,83 @@ secret=change_me_to_a_strong_secret
 cloud_name=your_cloudinary_cloud_name
 api_key=your_cloudinary_api_key
 api_secret=your_cloudinary_api_secret
+```
 
-# Optional: used by backend/scripts/createAdmin.js
+Used by the bootstrap admin script backend/scripts/createAdmin.js:
+
+```env
 MONGO_URI=mongodb://root:example@localhost:27017/conference_db?authSource=admin
 ```
 
-Health check:
+### Frontend (frontend/.env)
 
-- `GET http://localhost:3000/health`
-
-### 3) Frontend setup
-
-Install and run the frontend:
-
-```bash
-cd frontend
-pnpm install
-pnpm run dev
-```
-
-Create `frontend/.env`:
+Used across frontend/src/*:
 
 ```env
 VITE_API_URL=http://localhost:3000
 ```
 
-Frontend runs at:
+### Production (root app.env)
 
-- `http://localhost:5173`
-
----
-
-## Admin access
-
-### Create the first admin user (recommended)
-
-Run the bootstrap script:
-
-```bash
-cd backend
-node scripts/createAdmin.js
-```
-
-Notes:
-
-- The script reads `MONGO_URI` (and falls back to `mongodb://root:example@localhost:27017`).
-- The backend server uses `URI` for the main connection.
-
-### Login
-
-- Backend endpoint: `POST /user/login`
-- Frontend route: `/login`
+docker-compose.prod.yml loads environment variables from `app.env` at the repository root.
 
 ---
 
-## API notes
+## 🧩 API overview
 
-### Authentication
+Route groups are mounted in backend/src/routes/index.js:
 
-Protected endpoints expect a JWT in the request headers:
-
-```text
-token: <JWT>
-```
-
-Important: the backend expects the header name to be exactly `token` (not `Authorization`).
-
-### Main route groups
-
-The API mounts these route prefixes in [backend/src/routes/index.js](backend/src/routes/index.js):
-
-- `/user`
-- `/photogallery`
+- `/user` (login, admin creation, list users, Cloudinary image helper)
 - `/speaker`
 - `/papers`
 - `/recentupdate`
+- `/photogallery`
 - `/contact`
 - `/organisingcommitee`
 - `/internationalcommitee`
 - `/technicalcommitee`
 - `/industryprogramme`
 
+OpenAPI 3.0 spec: docs/openapi.yaml.
+
+Authentication:
+- Protected endpoints require a JWT in the `token` request header (not `Authorization`).
+
 ---
 
-## DevOps and deployment
+## 🤝 Contributing
 
-### Development database (local)
+Contributions are welcome.
 
-- Uses [docker-compose.dev.yml](docker-compose.dev.yml) to run MongoDB locally
+- See CONTRIBUTING.md for local setup, branch naming, and PR guidelines.
+- Please follow the Code of Conduct in CODE_OF_CONDUCT.md.
 
-### Backend production (Docker Compose)
+---
 
-Production compose file: [docker-compose.prod.yml](docker-compose.prod.yml)
+## 🌟 Contributors
 
-```bash
-docker compose -f docker-compose.prod.yml up -d --build --force-recreate
-```
+Thanks to everyone who has contributed to this project. 🙌
 
-It expects an env file named `app.env` in the repository root (see [docker-compose.prod.yml](docker-compose.prod.yml)).
-The included [Jenkinsfile](Jenkinsfile) copies an external env file to `./app.env` and then runs the compose command.
+<a href="https://github.com/suryanshvermaa/Conference_website/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=suryanshvermaa/Conference_website" alt="Contributors" />
+</a>
 
-### CI/CD (Jenkins)
+---
 
-This repository includes a production-oriented Jenkins pipeline in [Jenkinsfile](Jenkinsfile). At a high level it:
+## 👥 Maintainers
 
-1. Cleans the Jenkins workspace
-2. Clones this repository
-3. Copies an environment file to `./app.env` (the pipeline expects it to exist on the Jenkins machine)
-4. Runs `docker compose -f docker-compose.prod.yml up -d --build --force-recreate`
+- Suryansh Verma (GitHub: suryanshvermaa)
 
-Operational notes:
+---
+
+## 📦 Deployment notes
 
 - The compose file builds the backend image from [backend/Dockerfile](backend/Dockerfile) and exposes port `3000`.
 - `app.env` is intentionally not committed; provide it securely via your CI/CD environment.
-
-### Frontend
-
-The frontend is set up for Vercel (see [frontend/vercel.json](frontend/vercel.json)).
+- The frontend is set up for Vercel (see [frontend/vercel.json](frontend/vercel.json)).
 
 ---
 
-## License
+## 📄 License
 
 MIT — see [LICENSE](LICENSE).

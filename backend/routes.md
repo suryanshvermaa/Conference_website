@@ -1,4 +1,4 @@
-# Backend Routes
+# 🛣️ Backend Routes
 
 - **GET** `/api/users` - Get all users
 - **POST** `/api/users` - Create a new user

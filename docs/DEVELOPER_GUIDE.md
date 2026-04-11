@@ -1,4 +1,4 @@
-# Developer Guide (Beginner-Friendly)
+# 📘 Developer Guide (Beginner-Friendly)
 
 This guide explains how to understand, run, modify, and maintain the **ICNARI 2026 Conference Website** codebase.
 
@@ -101,8 +101,10 @@ If you are new to full‑stack projects, read sections **1 → 9** first, then c
 ## 4) Folder & File Structure
 
 ### Top level
-- `docker-compose.yml`
-  - Starts MongoDB locally via Docker.
+- `docker-compose.dev.yml`
+  - Starts MongoDB locally via Docker (development).
+- `docker-compose.prod.yml`
+  - Starts backend containers in production (used by the Jenkins pipeline).
 - `data/`
   - MongoDB data files (Docker volume). You usually do not edit these manually.
 - `backend/`
@@ -207,6 +209,16 @@ Tip for maintainers: if you add many endpoints, consider creating a small API he
   - `/organisingcommitee`
   - `/internationalcommitee`
   - `/technicalcommitee`
+  - `/industryprogramme`
+
+### API documentation (OpenAPI)
+
+- OpenAPI 3.0 spec: `docs/openapi.yaml`
+- This spec is derived from the current Express routes/controllers/models.
+
+When you add or change an endpoint:
+1. Update the route/controller/model
+2. Update `docs/openapi.yaml` to match the implementation
 
 ### Controllers / “services” / middleware
 - Controllers live in `backend/src/controllers/*`.
@@ -318,7 +330,8 @@ Common fields:
 ### Required software
 - **Node.js**: recommended **18+** (Vite 6 typically requires Node 18+).
 - **pnpm**: package manager used by both frontend and backend.
-- **Docker + Docker Compose**: for running MongoDB locally.
+- **MongoDB**: required (choose one: local MongoDB install, MongoDB Atlas, or Docker Compose).
+- **Docker + Docker Compose**: optional (an easy way to run MongoDB locally).
 
 ### Environment variables
 
@@ -344,8 +357,14 @@ VITE_API_URL=http://localhost:3000
 ```
 
 ### Step-by-step local setup
-1. Start MongoDB with Docker:
-   - From project root: `docker-compose up -d`
+1. Start MongoDB (pick one option):
+   - **Option A (Docker, easy)**: from project root run `docker compose -f docker-compose.dev.yml up -d`
+   - **Option B (No Docker, local MongoDB)**:
+     - Install MongoDB for your OS and start `mongod`
+     - Set `URI=mongodb://127.0.0.1:27017/conference_db` in `backend/.env`
+   - **Option C (No Docker, MongoDB Atlas)**:
+     - Create a cluster on Atlas and copy the connection string
+     - Set `URI=mongodb+srv://<username>:<password>@<cluster-host>/conference_db?...` in `backend/.env`
 2. Backend setup:
    - `cd backend`
    - `pnpm install`
@@ -364,7 +383,7 @@ VITE_API_URL=http://localhost:3000
 ## 9) How to Run the Project
 
 ### Development mode
-- MongoDB: `docker-compose up -d`
+- MongoDB: `docker compose -f docker-compose.dev.yml up -d`
 - Backend:
   - `cd backend && pnpm run dev`
 - Frontend:
@@ -461,7 +480,9 @@ Frontend:
   - Deployed on **Vercel**.
   - `frontend/vercel.json` rewrites routes to `index.html` so React Router works.
 - Backend:
-  - Deployed as a Node.js server (separate from Vercel frontend).
+  - Deployed as Docker containers using `docker-compose.prod.yml`.
+  - The Jenkins pipeline (`Jenkinsfile`) copies an `app.env` file into the repo root and runs:
+    - `docker compose -f docker-compose.prod.yml up -d --build --force-recreate`
 - Database:
   - In development, MongoDB runs via Docker.
   - In production, you should use a managed MongoDB or a dedicated server.

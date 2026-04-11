@@ -20,7 +20,6 @@ const AllSpeakers = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_API_URL}/speaker/all`
         );
-        console.log(response.data)
         setSpeakers(response.data);
         // Initialize priorities state with current speaker priorities
         const initialPriorities = {};

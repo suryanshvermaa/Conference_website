@@ -21,7 +21,6 @@ export default function Login({setfetch}) {
 
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
-        console.log(response.data);
         // Show success toast
         localStorage.setItem("photo", response.data?.user?.photo);
         localStorage.setItem("name", response.data?.user?.name);

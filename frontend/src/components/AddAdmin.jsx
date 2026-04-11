@@ -41,7 +41,6 @@ const AddAdmin = () => {
 				newAdminData,
 				{ headers: { token: localStorage.getItem('token') } }
 			);
-			console.log(createAdminResponse);
 			if (createAdminResponse.status === 200) {
 				toast.success(createAdminResponse.data.msg);
 				// Reset form after successful admin creation

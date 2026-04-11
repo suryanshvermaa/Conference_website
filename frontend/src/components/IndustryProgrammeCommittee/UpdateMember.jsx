@@ -26,7 +26,6 @@ const UpdateIndustryProgrammeMember = () => {
               headers:{token:localStorage.getItem("token")}
           });
           const member=res.data.member;
-          console.log(member);
           setOrganisingMemberData({
               college:member.college,
               committee:member.committee,
@@ -90,7 +89,6 @@ const UpdateIndustryProgrammeMember = () => {
             },
           }
         );
-        console.log(response);
         if (response.status === 201) {
           toast.success(response.data.msg);
           setImage(null);

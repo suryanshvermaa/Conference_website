@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router-dom"
+import { Route, Routes, useLocation, Navigate } from "react-router-dom"
 import Navbar from "./components/Navbar"
 import Home from "./routes/Home"
 import Authors from "./routes/Authors"
@@ -76,6 +76,10 @@ function App() {
       < ToastContainer/>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route
+          path="*"
+          element={<Navigate to="/" replace />}
+        />
         {/* About routes */}
         <Route path="/about" element={<Aboutnit />} />
         <Route path="/about/about-the-conference" element={<Aboutconf/>} />

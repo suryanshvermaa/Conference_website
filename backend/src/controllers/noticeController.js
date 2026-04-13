@@ -31,7 +31,21 @@ const addNotice = async (req, res) => {
  */
 const getAllNotices = async (req, res) => {
     try {
-        const notices = await Notice.find().sort({ createdAt: -1 }); // Fetch notices, newest first
+        const parsedLimit = Number.parseInt(req.query.limit, 10);
+        const parsedSkip = Number.parseInt(req.query.skip, 10);
+
+        const limit = Number.isInteger(parsedLimit) && parsedLimit > 0 ? parsedLimit : null;
+        const skip = Number.isInteger(parsedSkip) && parsedSkip >= 0 ? parsedSkip : null;
+
+        const query = Notice.find().sort({ createdAt: -1 }); // Fetch notices, newest first
+        if (skip !== null) {
+            query.skip(skip);
+        }
+        if (limit !== null) {
+            query.limit(limit);
+        }
+
+        const notices = await query;
         res.status(200).json(notices);
     } catch (error) {
         res.status(500).json({ error: error.message });

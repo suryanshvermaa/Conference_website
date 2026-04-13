@@ -32,7 +32,21 @@ const addRecentUpdate = async (req, res) => {
  */
 const getAllRecentUpdates = async (req, res) => {
     try {
-        const recentUpdates = await RecentUpdate.find().sort({ createdAt: -1 }); // Fetch all, sorted by latest
+        const parsedLimit = Number.parseInt(req.query.limit, 10);
+        const parsedSkip = Number.parseInt(req.query.skip, 10);
+
+        const limit = Number.isInteger(parsedLimit) && parsedLimit > 0 ? parsedLimit : null;
+        const skip = Number.isInteger(parsedSkip) && parsedSkip >= 0 ? parsedSkip : null;
+
+        const query = RecentUpdate.find().sort({ createdAt: -1 }); // Fetch all, sorted by latest
+        if (skip !== null) {
+            query.skip(skip);
+        }
+        if (limit !== null) {
+            query.limit(limit);
+        }
+
+        const recentUpdates = await query;
         res.status(200).json(recentUpdates);
     } catch (error) {
         res.status(500).json({ error: error.message });

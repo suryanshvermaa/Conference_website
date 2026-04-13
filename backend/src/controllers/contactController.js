@@ -41,7 +41,21 @@ exports.createContact= async (req, res) => {
  */
 exports.getContact=async (req, res) => {
     try {
-      const contacts = await Contact.find().sort({ createdAt: -1 }); // newest first
+      const parsedLimit = Number.parseInt(req.query.limit, 10);
+      const parsedSkip = Number.parseInt(req.query.skip, 10);
+
+      const limit = Number.isInteger(parsedLimit) && parsedLimit > 0 ? parsedLimit : null;
+      const skip = Number.isInteger(parsedSkip) && parsedSkip >= 0 ? parsedSkip : null;
+
+      const query = Contact.find().sort({ createdAt: -1 }); // newest first
+      if (skip !== null) {
+        query.skip(skip);
+      }
+      if (limit !== null) {
+        query.limit(limit);
+      }
+
+      const contacts = await query;
       res.status(200).json(contacts);
     } catch (err) {
       console.error('Error fetching contacts:', err);

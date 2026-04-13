@@ -57,7 +57,21 @@ const deleteSpeaker = async (req, res) => {
  */
 const getAllSpeakers = async (req, res) => {
     try {
-        const speakers = await Speaker.find().sort({ createdAt: -1 }); // Fetch speakers, newest first
+        const parsedLimit = Number.parseInt(req.query.limit, 10);
+        const parsedSkip = Number.parseInt(req.query.skip, 10);
+
+        const limit = Number.isInteger(parsedLimit) && parsedLimit > 0 ? parsedLimit : null;
+        const skip = Number.isInteger(parsedSkip) && parsedSkip >= 0 ? parsedSkip : null;
+
+        const query = Speaker.find().sort({ createdAt: -1 }); // Fetch speakers, newest first
+        if (skip !== null) {
+            query.skip(skip);
+        }
+        if (limit !== null) {
+            query.limit(limit);
+        }
+
+        const speakers = await query;
         res.status(200).json(speakers);
     } catch (error) {
         res.status(500).json({ error: error.message });

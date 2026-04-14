@@ -135,7 +135,7 @@ exports.login=async(req,res)=>{
     if(!validator.isEmail(email)){
         return res.json({msg:"enter a valid email",success:false})
     }
-    const isExisting=await UserModel.findOne({email:email})
+    const isExisting=await UserModel.findOne({email:email}).select("+password")
     if(!isExisting){
         return  res.json({success:false,msg:"email not registered"})
     }else{

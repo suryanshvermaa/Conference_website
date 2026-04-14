@@ -20,6 +20,13 @@ List the exact steps/commands to verify the change:
 - [ ] Frontend: `pnpm run dev` (or `npm run dev`)
 - [ ] API: call endpoint(s) affected
 
+## 📸 Screenshots
+
+Add screenshots as proof of changes:
+
+- [ ] Before screenshot
+- [ ] After screenshot
+
 ## ✅ Checklist
 
 - [ ] I ran the app locally and verified the change

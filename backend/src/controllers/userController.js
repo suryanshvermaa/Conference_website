@@ -149,9 +149,9 @@ exports.login=async(req,res)=>{
             }
         }
         const token=await jwt.sign(payload,secret)
-        return res.json({success:true,msg:`Welcome ${isExisting.name} 😍 ! your login successfull`,token,user:isExisting})
+        // Map to DTO to exclude password
+        return res.json({success:true,msg:`Welcome ${isExisting.name} 😍 ! your login successfull`,token,user:userDTO(isExisting)})
     }
-
 }
 
 /**
@@ -179,4 +179,13 @@ exports.getAllUsers=async(req,res)=>{
             msg:"failed to load all users"
         })
     }
+}
+// User DTO to exclude password
+function userDTO(user) {
+    return {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        pic: user.pic,
+    };
 }

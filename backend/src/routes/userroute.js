@@ -7,7 +7,7 @@ const auth=require("../middlewares/middleware")
 userRouter
 .post("/image",upload.single('image'),uploadImage)
 .delete("/image",auth,deleteImage)
-// .post("/signup",signUp) ->>  It is removed because otherwise anybody can become admin
+.post("/signup",signUp) // ->>  It is removed because otherwise anybody can become admin
 .post("/newuser",auth,createNewAdmin)
 .post("/login",login)
 .get("/Allusers",auth,getAllUsers)

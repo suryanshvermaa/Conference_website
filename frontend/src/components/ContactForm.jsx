@@ -26,6 +26,11 @@ const ContactForm = () => {
       });
 
       const result = await res.json();
+      if(!res.ok){
+        alert(result.error || "something went wrong. Please try again.");
+        return;
+      }
+      
       alert(result.message);
 
       // Clear the form

@@ -24,7 +24,7 @@ exports.uploadImage=async(req,res)=>{
         const result=await cloud.uploader.upload(req.file.path)
         return res.status(200).json({success:true,msg:" uploaded 😍",result:result.url})
     }catch(err){
-        return res.status(500).json({success:false,msg:"Error while uploading image",err})
+        return res.status(500).json({success:false,msg:"Error while uploading image",err: err.message})
     }
     
 }

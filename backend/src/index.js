@@ -7,6 +7,8 @@ const clc=require("cli-color")
 const router = require("./routes")
 dotenv.config();
 
+app.set("trust proxy", true);
+
 app.use(cors({origin:["https://icnari26.nasl.in","https://conference-website-three.vercel.app","http://localhost:5173"]}))
 app.use(express.json())
 app.use("/",router)

@@ -18,10 +18,13 @@ app.get("/health",(req,res)=>{
 })
 
 const PORT=process.env.PORT||3000
-db().then(
-    app.listen(PORT,()=>{
+db().then(()=>{
+     app.listen(PORT,()=>{
         console.log(clc.bgGreen.whiteBright(`server connection  successfull on port:${PORT} 😍😍`))
     })
+}
+   
 ).catch((err)=>{
     console.log(clc.bgRed.whiteBright("error while starting server 😒😒"))
+    process.exit(1)
 })

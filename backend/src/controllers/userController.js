@@ -18,10 +18,13 @@ const validator=require("validator")
  */
 exports.uploadImage=async(req,res)=>{
     try{
+        if(!req.file){
+            return res.status(400).json({success:false,msg:"No image uploaded"})
+        }
         const result=await cloud.uploader.upload(req.file.path)
-        return res.json({success:true,msg:" uploaded 😍",result:result.url})
+        return res.status(200).json({success:true,msg:" uploaded 😍",result:result.url})
     }catch(err){
-        return res.json({success:false,msg:"error while uploading message",err})
+        return res.status(500).json({success:false,msg:"Error while uploading image",err})
     }
     
 }

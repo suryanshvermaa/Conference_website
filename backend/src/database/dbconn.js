@@ -11,6 +11,7 @@ const db=async()=>{
     }catch(err){
         console.log(err)
         console.log(clc.bgRed.whiteBright("error while connection with database 😒😒"))
+        throw(err)
     }
 }
 

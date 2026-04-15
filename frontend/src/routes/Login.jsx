@@ -31,7 +31,7 @@ export default function Login({setfetch}) {
           closeOnClick: true,
           pauseOnHover: true,
         });
-        setfetch(true);
+        setfetch((prev) => !prev);
         navigate("/admin"); // Redirect to admin page
       } else {
         // Show error toast for invalid credentials

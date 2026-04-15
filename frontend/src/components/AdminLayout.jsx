@@ -56,8 +56,8 @@ const AdminLayout = ({ children, setfetch }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("photo");
     localStorage.removeItem("name");
+    setfetch?.((prev) => !prev);
     navigate("/login");
-    setfetch?.(true);
   };
 
   return (

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   HiMenuAlt3,
   HiX,
@@ -14,12 +14,13 @@ const technicalSessions=[
   'Next Generation Sensing and Computing'
 ];
 
-export default function Navbar(fetch, setfetch) {
+export default function Navbar({ fetch, setfetch }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [openDropdown, setOpenDropdown] = useState("");
   const [openNestedDropdown, setOpenNestedDropdown] = useState("");
   const [hoveredNested, setHoveredNested] = useState("");
+  const navigate = useNavigate();
 
   const toggleDropdown = (section) => {
     setOpenDropdown((prev) => (prev === section ? "" : section));
@@ -33,8 +34,19 @@ export default function Navbar(fetch, setfetch) {
     const token = localStorage.getItem("token");
     if (token) {
       setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
     }
-  }, [setfetch, fetch]);
+  }, [fetch]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("photo");
+    localStorage.removeItem("name");
+    setIsAuthenticated(false);
+    setfetch?.(prev => !prev);
+    navigate("/login");
+  };
 
   const menuSections = [
     { label: "About", key: "about", options: ["About the Conference", "About NIT Patna", "Organising Committee", "International Advisory Committee", "Technical Programme Committee", "Industry Programme Committee", "Venue and Travels", "Accomodations", "About NIT Patna (Bihta Campus)", "PhotoGallery"] },
@@ -113,7 +125,15 @@ export default function Navbar(fetch, setfetch) {
           <Link to="/contact" className="hover:text-gray-500">Contact</Link>
           <Link to="/icnari-in-news" className="hover:text-gray-500">ICNARI in news</Link>
           {isAuthenticated && (
-            <Link to="/admin" className="hover:text-gray-500 font-semibold">Admin</Link>
+            <div className="flex items-center space-x-6">
+              <Link to="/admin" className="hover:text-gray-500 font-semibold text-indigo-600">Admin</Link>
+              <button 
+                onClick={handleLogout}
+                className="hover:text-red-600 font-semibold cursor-pointer transition-colors"
+              >
+                Logout
+              </button>
+            </div>
           )}
         </div>
 
@@ -200,7 +220,7 @@ export default function Navbar(fetch, setfetch) {
               )}
             </div>
           ))}
-          <Link to="/contact" className="hover:text-gray-500">Contact</Link>
+          <Link to="/contact" className="hover:text-gray-500" onClick={() => setIsOpen(false)}>Contact</Link>
           <Link
             to="/icnari-in-news"
             className="hover:text-gray-500"
@@ -209,13 +229,24 @@ export default function Navbar(fetch, setfetch) {
             ICNARI in news
           </Link>
           {isAuthenticated && (
-            <Link
-              to="/admin"
-              className="hover:text-gray-500 font-semibold"
-              onClick={() => setIsOpen(false)}
-            >
-              Admin
-            </Link>
+            <div className="flex flex-col space-y-2 pt-2 border-t border-gray-200">
+              <Link
+                to="/admin"
+                className="hover:text-indigo-600 font-semibold"
+                onClick={() => setIsOpen(false)}
+              >
+                Admin Panel
+              </Link>
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setIsOpen(false);
+                }}
+                className="text-left hover:text-red-600 font-semibold"
+              >
+                Logout
+              </button>
+            </div>
           )}
         </div>
       )}

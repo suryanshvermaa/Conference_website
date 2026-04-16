@@ -20,6 +20,17 @@ const InternationalMember = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      if (!file.type.startsWith('image/')) {
+        toast.error('Please upload an image file (JPEG, PNG, etc.)');
+        e.target.value = null;
+        return;
+      }
+      const maxSize = 2 * 1024 * 1024; // 2MB
+      if (file.size > maxSize) {
+        toast.error('File size must be less than 2MB');
+        e.target.value = null;
+        return;
+      }
       setImage(file);
       const imageUrl = URL.createObjectURL(file);
       setOrganisingMemberData({...organisingMemberData,imageUrl});

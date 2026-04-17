@@ -45,7 +45,12 @@ const ContactForm = () => {
       });
 
       const result = await res.json();
-      toast.success(result.message || 'Message sent successfully!');
+      if(!res.ok){
+        alert(result.error || "something went wrong. Please try again.");
+        return;
+      }
+      
+      alert(result.message);
 
       // Clear the form
       setFormData({

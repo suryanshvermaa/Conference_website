@@ -1,5 +1,5 @@
 const express=require("express")
-const { signUp, createNewAdmin, login, getAllUsers, uploadImage, deleteImage } = require("../controllers/userController")
+const { signUp, createNewAdmin, login, getAllUsers, uploadImage, deleteImage } = require("../controllers/userController.js")
 const { upload } = require("../multer/multer")
 const userRouter=express.Router()
 const auth=require("../middlewares/middleware")

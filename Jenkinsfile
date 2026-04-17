@@ -44,7 +44,6 @@ pipeline{
                 echo "deploying application..."
                 sh '''
                     set -e
-                    docker rm -f app_container 2>/dev/null || true
                     docker compose -f docker-compose.prod.yml up -d --build --force-recreate
                 '''
                 echo "application deployed successfully."

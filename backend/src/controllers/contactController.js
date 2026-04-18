@@ -56,7 +56,20 @@ exports.getContact=async (req, res) => {
       }
 
       const contacts = await query;
-      res.status(200).json(contacts);
+      const totalCount = await Contact.countDocuments();
+
+      const pageSize = limit || totalCount;
+      const skipAmount = skip || 0;
+      const currentPage = Math.floor(skipAmount / pageSize) + 1;
+      const totalPages = Math.ceil(totalCount / pageSize);
+
+      res.status(200).json({
+        data: contacts,
+        totalCount,
+        currentPage,
+        pageSize,
+        totalPages
+      });
     } catch (err) {
       console.error('Error fetching contacts:', err);
       res.status(500).json({ error: 'Server Error. Could not fetch contacts.' });

@@ -67,7 +67,7 @@ const PhotoGallery = () => {
             <img
               src={selectedImage}
               alt="Large View"
-              className="block mx-auto max-w-full max-h-[80vh] object-contain rounded"
+              className="block mx-auto w-full h-auto max-w-full max-h-[85vh] object-contain rounded"
             />
           </div>
         </div>

@@ -8,6 +8,8 @@ export default function AllSpeakerprog() {
   const [error, setError] = useState(null)
   const [searchTerm, setSearchTerm] = useState("")
   const [toast, setToast] = useState(null)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [pageSize, setPageSize] = useState(20)
 
   const token =localStorage.getItem("token");
 
@@ -28,9 +30,11 @@ export default function AllSpeakerprog() {
       }
 
       const data = await response.json()
-      data.sort((a, b) => (a.priority || 0) - (b.priority || 0))
-      setSpeakers(data)
-      setFilteredSpeakers(data)
+      const speakersData = Array.isArray(data.data) ? data.data : data;
+      speakersData.sort((a, b) => (a.priority || 0) - (b.priority || 0))
+      setSpeakers(speakersData)
+      setFilteredSpeakers(speakersData)
+      setCurrentPage(1)
     } catch (error) {
       console.error("Error fetching speakers:", error)
       setError("Failed to fetch speakers. Please try again.")
@@ -52,7 +56,12 @@ export default function AllSpeakerprog() {
         (speaker.description && speaker.description.toLowerCase().includes(searchTerm.toLowerCase())),
     )
     setFilteredSpeakers(filtered)
+    setCurrentPage(1)
   }, [searchTerm, speakers])
+
+  const totalPages = Math.ceil(filteredSpeakers.length / pageSize);
+  const startIndex = (currentPage - 1) * pageSize;
+  const paginatedSpeakers = filteredSpeakers.slice(startIndex, startIndex + pageSize);
 
   const SpeakerSkeleton = () => (
     <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
@@ -98,7 +107,7 @@ export default function AllSpeakerprog() {
           {/* Header */}
           <div className="text-center mb-8 mt-10">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">Speakers</h1>
-           
+
           </div>
 
           {/* Search */}
@@ -176,11 +185,11 @@ export default function AllSpeakerprog() {
             <>
               <div className="mb-6">
                 <p className="text-gray-600">
-                  Showing {filteredSpeakers.length} of {speakers.length} speakers
+                  Showing {startIndex + 1}–{Math.min(startIndex + pageSize, filteredSpeakers.length)} of {filteredSpeakers.length} speakers
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredSpeakers.map((speaker) => (
+                {paginatedSpeakers.map((speaker) => (
                   <div
                     key={speaker._id}
                     className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden group"
@@ -216,6 +225,28 @@ export default function AllSpeakerprog() {
                   </div>
                 ))}
               </div>
+
+              {totalPages > 1 && (
+                <div className="flex items-center justify-center mt-8 gap-2">
+                  <button
+                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                    disabled={currentPage === 1}
+                    className="px-4 py-2 text-sm font-medium rounded border border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Prev
+                  </button>
+                  <span className="px-4 py-2 text-sm font-medium text-gray-700">
+                    Page {currentPage} of {totalPages}
+                  </span>
+                  <button
+                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                    disabled={currentPage === totalPages}
+                    className="px-4 py-2 text-sm font-medium rounded border border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
             </>
           )}
         </div>

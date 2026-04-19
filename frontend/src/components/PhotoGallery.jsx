@@ -49,21 +49,25 @@ const PhotoGallery = () => {
         </div>
       </section>
 
-      {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="relative bg-white p-4 rounded-lg shadow-lg max-w-4xl w-full">
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={closeModal}
+        >
+          <div
+            className="relative bg-white p-4 rounded-lg shadow-lg w-auto max-w-[90vw] md:max-w-3xl lg:max-w-4xl"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
-              className="absolute top-2 right-2 text-2xl text-gray-700 hover:text-gray-900"
+              className="absolute top-2 right-2 text-2xl text-gray-700 hover:text-gray-900 z-10"
               onClick={closeModal}
             >
               <ImCross />
             </button>
-            {/* Image in Modal with 50% width and height */}
             <img
               src={selectedImage}
               alt="Large View"
-              className="w-1/2 h-1/2 object-contain mx-auto" // 50% width and height, keeping aspect ratio
+              className="block mx-auto max-w-full max-h-[80vh] object-contain rounded"
             />
           </div>
         </div>

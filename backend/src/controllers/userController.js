@@ -7,6 +7,7 @@ const bcryptjs=require("bcryptjs")
 const secret=process.env.secret
 const jwt=require("jsonwebtoken")
 const validator=require("validator")
+const { validationResult } = require('express-validator');
 
 /**
  * 
@@ -94,22 +95,20 @@ exports.signUp=async(req,res)=>{
 }
 
 /**
- * 
+ *
  * @description Create a new admin member
  * @route POST /user/newuser
  * @access Private
- * @param {import("express").Request} req 
- * @param {import("express").Response} res  
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
  */
 exports.createNewAdmin=async(req,res)=>{
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     const {name,email,password,pic}=req.body
-    
-    if(!name || !email ||!password||!pic){
-        return res.json({success:false,msg:"these fields cannot be empty"})
-    }
-    if(!validator.isEmail(email)){
-        return res.json({msg:"enter a valid email",success:false})
-    }
     const isExisting=await UserModel.findOne({email:email})
     if(isExisting){
         return  res.json({success:false,msg:"email already in use"})
@@ -122,22 +121,20 @@ exports.createNewAdmin=async(req,res)=>{
 }
 
 /**
- * 
+ *
  * @description Login a user
  * @route POST /user/login
  * @access Private
- * @param {import("express").Request} req 
- * @param {import("express").Response} res  
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
  */
 exports.login=async(req,res)=>{
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     const {email,password}=req.body
-    
-    if(!email ||!password){
-        return res.json({success:false,msg:"these fields cannot be empty"})
-    }
-    if(!validator.isEmail(email)){
-        return res.json({msg:"enter a valid email",success:false})
-    }
     const isExisting=await UserModel.findOne({email:email})
     if(!isExisting){
         return  res.json({success:false,msg:"email not registered"})

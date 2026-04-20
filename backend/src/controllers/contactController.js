@@ -1,19 +1,22 @@
 const Contact=require("../models/Contact")
+const { validationResult } = require('express-validator');
 
 /**
- * 
+ *
  * @description Handles the creation of a new contact message.
  * @route POST /contact
  * @access Public
- * @param {import("express").Request} req 
- * @param {import("express").Response} res 
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
  */
 exports.createContact= async (req, res) => {
     try {
-      const { name, email, subject, phone, message } = req.body;
-      if (!name || !email || !subject || !message) {
-        return res.status(400).json({ error: 'Please fill in all required fields.' });
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
       }
+
+      const { name, email, subject, phone, message } = req.body;
   
       const newContact = new Contact({
         name,

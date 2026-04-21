@@ -62,6 +62,7 @@ import UpdateIndustryProgrammeMember from "./components/IndustryProgrammeCommitt
 import AllIndustryProgrammeCommitteeMembers from "./components/IndustryProgrammeCommittee/AllMembers"
 import Publication from "./components/authorcomp/Publication"
 import IcnariInNews from "./routes/IcnariInNews"
+import NotFound from "./routes/NotFound"
 
 function App() {
   const [fetch,setfetch]=useState(false)
@@ -145,6 +146,7 @@ function App() {
             <Route path="all-industry-programme-members/:id" element={<UpdateIndustryProgrammeMember />} />
           </Route>
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
       </main>
       {showPublicChrome ? <Footer/> : null}

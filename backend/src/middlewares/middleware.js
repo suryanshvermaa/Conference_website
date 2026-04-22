@@ -13,7 +13,25 @@ const secret=process.env.secret;
  */
 const auth=async (req,res,next)=>{
     try{
-        const token=req.headers.token;
+       let token
+
+       if(req.headers.token){
+        token = req.headers.token
+        // res.json({message :"         header_token  :      " +token}) >> //just for checkout
+       }
+       else if(req.headers.authorization){
+        const auth_Header = req.headers.authorization
+
+        if(auth_Header.startsWith("Bearer ")){
+            token = auth_Header.split(" ")[1]
+            // res.json({message :"     authorization_token            "   +token}) >>  //just for checkout
+            
+        }
+
+       }
+
+      
+
         if (!token) {
             return res.status(401).json({ message: "No token provided" });
         }

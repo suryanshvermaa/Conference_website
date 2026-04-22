@@ -44,8 +44,9 @@ pipeline{
                 echo "deploying application..."
                 sh '''
                     set -e
-                    docker rm -f app_container 2>/dev/null || true
-                    docker compose -f docker-compose.prod.yml up -d --build --force-recreate
+                    docker compose -f docker-compose.prod.yml down --remove-orphans || true
+                    docker rm -f app_container app_replica_2_container || true
+                    docker compose -f docker-compose.prod.yml up -d --build --force-recreate --remove-orphans
                 '''
                 echo "application deployed successfully."
             }

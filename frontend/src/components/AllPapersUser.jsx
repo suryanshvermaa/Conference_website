@@ -2,22 +2,31 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 const AllPapersUser = () => {
     const [papers, setPapers] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(20);
+    const [totalCount, setTotalCount] = useState(0);
+    const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
-    // Fetch all papers when the component mounts
     const fetchPapers = async () => {
       try {
+        const skip = (currentPage - 1) * pageSize;
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/papers/all`
+          `${import.meta.env.VITE_API_URL}/papers/all?skip=${skip}&limit=${pageSize}`
         );
-        setPapers(response.data);
+        setPapers(response.data.data);
+        setTotalCount(response.data.totalCount);
+        setTotalPages(response.data.totalPages);
       } catch (error) {
         console.error('Error fetching papers:', error);
-        toast.error('Failed to fetch papers. Please try again.');
       }
     };
     fetchPapers();
-  }, []);
+  }, [currentPage, pageSize]);
+
+  const startIndex = (currentPage - 1) * pageSize + 1;
+  const endIndex = Math.min(currentPage * pageSize, totalCount);
+
   return (
     <div>
       <div className="bg-white shadow-lg rounded-lg p-6 flex-1 border h-[60%] border-gray-200 overflow-hidden">
@@ -39,6 +48,30 @@ const AllPapersUser = () => {
               </li>
             ))}
           </ul>
+          <div className="flex items-center justify-between mt-4 pt-4 border-t">
+            <span className="text-sm text-gray-600">
+              Showing {startIndex}–{endIndex} of {totalCount} total
+            </span>
+            <div className="flex gap-2">
+              <button
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="px-3 py-1 text-sm font-medium rounded border border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Prev
+              </button>
+              <span className="px-3 py-1 text-sm font-medium text-gray-700">
+                Page {currentPage} of {totalPages}
+              </span>
+              <button
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className="px-3 py-1 text-sm font-medium rounded border border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Next
+              </button>
+            </div>
+          </div>
         </div>
     </div>
   )

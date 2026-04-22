@@ -45,7 +45,8 @@ export default function Login({setfetch}) {
       }
     } catch (err) {
       // Show error toast if request fails
-      toast.error("An error occurred while logging in.", {
+      const message = err.response?.data?.error || "An error occurred while logging in.";
+      toast.error(message, {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: true,

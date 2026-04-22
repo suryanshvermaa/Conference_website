@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_RE = /^[\d\s+\-().]{7,15}$/;
@@ -44,6 +45,11 @@ const ContactForm = () => {
       });
 
       const result = await res.json();
+      if(!res.ok){
+        alert(result.error || "something went wrong. Please try again.");
+        return;
+      }
+      
       alert(result.message);
 
       // Clear the form
@@ -56,7 +62,7 @@ const ContactForm = () => {
       });
     } catch (err) {
       console.error(err);
-      alert('Something went wrong. Please try again.');
+      toast.error('Something went wrong. Please try again.');
     }
   };
 

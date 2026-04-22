@@ -46,7 +46,20 @@ const getAllNotices = async (req, res) => {
         }
 
         const notices = await query;
-        res.status(200).json(notices);
+        const totalCount = await Notice.countDocuments();
+
+        const pageSize = limit || totalCount;
+        const skipAmount = skip || 0;
+        const currentPage = Math.floor(skipAmount / pageSize) + 1;
+        const totalPages = Math.ceil(totalCount / pageSize);
+
+        res.status(200).json({
+            data: notices,
+            totalCount,
+            currentPage,
+            pageSize,
+            totalPages
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

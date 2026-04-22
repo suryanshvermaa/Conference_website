@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   HiMenuAlt3,
   HiX,
@@ -20,6 +20,7 @@ export default function Navbar(fetch, setfetch) {
   const [openDropdown, setOpenDropdown] = useState("");
   const [openNestedDropdown, setOpenNestedDropdown] = useState("");
   const [hoveredNested, setHoveredNested] = useState("");
+  const navigate = useNavigate();
 
   const toggleDropdown = (section) => {
     setOpenDropdown((prev) => (prev === section ? "" : section));
@@ -35,6 +36,15 @@ export default function Navbar(fetch, setfetch) {
       setIsAuthenticated(true);
     }
   }, [setfetch, fetch]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("photo");
+    localStorage.removeItem("name");
+    setIsAuthenticated(false);
+    setfetch?.(true);
+    navigate("/login");
+  };
 
   const menuSections = [
     { label: "About", key: "about", options: ["About the Conference", "About NIT Patna", "Organising Committee", "International Advisory Committee", "Technical Programme Committee", "Industry Programme Committee", "Venue and Travels", "Accomodations", "About NIT Patna (Bihta Campus)", "PhotoGallery"] },
@@ -113,7 +123,10 @@ export default function Navbar(fetch, setfetch) {
           <Link to="/contact" className="hover:text-gray-500">Contact</Link>
           <Link to="/icnari-in-news" className="hover:text-gray-500">ICNARI in news</Link>
           {isAuthenticated && (
-            <Link to="/admin" className="hover:text-gray-500 font-semibold">Admin</Link>
+            <>
+              <Link to="/admin" className="hover:text-gray-500 font-semibold">Admin</Link>
+              <button onClick={handleLogout} className="hover:text-gray-500 font-semibold cursor-pointer">Logout</button>
+            </>
           )}
         </div>
 
@@ -209,13 +222,24 @@ export default function Navbar(fetch, setfetch) {
             ICNARI in news
           </Link>
           {isAuthenticated && (
-            <Link
-              to="/admin"
-              className="hover:text-gray-500 font-semibold"
-              onClick={() => setIsOpen(false)}
-            >
-              Admin
-            </Link>
+            <>
+              <Link
+                to="/admin"
+                className="hover:text-gray-500 font-semibold"
+                onClick={() => setIsOpen(false)}
+              >
+                Admin
+              </Link>
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setIsOpen(false);
+                }}
+                className="hover:text-gray-500 font-semibold text-left cursor-pointer w-full"
+              >
+                Logout
+              </button>
+            </>
           )}
         </div>
       )}

@@ -23,7 +23,9 @@ const ContactForm = () => {
     phone: '',
     message: '',
   });
+
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false); // ✅ loading state
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -34,9 +36,19 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // ✅ prevent multiple submissions
+    if (loading) return;
+
     const errs = validate(formData);
-    if (Object.keys(errs).length) { setErrors(errs); return; }
+    if (Object.keys(errs).length) {
+      setErrors(errs);
+      return;
+    }
+
     setErrors({});
+    setLoading(true);
+
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/contact`, {
         method: 'POST',
@@ -45,14 +57,19 @@ const ContactForm = () => {
       });
 
       const result = await res.json();
-      if(!res.ok){
-        alert(result.error || "something went wrong. Please try again.");
+
+      if (!res.ok) {
+        toast.error(result.error || "Something went wrong. Please try again.", {
+          toastId: "contact-error"
+        });
         return;
       }
-      
-      alert(result.message);
 
-      // Clear the form
+      toast.success(result.message, {
+        toastId: "contact-success"
+      });
+
+      // clear form
       setFormData({
         name: '',
         email: '',
@@ -60,9 +77,14 @@ const ContactForm = () => {
         phone: '',
         message: '',
       });
+
     } catch (err) {
       console.error(err);
-      toast.error('Something went wrong. Please try again.');
+      toast.error('Something went wrong. Please try again.', {
+        toastId: "contact-error"
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -70,7 +92,9 @@ const ContactForm = () => {
     <div className="max-w-md mx-auto mt-12 bg-white shadow-xl rounded-lg p-8">
       <h2 className="text-3xl font-bold text-center text-gray-800 mb-2">Keep in touch</h2>
       <div className="w-16 h-1 bg-yellow-400 mx-auto mb-4 rounded" />
+
       <form onSubmit={handleSubmit} className="space-y-4">
+
         <input
           type="text"
           name="name"
@@ -80,6 +104,7 @@ const ContactForm = () => {
           required
           className="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
         />
+
         <input
           type="email"
           name="email"
@@ -90,6 +115,7 @@ const ContactForm = () => {
           className="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
         />
         {errors.email && <p className="text-red-500 text-sm -mt-2">{errors.email}</p>}
+
         <input
           type="text"
           name="subject"
@@ -100,6 +126,7 @@ const ContactForm = () => {
           className="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
         />
         {errors.subject && <p className="text-red-500 text-sm -mt-2">{errors.subject}</p>}
+
         <input
           type="tel"
           name="phone"
@@ -109,6 +136,7 @@ const ContactForm = () => {
           className="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
         />
         {errors.phone && <p className="text-red-500 text-sm -mt-2">{errors.phone}</p>}
+
         <textarea
           name="message"
           placeholder="Message"
@@ -119,12 +147,15 @@ const ContactForm = () => {
           className="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
         />
         {errors.message && <p className="text-red-500 text-sm -mt-2">{errors.message}</p>}
+
         <button
           type="submit"
-          className="w-full bg-yellow-400 text-black font-bold py-2 rounded hover:bg-yellow-500 transition"
+          disabled={loading} // ✅ disable button
+          className="w-full bg-yellow-400 text-black font-bold py-2 rounded hover:bg-yellow-500 transition disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Send
+          {loading ? "Sending..." : "Send"} {/* ✅ loading text */}
         </button>
+
       </form>
     </div>
   );

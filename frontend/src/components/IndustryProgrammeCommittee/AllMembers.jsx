@@ -8,6 +8,8 @@ import AdminLoader from '../AdminLoader';
 const AllIndustryProgrammeCommitteeMembers = () => {
   const [organisingMembers, setOrganisingMembers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleteTarget, setDeleteTarget] = useState(null);
   const token = localStorage.getItem('token');
   const navigate=useNavigate();
 
@@ -35,26 +37,39 @@ const AllIndustryProgrammeCommitteeMembers = () => {
   }, []);
 
   // Handle delete speaker
-  const handleDelete = async (id) => {
-    if (!token) {
+  const handleDeleteClick = (id) => {
+    setDeleteTarget(id);
+    setShowDeleteConfirm(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!deleteTarget || !token) {
       toast.error('Please log in first.');
       return;
     }
 
     try {
       const response = await axios.delete(
-        `${import.meta.env.VITE_API_URL}/industryprogramme/deleteMember/${id}`,
+        `${import.meta.env.VITE_API_URL}/industryprogramme/deleteMember/${deleteTarget}`,
         {
           headers: { token: token },
         }
       );
       toast.success(response.data.msg || response.data.message || "Member deleted");
       // Remove the deleted speaker from the state
-      setOrganisingMembers(orgMembers=>orgMembers.filter((member) => member._id !== id));
+      setOrganisingMembers(orgMembers=>orgMembers.filter((member) => member._id !== deleteTarget));
     } catch (error) {
       console.error('Error deleting member:', error);
       toast.error('Failed to delete member. Please try again.');
+    } finally {
+      setShowDeleteConfirm(false);
+      setDeleteTarget(null);
     }
+  };
+
+  const handleDeleteCancel = () => {
+    setShowDeleteConfirm(false);
+    setDeleteTarget(null);
   };
 
   return (
@@ -92,12 +107,12 @@ const AllIndustryProgrammeCommitteeMembers = () => {
                       <b>{member.college}</b>
                   </p>
                 <div className="flex justify-between items-center">
-                  <button
-                    onClick={() => handleDelete(member._id)}
-                    className="admin-button-danger"
-                  >
-                    Delete
-                  </button>
+                   <button
+                     onClick={() => handleDeleteClick(member._id)}
+                     className="admin-button-danger"
+                   >
+                     Delete
+                   </button>
                   <button
                     onClick={() => navigate(`/admin/all-industry-programme-members/${member._id}`)}
                     className="admin-button-primary"
@@ -110,6 +125,33 @@ const AllIndustryProgrammeCommitteeMembers = () => {
           ))}
         </div>
       )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4 shadow-xl">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Confirm Deletion</h3>
+            <p className="text-gray-600 mb-6">
+              Are you sure you want to delete this committee member? This action cannot be undone.
+            </p>
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={handleDeleteCancel}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDeleteConfirm}
+                className="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <ToastContainer position="bottom-center" />
     </div>
   );

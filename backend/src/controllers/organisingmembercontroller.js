@@ -1,19 +1,22 @@
 const OrganisingCommitteeMember=require("../models/OrganisingCommitteeMember");
+const { validationResult } = require('express-validator');
 
 /**
- * 
+ *
  * @description create a new member in the organising committee
  * @route POST /organisingcommitee/createMember
  * @access Private
- * @param {import("express").Request} req 
- * @param {import("express").Response} res  
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
  */
 exports.createMember=async(req,res)=>{
    try {
-       const {name,specialization,college,committee,imageUrl,description}=req.body;
-       if(!name || !specialization || !college || !committee || !imageUrl || !description){
-           return res.status(400).json({success:false,msg:"these fields cannot be empty"})
-       }
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
+        const {name,specialization,college,committee,imageUrl,description}=req.body;
        const newMember=new OrganisingCommitteeMember({
               name,
               specialization:[...String(specialization).split(',').map(item => item.trim())],
@@ -143,8 +146,8 @@ exports.setPriority=async(req,res)=>{
         if(!id){
             return res.status(400).json({success:false,msg:"id is required"});
         }
-        if(priority===undefined){
-            return res.status(400).json({success:false,msg:"priority is required"});
+        if(priority === undefined || typeof priority !== 'number' || !Number.isInteger(priority) || priority < 1 || priority > 100){
+            return res.status(400).json({success:false,msg:"Priority must be an integer between 1 and 100"});
         }
         const member=await OrganisingCommitteeMember.findById(id);
         if(!member){

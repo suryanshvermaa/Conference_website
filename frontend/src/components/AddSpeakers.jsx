@@ -9,8 +9,17 @@ const AddSpeaker = () => {
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
   const [desription,setdescription]=useState('')
+  const [errors, setErrors] = useState({});
 
   const token = localStorage.getItem('token');  // Get the token from localStorage
+
+  const validate = () => {
+    const errs = {};
+    if (name.trim().length < 2) errs.name = 'Name must be at least 2 characters.';
+    if (specialization.trim().length < 3) errs.specialization = 'Specialization must be at least 3 characters.';
+    if (desription.trim().length < 10) errs.description = 'Description must be at least 10 characters.';
+    return errs;
+  };
 
   // Handle image change
   const handleImageChange = (e) => {
@@ -41,6 +50,13 @@ const AddSpeaker = () => {
       toast.error('Please log in first.');
       return;
     }
+
+    const errs = validate();
+    if (Object.keys(errs).length) {
+      setErrors(errs);
+      return;
+    }
+    setErrors({});
 
     // Upload image to Cloudinary
     const formData = new FormData();
@@ -111,6 +127,7 @@ const AddSpeaker = () => {
                 placeholder="Enter speaker name"
                 required
               />
+              {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
             </div>
 
             <div>
@@ -123,6 +140,7 @@ const AddSpeaker = () => {
                 placeholder="Enter speaker's specialization separated by commas"
                 required
               />
+              {errors.specialization && <p className="text-red-500 text-sm mt-1">{errors.specialization}</p>}
             </div>
             <div>
               <label className="admin-label">Description</label>
@@ -135,6 +153,7 @@ const AddSpeaker = () => {
                 placeholder="Enter a short bio/description"
                 required
               />
+              {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description}</p>}
             </div>
 
             <div>

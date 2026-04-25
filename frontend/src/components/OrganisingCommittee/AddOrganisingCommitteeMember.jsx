@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const AddOrganisingCommitteeMember = () => {
   const [image, setImage] = useState(null);
+  const [errors, setErrors] = useState({});
   const roles = [
     'Patron & General Chair',
     'Honorary Chairs (Chairman)',
@@ -32,6 +33,15 @@ const AddOrganisingCommitteeMember = () => {
   })
 
   const token = localStorage.getItem('token');  // Get the token from localStorage
+
+  const validate = () => {
+    const errs = {};
+    if (organisingMemberData.name.trim().length < 2) errs.name = 'Name must be at least 2 characters.';
+    if (organisingMemberData.specialization.trim().length < 3) errs.specialization = 'Specialization must be at least 3 characters.';
+    if (organisingMemberData.college.trim().length < 2) errs.college = 'College must be at least 2 characters.';
+    if (organisingMemberData.description.trim().length < 10) errs.description = 'Description must be at least 10 characters.';
+    return errs;
+  };
 
   // Handle image change
   const handleImageChange = (e) => {
@@ -62,6 +72,13 @@ const AddOrganisingCommitteeMember = () => {
       toast.error('Please log in first.');
       return;
     }
+
+    const errs = validate();
+    if (Object.keys(errs).length) {
+      setErrors(errs);
+      return;
+    }
+    setErrors({});
 
     // Upload image to Cloudinary
     const formData = new FormData();
@@ -121,6 +138,7 @@ const AddOrganisingCommitteeMember = () => {
               placeholder="Enter Member name"
               required
             />
+            {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
           </div>
 
           <div>
@@ -133,6 +151,7 @@ const AddOrganisingCommitteeMember = () => {
               placeholder="Enter member's specialization separated by commas"
               required
             />
+            {errors.specialization && <p className="text-red-500 text-sm mt-1">{errors.specialization}</p>}
           </div>
 
           <div>
@@ -145,6 +164,7 @@ const AddOrganisingCommitteeMember = () => {
               placeholder="Enter member's college"
               required
             />
+            {errors.college && <p className="text-red-500 text-sm mt-1">{errors.college}</p>}
           </div>
 
           <div>
@@ -174,6 +194,7 @@ const AddOrganisingCommitteeMember = () => {
               placeholder="Description about organising member"
               required
             />
+            {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description}</p>}
           </div>
 
           <div>

@@ -1,16 +1,22 @@
 const Speaker = require('../models/Speaker');
 const fs = require('fs');
+const { validationResult } = require('express-validator');
 
 /**
- * 
+ *
  * @description Create a new Speaker
  * @route POST /speaker/create
  * @access Private
- * @param {import("express").Request} req 
- * @param {import("express").Response} res  
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
  */
 const createSpeaker = async (req, res) => {
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
         let imageUrl = req.body.imageUrl;
 
         const { name, specialization ,description} = req.body;
@@ -157,8 +163,8 @@ const setPriority = async (req, res) => {
     try {
         const { id } = req.params;
         const { priority } = req.body;
-        if (priority === undefined || priority < 1) {
-            return res.status(400).json({ error: "Priority must be a positive integer" });
+        if (priority === undefined || typeof priority !== 'number' || !Number.isInteger(priority) || priority < 1 || priority > 100) {
+            return res.status(400).json({ error: "Priority must be an integer between 1 and 100" });
         } 
         const speaker = await Speaker.findById(id);
         if (!speaker) {

@@ -4,8 +4,9 @@ import { toast } from 'react-toastify';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_RE = /^[\d\s+\-().]{7,15}$/;
 
-const validate = ({ email, subject, phone, message }) => {
+const validate = ({ name, email, subject, phone, message }) => {
   const errs = {};
+  if (name.trim().length < 2) errs.name = 'Name must be at least 2 characters.';
   if (!EMAIL_RE.test(email)) errs.email = 'Enter a valid email address.';
   if (subject.trim().length < 5) errs.subject = 'Subject must be at least 5 characters.';
   if (subject.trim().length > 100) errs.subject = 'Subject must be 100 characters or fewer.';
@@ -104,6 +105,7 @@ const ContactForm = () => {
           required
           className="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
         />
+        {errors.name && <p className="text-red-500 text-sm -mt-2">{errors.name}</p>}
 
         <input
           type="email"

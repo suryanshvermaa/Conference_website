@@ -53,8 +53,20 @@ const AllSpeakers = () => {
   };
 
   const handleSetPriority = async (id) => {
-    if (!token) {
-      toast.error('Please log in first.');
+    const priority = priorities[id];
+
+    if (!priority || priority.trim() === '') {
+      toast.error('Please enter a priority value.');
+      return;
+    }
+
+    const priorityNum = parseInt(priority, 10);
+    if (isNaN(priorityNum)) {
+      toast.error('Please enter a valid number for priority.');
+      return;
+    }
+    if (priorityNum < 1 || priorityNum > 100) {
+      toast.error('Priority must be between 1 and 100.');
       return;
     }
 

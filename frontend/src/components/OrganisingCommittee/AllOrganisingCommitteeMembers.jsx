@@ -93,6 +93,10 @@ const AllOrganisingCommitteeMembers = () => {
       toast.error('Please enter a valid number for priority.');
       return;
     }
+    if (priorityNum < 1 || priorityNum > 100) {
+      toast.error('Priority must be between 1 and 100.');
+      return;
+    }
 
     try {
       const response = await axios.patch(

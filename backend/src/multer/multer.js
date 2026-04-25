@@ -4,7 +4,8 @@ const dotenv=require("dotenv")
 dotenv.config()
 const storage=multer.diskStorage({
     filename:(res,file,cb)=>{
-        cb(null,`${Date.now()-file.originalname}`)
+        const sanitizedName = file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_');
+        cb(null,`${Date.now()}-${sanitizedName}`)
     },
 })
 cloud.config({

@@ -26,7 +26,7 @@ const ContactForm = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false); // ✅ loading state
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -37,8 +37,6 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // ✅ prevent multiple submissions
     if (loading) return;
 
     const errs = validate(formData);
@@ -66,98 +64,52 @@ const ContactForm = () => {
         return;
       }
 
-      toast.success(result.message, {
-        toastId: "contact-success"
-      });
+      toast.success(result.message, { toastId: "contact-success" });
 
-      // clear form
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        phone: '',
-        message: '',
-      });
-
+      setFormData({ name: '', email: '', subject: '', phone: '', message: '' });
     } catch (err) {
       console.error(err);
-      toast.error('Something went wrong. Please try again.', {
-        toastId: "contact-error"
-      });
+      toast.error('Something went wrong. Please try again.', { toastId: "contact-error" });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="max-w-md mx-auto mt-12 bg-white shadow-xl rounded-lg p-8">
-      <h2 className="text-3xl font-bold text-center text-gray-800 mb-2">Keep in touch</h2>
-      <div className="w-16 h-1 bg-yellow-400 mx-auto mb-4 rounded" />
+    <div className="bg-white shadow-lg rounded-lg p-8">
+      <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">Keep in touch</h2>
+      <div className="w-20 h-1 bg-yellow-400 mx-auto mb-6 rounded" />
 
       <form onSubmit={handleSubmit} className="space-y-4">
+        <input type="text" name="name" placeholder="Your name"
+          value={formData.name} onChange={handleChange} required
+          className="w-full border border-gray-300 p-3 rounded focus:ring-2 focus:ring-yellow-400" />
+        {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
 
-        <input
-          type="text"
-          name="name"
-          placeholder="Your name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          className="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
-        />
-        {errors.name && <p className="text-red-500 text-sm -mt-2">{errors.name}</p>}
+        <input type="email" name="email" placeholder="Email"
+          value={formData.email} onChange={handleChange} required
+          className="w-full border border-gray-300 p-3 rounded focus:ring-2 focus:ring-yellow-400" />
+        {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          className="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
-        />
-        {errors.email && <p className="text-red-500 text-sm -mt-2">{errors.email}</p>}
+        <input type="text" name="subject" placeholder="Subject"
+          value={formData.subject} onChange={handleChange} required
+          className="w-full border border-gray-300 p-3 rounded focus:ring-2 focus:ring-yellow-400" />
+        {errors.subject && <p className="text-red-500 text-sm">{errors.subject}</p>}
 
-        <input
-          type="text"
-          name="subject"
-          placeholder="Subject"
-          value={formData.subject}
-          onChange={handleChange}
-          required
-          className="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
-        />
-        {errors.subject && <p className="text-red-500 text-sm -mt-2">{errors.subject}</p>}
+        <input type="tel" name="phone" placeholder="Phone (optional)"
+          value={formData.phone} onChange={handleChange}
+          className="w-full border border-gray-300 p-3 rounded focus:ring-2 focus:ring-yellow-400" />
+        {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
 
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Phone (optional)"
-          value={formData.phone}
-          onChange={handleChange}
-          className="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
-        />
-        {errors.phone && <p className="text-red-500 text-sm -mt-2">{errors.phone}</p>}
+        <textarea name="message" placeholder="Message"
+          value={formData.message} onChange={handleChange} required rows="4"
+          className="w-full border border-gray-300 p-3 rounded focus:ring-2 focus:ring-yellow-400" />
+        {errors.message && <p className="text-red-500 text-sm">{errors.message}</p>}
 
-        <textarea
-          name="message"
-          placeholder="Message"
-          value={formData.message}
-          onChange={handleChange}
-          required
-          rows="4"
-          className="w-full border border-gray-300 p-3 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400"
-        />
-        {errors.message && <p className="text-red-500 text-sm -mt-2">{errors.message}</p>}
-
-        <button
-          type="submit"
-          disabled={loading} // ✅ disable button
-          className="w-full bg-yellow-400 text-black font-bold py-2 rounded hover:bg-yellow-500 transition disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {loading ? "Sending..." : "Send"} {/* ✅ loading text */}
+        <button type="submit" disabled={loading}
+          className="w-full bg-yellow-400 text-black font-bold py-2 rounded hover:bg-yellow-500 transition disabled:opacity-50">
+          {loading ? "Sending..." : "Send"}
         </button>
-
       </form>
     </div>
   );

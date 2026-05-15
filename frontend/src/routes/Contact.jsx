@@ -25,7 +25,7 @@ const ContactSection = () => {
             <Mail className="w-6 h-6 text-yellow-500" />
             <div>
               <h3 className="font-semibold text-gray-800">Email</h3>
-              <p className="text-gray-600">info@nitp.ac.in</p>
+              <p className="text-gray-600">nasl@nitp.ac.in</p>
             </div>
           </div>
 

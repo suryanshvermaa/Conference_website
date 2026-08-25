@@ -38,6 +38,7 @@ import SponsorshipPage from "./components/aboutcomp/SponsorshipPage"
 import AllSpeakerprog from "./components/programscomp/AllSpeakersprog"
 import TechnicalSession from "./components/programscomp/TechnicalSession"
 import BestStuden from "./components/authorcomp/BestStuden"
+import BestPaperAwards from "./components/authorcomp/BestPaperAwards"
 import FinancialSupp from "./components/authorcomp/FinancialSupp"
 import Culturalevents from "./components/programscomp/Culturalevents"
 import Allphotosgallery from "./components/Allphotosgallery"
@@ -99,6 +100,7 @@ function App() {
         <Route path="/authors/paper-submissions" element={<Papersub/>} />
         <Route path="/authors/registrations" element={<Registrations/>} />
         <Route path="/authors/best-student-paper-award" element={<BestStuden/>} />
+        <Route path="/authors/best-paper-awards" element={<BestPaperAwards/>} />
         <Route path="/authors/financial-support" element={<FinancialSupp/>} />
         <Route path="/authors/cmt-acknowledgement" element={<CMTAcknowledgement/>} />
 
